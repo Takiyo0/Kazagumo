@@ -20,7 +20,7 @@ class kazagumoSpotify {
     /**
      * Request to spotify API
      * @param {String} endpoint Endpoint for the request
-     * @param {Boolean} disableBaseURI Whether add or remove base URI on request
+     * @param {?Boolean} disableBaseURI Whether add or remove base URI on request
      * @returns {Object}
      */
     async request(endpoint, disableBaseURI) {
@@ -29,7 +29,7 @@ class kazagumoSpotify {
 
     /**
      * Refresh a token
-     * @returns {Number}
+     * @returns {Promise<Number>}
      */
     async refreshToken() {
         const {access_token, expires_in} = await petitio("https://accounts.spotify.com/api/token", "POST")
