@@ -1,4 +1,3 @@
-const Kazagumo = require('../index');
 const search = require('./kazagumoSearch');
 
 /**
@@ -56,8 +55,7 @@ class kazagumoPlayer {
         this.player = player;
         /**
          * Loop mode
-         * @readonly
-         * @type {string}
+         * @type {String}
          */
         this.loop = 'off';
         /**
@@ -80,12 +78,38 @@ class kazagumoPlayer {
          * @type {boolean}
          */
         this.playing = false;
+        /**
+         * Save any data here
+         * @type {Map<any, any>}
+         */
+        this.data = new Map();
+
+        this.player.on("start", () => {
+            this.playing = true;
+            this.kazagumo.emit("playerStart", this, this.current)
+        })
+        this.player.on("end", () => {
+            if (this.loop === 'track') this.queue.unshift(this.current);
+            if (this.loop === 'queue') this.queue.push(this.current);
+            this.previous = this.current;
+            this.playing = false;
+            this.kazagumo.emit("playerEnd", this);
+            this.play();
+        })
+        for (let event of ["closed", "error"]) this.player.on(event, (...args) => {
+            this.playing = false;
+            this.kazagumo.emit("playerError", this, {type: event, ...args})
+        })
+        this.player.on("update", (...args) => this.kazagumo.emit("playerUpdate", this, ...args))
+        this.player.on("exception", (...args) => this.kazagumo.emit("playerException", this, ...args))
+        this.player.on("resumed", () => this.kazagumo.emit("playerResumed", this))
+
     }
 
     /**
      * Add a song
      * @returns {kazagumoPlayer}
-     * @param {ShoukakuTrack} track
+     * @param {kazagumoTrack} track
      */
     addSong(track) {
         this.queue.push(track);
@@ -93,9 +117,9 @@ class kazagumoPlayer {
     }
 
     /**
-     * Search a song
-     * @returns {search}
+     * Search for song/link
      * @param {String} query
+     * @returns {Promise<{selectedTracks: (*|number), type: (*|null), tracks: (*|*[]), playlistName: (*|null)}|{selectedTracks: number, type: string, tracks, playlistName}>}
      */
     async search(query) {
         return await (new search(this.kazagumo, query)).search();
@@ -105,10 +129,11 @@ class kazagumoPlayer {
      * Play the first song from queue
      * @returns {kazagumoPlayer}
      */
-    play() {
+    async play() {
         this.current = this.queue.shift();
         this.playing = true;
-        this.player.setVolume(1).playTrack(this.current);
+        await this.current.resolve();
+        this.player.setVolume(1).playTrack(this.current.track);
         return this;
     }
 
@@ -124,13 +149,19 @@ class kazagumoPlayer {
 
     /**
      * Set loop
-     * @param {?String} mode
+     * @param {?string} mode
+     * @returns {kazagumoPlayer}
      */
     setLoop(mode) {
-        if (mode && ['off', 'track', 'queue'].includes(mode.toLowerCase())) this.loop = mode;
+        if (mode && ['off', 'track', 'queue'].includes(mode.toLowerCase())) {
+            this.loop = mode;
+            return this;
+        }
+        console.log([mode, this.loop])
         if (this.loop === 'off') this.loop = 'queue';
         if (this.loop === 'queue') this.loop = 'track';
         if (this.loop === 'track') this.loop = 'off';
+        console.log([mode, this.loop])
         return this;
     }
 
