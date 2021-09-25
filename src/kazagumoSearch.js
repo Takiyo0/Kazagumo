@@ -1,5 +1,4 @@
-const Kazagumo = require('../index');
-const shoukakuTrack = require('shoukaku/src/struct/ShoukakuTrack');
+const kazagumoTrack = require('./kazagumoTrack');
 const {parse} = require('spotify-uri');
 
 /**
@@ -8,12 +7,14 @@ const {parse} = require('spotify-uri');
  */
 class kazagumoSearch {
     /**
-     * @param {Kazagumo} kazagumo
-     * @param {string} url
+     * @param {Kazagumo} kazagumo Kazagumo
+     * @param {string} url The query itself
+     * @param {String} type The search type for non link query
      */
-    constructor(kazagumo, url) {
+    constructor(kazagumo, url, type = "") {
         this.kazagumo = kazagumo;
         this.url = url;
+        this.type = type;
     }
 
     /**
@@ -23,20 +24,33 @@ class kazagumoSearch {
     async search() {
         const spotifyRegex = /(?:https:\/\/open\.spotify\.com\/|spotify:)(?:.+)?(track|playlist|album)[\/:]([A-Za-z0-9]+)/;
         const node = this.kazagumo.shoukaku.getNode();
-        if (spotifyRegex) {
-            const {tracks, playlistName} = await this.spotifyURIHandler(this.url);
+        const sources = {
+            "youtube": "yt",
+            "youtube_music": "ytm",
+            "soundcloud": "sc"
+        };
+        const source = sources[this.type || this.kazagumo._kazagumoOptions.defaultSearchEngine || "youtube"];
+
+        if (spotifyRegex.test(this.url)) {
+            const {playlistName, tracks} = await this.spotifyURIHandler(this.url);
             return {
                 playlistName: playlistName,
-                selectedTracks: 0,
+                selectedTrack: 0,
                 tracks: tracks,
                 type: playlistName ? "PLAYLIST" : "TRACK"
             }
         }
-        const result = node.rest.resolve(this.url);
+        const result = await node.rest.resolve(!/^https?:\/\//.test(this.url) ? `${source}search:${this.url}` : this.url);
+        if (!result) return {
+            playlistName: null,
+            selectedTrack: 0,
+            tracks: [],
+            type: null
+        }
         return {
             playlistName: result.playlistName || null,
-            selectedTracks: result.selectedTracks || 0,
-            tracks: result.tracks || [],
+            selectedTrack: result.selectedTrack || 0,
+            tracks: result.tracks.map(x => new kazagumoTrack(x, this.kazagumo)) || [],
             type: result.type || null
         }
     }
@@ -56,30 +70,30 @@ class kazagumoSearch {
     /**
      * Get spotify track metadata
      * @param {String} id
-     * @returns {Promise<Array>}
+     * @returns {Promise<{tracks: (*[]|kazagumoTrack[]), playlistName: null}>}
      * @private
      */
     async getSpotifyTrack(id) {
-        const request = await this.kazagumo.spotify.request('/tracks/' + id);
-        return {tracks: request.error ? [] : [this.buildShoukakuTrack(request)], playlistName: null}
+        const request = await this.kazagumo.spotify.request('/tracks/' + id, false);
+        return {tracks: request.error ? [] : [this.buildKazagumoTrack(request)], playlistName: null}
     }
 
     /**
      * Get spotify playlist tracks metadata
      * @param {String} id
-     * @returns {Promise<Array>}
+     * @returns {Promise<{tracks: *[], playlistName: null}>}
      * @private
      */
     async getPlaylistTracks(id) {
-        const request = await this.kazagumo.spotify.request('/playlists/' + id);
+        const request = await this.kazagumo.spotify.request('/playlists/' + id, false);
         const tracks = [];
         if (request.error) return {tracks: [], playlistName: null}
-        tracks.push(request.tracks.items.filter(this.filterSpotifyTrack).map(track => this.buildShoukakuTrack(track.track)))
+        tracks.push(...request.tracks.items.filter(this.filterSpotifyTrack).map(track => this.buildKazagumoTrack(track.track)))
         let next = request.tracks.next;
 
         while (next) {
             const nextPage = await this.kazagumo.spotify.request(next, true);
-            tracks.push(...nextPage.items.filter(this.filterSpotifyTrack).map(track => this.buildShoukakuTrack(track.track)));
+            tracks.push(...nextPage.items.filter(this.filterSpotifyTrack).map(track => this.buildKazagumoTrack(track.track)));
             next = nextPage.next;
         }
         return {tracks, playlistName: request.name};
@@ -88,19 +102,19 @@ class kazagumoSearch {
     /**
      * Get spotify album tracks metadata
      * @param {String} id
-     * @returns {Promise<Array>}
+     * @returns {Promise<{tracks: *[], playlistName: null}>}
      * @private
      */
     async getAlbumTracks(id) {
-        const request = await this.kazagumo.spotify.request('/albums/' + id);
+        const request = await this.kazagumo.spotify.request('/albums/' + id, false);
         const tracks = [];
         if (request.error) return {tracks: [], playlistName: null}
-        tracks.push(request.tracks.items.filter(this.filterSpotifyTrack).map(track => this.buildShoukakuTrack(track)))
+        tracks.push(...request.tracks.items.filter(this.filterSpotifyTrack).map(track => this.buildKazagumoTrack(track)))
         let next = request.tracks.next;
 
         while (next) {
             const nextPage = await this.kazagumo.spotify.request(next, true);
-            tracks.push(...nextPage.items.filter(this.filterSpotifyTrack).map(track => this.buildShoukakuTrack(track)));
+            tracks.push(...nextPage.items.filter(this.filterSpotifyTrack).map(track => this.buildKazagumoTrack(track)));
             next = nextPage.next;
         }
         return {tracks, playlistName: request.name};
@@ -108,12 +122,12 @@ class kazagumoSearch {
 
     /**
      * Filter any unavailable spotify track
-     * @returns {shoukakuTrack}
+     * @returns {kazagumoTrack}
      * @param {Object} spotifyTrack
      * @private
      */
-    buildShoukakuTrack(spotifyTrack) {
-        return new shoukakuTrack({
+    buildKazagumoTrack(spotifyTrack) {
+        return new kazagumoTrack({
             track: "",
             info: {
                 sourceName: "spotify",
@@ -126,7 +140,7 @@ class kazagumoSearch {
                 title: spotifyTrack.name,
                 uri: `https://open.spotify.com/track/${spotifyTrack.id}`
             }
-        })
+        }, this.kazagumo)
     }
 
     /**
