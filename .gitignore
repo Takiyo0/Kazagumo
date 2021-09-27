@@ -86,3 +86,7 @@ typings/
 
 # DynamoDB Local files
 .dynamodb/
+
+# package owo
+package-lock.json
+tsconfig.json
