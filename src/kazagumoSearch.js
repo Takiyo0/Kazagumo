@@ -88,12 +88,12 @@ class kazagumoSearch {
         const request = await this.kazagumo.spotify.request('/playlists/' + id, false);
         const tracks = [];
         if (request.error) return {tracks: [], playlistName: null}
-        tracks.push(...request.tracks.items.filter(this.filterSpotifyTrack).map(track => this.buildKazagumoTrack(track.track)))
+        tracks.push(...request.tracks.items.map(x => x.track).filter(this.filterSpotifyTrack).map(track => this.buildKazagumoTrack(track)))
         let next = request.tracks.next;
 
         while (next) {
             const nextPage = await this.kazagumo.spotify.request(next, true);
-            tracks.push(...nextPage.items.filter(this.filterSpotifyTrack).map(track => this.buildKazagumoTrack(track.track)));
+            tracks.push(...nextPage.items.map(x => x.track).filter(this.filterSpotifyTrack).map(track => this.buildKazagumoTrack(track)));
             next = nextPage.next;
         }
         return {tracks, playlistName: request.name};
@@ -109,12 +109,12 @@ class kazagumoSearch {
         const request = await this.kazagumo.spotify.request('/albums/' + id, false);
         const tracks = [];
         if (request.error) return {tracks: [], playlistName: null}
-        tracks.push(...request.tracks.items.filter(this.filterSpotifyTrack).map(track => this.buildKazagumoTrack(track)))
+        tracks.push(...request.tracks.items.filter(this.filterSpotifyTrack).map(track => this.buildKazagumoTrack(track, request.images[0].url)))
         let next = request.tracks.next;
 
         while (next) {
             const nextPage = await this.kazagumo.spotify.request(next, true);
-            tracks.push(...nextPage.items.filter(this.filterSpotifyTrack).map(track => this.buildKazagumoTrack(track)));
+            tracks.push(...nextPage.items.filter(this.filterSpotifyTrack).map(track => this.buildKazagumoTrack(track, request.images[0].url)));
             next = nextPage.next;
         }
         return {tracks, playlistName: request.name};
@@ -123,10 +123,11 @@ class kazagumoSearch {
     /**
      * Filter any unavailable spotify track
      * @returns {kazagumoTrack}
-     * @param {Object} spotifyTrack
+     * @param {Object} spotifyTrack Spotify raw track
+     * @param {string} [thumbnail] Track's thumbnail
      * @private
      */
-    buildKazagumoTrack(spotifyTrack) {
+    buildKazagumoTrack(spotifyTrack, thumbnail) {
         return new kazagumoTrack({
             track: "",
             info: {
@@ -138,7 +139,8 @@ class kazagumoSearch {
                 isStream: false,
                 position: 0,
                 title: spotifyTrack.name,
-                uri: `https://open.spotify.com/track/${spotifyTrack.id}`
+                uri: `https://open.spotify.com/track/${spotifyTrack.id}`,
+                thumbnail: thumbnail ? thumbnail : spotifyTrack.album.images[0].url
             }
         }, this.kazagumo)
     }
