@@ -2,6 +2,12 @@ const error = require('./kazagumoError');
 const escapeRegExp = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
 /**
+ * Discord User
+ * @external DiscordUser
+ * @see {@link https://discord.js.org/#/docs/main/stable/class/User}
+ */
+
+/**
  * Kazagumo Track
  * @class kazagumoTrack
  */
@@ -9,7 +15,7 @@ class kazagumoTrack {
     /**
      * Kazagumo Track's information
      * @param kazagumoRawTrack
-     * @param kazagumo
+     * @param {Kazagumo} kazagumo
      */
     constructor(kazagumoRawTrack, kazagumo) {
         this.track = kazagumoRawTrack.track;
@@ -19,10 +25,14 @@ class kazagumoTrack {
         this.author = kazagumoRawTrack.info.author;
         this.length = kazagumoRawTrack.info.length;
         this.isStream = !!kazagumoRawTrack.info.isStream;
-        this.position = kazagumoRawTrack.info.position;
+        this.position = kazagumoRawTrack.info.position
+        this.thumbnail = kazagumoRawTrack.info.thumbnail;
         this.title = kazagumoRawTrack.info.title;
         this.uri = kazagumoRawTrack.info.uri;
-        this.realUri = kazagumoRawTrack.info.realUri;
+        this.realUri = this.checkSupportedSource() ? kazagumoRawTrack.info.uri : null;
+        this.requester = null;
+
+        this.getThumbnail();
         /**
          * @private
          */
@@ -31,7 +41,7 @@ class kazagumoTrack {
 
     /**
      * Resolve all required metadata of the song
-     * @param overwrite
+     * @param {?boolean} [overwrite]
      * @returns {Promise<kazagumoTrack>}
      */
     async resolve(overwrite) {
@@ -81,6 +91,48 @@ class kazagumoTrack {
         }
 
         return result.tracks[0];
+    }
+
+    /**
+     * Set requester for this track
+     * @param {DiscordUser} discordUser
+     * @returns {kazagumoTrack}
+     */
+    setRequester(discordUser) {
+        this.requester = discordUser;
+        return this;
+    }
+
+    /**
+     * Get thumbnail for the track
+     * @private
+     */
+    getThumbnail() {
+        if (this.thumbnail) return;
+        if (this.sourceName === "youtube") this.thumbnail = `https://img.youtube.com/vi/${this.identifier}/maxresdefault.jpg`;
+        else this.thumbnail = null;
+    }
+
+    /**
+     * Check if the track's source is internally supported by lavalink to prevent multiple track resolving
+     * @returns {boolean}
+     * @private
+     */
+    checkSupportedSource() {
+        let sources = [
+            'bandcamp',
+            'beam',
+            'getyarn',
+            'http',
+            'local',
+            'nico',
+            'soundcloud',
+            'stream',
+            'twitch',
+            'vimeo',
+            'youtube'
+        ]
+        return sources.includes(this.sourceName);
     }
 
     /**
