@@ -1,4 +1,6 @@
 const search = require('./kazagumoSearch');
+const KazagumoTrack = require('./kazagumoTrack');
+const {moveArray} = require('./kazagumoUtils');
 
 /**
  * Shoukaku player
@@ -29,11 +31,6 @@ class kazagumoPlayer {
          */
         this.kazagumo = kazagumo;
         /**
-         * Discord client
-         * @type {DiscordClient}
-         */
-        this.client = kazagumo.client;
-        /**
          * Guild ID
          * @type {String}
          */
@@ -56,10 +53,12 @@ class kazagumoPlayer {
         /**
          * Loop mode
          * @type {String}
+         * @readonly
          */
         this.loop = 'off';
         /**
          * Queue for this player
+         * @readonly
          * @type {*[]}
          */
         this.queue = [];
@@ -93,7 +92,12 @@ class kazagumoPlayer {
             if (this.loop === 'queue') this.queue.push(this.current);
             this.previous = this.current;
             this.playing = false;
-            this.kazagumo.emit("playerEnd", this);
+            if (this.queue.length) this.kazagumo.emit("playerEnd", this);
+            else {
+                this.playing = false;
+                this.current = null;
+                return this.kazagumo.emit("playerEmpty", this);
+            }
             this.play();
         })
         for (let event of ["closed", "error"]) this.player.on(event, (...args) => {
@@ -103,7 +107,17 @@ class kazagumoPlayer {
         this.player.on("update", (...args) => this.kazagumo.emit("playerUpdate", this, ...args))
         this.player.on("exception", (...args) => this.kazagumo.emit("playerException", this, ...args))
         this.player.on("resumed", () => this.kazagumo.emit("playerResumed", this))
+    }
 
+    /**
+     * Pause or resume the player
+     * @param {boolean} pause
+     * @returns {kazagumoPlayer}
+     */
+    setPaused(pause) {
+        this.playing = !pause;
+        this.player.setPaused(!!pause)
+        return this;
     }
 
     /**
@@ -126,14 +140,34 @@ class kazagumoPlayer {
     }
 
     /**
+     * Set player's volume
+     * @param {number} value
+     * @returns {kazagumoPlayer|{error: boolean, message: string}}
+     */
+    setVolume(value) {
+        if (isNaN(value)) return {
+            error: true,
+            message: `<kazagumoPlayer>#setVolume() value must be a valid number. Received ${typeof value}`
+        };
+        this.player.filters.volume = value;
+        this.player.connection.node.send({
+            op: "volume",
+            guildId: this.guild,
+            volume: this.player.filters.volume
+        })
+        return this;
+    }
+
+    /**
      * Play the first song from queue
+     * @param {?KazagumoTrack} [kazagumoTrack]
      * @returns {kazagumoPlayer}
      */
-    async play() {
+    async play(kazagumoTrack) {
         this.current = this.queue.shift();
         this.playing = true;
-        await this.current.resolve();
-        this.player.setVolume(1).playTrack(this.current.track);
+        if (!await this.current.resolve().catch(() => null)) return this.player.stopTrack();
+        this.player.setVolume(1).playTrack(this.current.track, {noReplace: false});
         return this;
     }
 
@@ -149,7 +183,7 @@ class kazagumoPlayer {
 
     /**
      * Set loop
-     * @param {?string} mode
+     * @param {?string} [mode]
      * @returns {kazagumoPlayer}
      */
     setLoop(mode) {
@@ -157,11 +191,37 @@ class kazagumoPlayer {
             this.loop = mode;
             return this;
         }
-        console.log([mode, this.loop])
         if (this.loop === 'off') this.loop = 'queue';
-        if (this.loop === 'queue') this.loop = 'track';
-        if (this.loop === 'track') this.loop = 'off';
-        console.log([mode, this.loop])
+        else if (this.loop === 'queue') this.loop = 'track';
+        else if (this.loop === 'track') this.loop = 'off';
+        return this;
+    }
+
+    /**
+     * Move a song to a specific index
+     * @param {number} oldIndex
+     * @param {number} newIndex
+     * @returns {kazagumoPlayer|{error: boolean, message: string}}
+     */
+    move(oldIndex, newIndex) {
+        if ([oldIndex, newIndex].some(x => isNaN(x))) return {error: true, message: "Invalid number"};
+        if (oldIndex + 1 > this.queue.length || newIndex + 1 > this.queue.length) return {
+            error: true,
+            message: "Invalid index"
+        }
+        moveArray(this.queue, oldIndex, newIndex);
+        return this;
+    }
+
+    /**
+     * Shuffle the queue
+     * @returns {kazagumoPlayer}
+     */
+    shuffle() {
+        for (let i = this.queue.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [this.queue[i], this.queue[j]] = [this.queue[j], this.queue[i]];
+        }
         return this;
     }
 
