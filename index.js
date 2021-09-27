@@ -1,5 +1,5 @@
 const eventEmitter = require('events');
-const { Shoukaku, Libraries } = require('shoukaku');
+const {Shoukaku, Libraries} = require('shoukaku');
 const player = require('./src/kazagumoPlayer');
 const error = require('./src/kazagumoError');
 const spotify = require('./src/kazagumoSpotify');
@@ -19,6 +19,7 @@ const spotify = require('./src/kazagumoSpotify');
  * @external ShoukakuOptions
  * @see {@link https://deivu.github.io/Shoukaku/?api#Constants.shoukakuOptions}
  */
+
 /**
  * Kazagumo options
  * @external KazagumoOptions
@@ -40,7 +41,6 @@ class Kazagumo extends eventEmitter {
     constructor(client, nodes, shoukakuOptions, kazagumoOptions) {
         super();
         this._kazagumoOptions = kazagumoOptions || {};
-        console.log(nodes)
         this.shoukaku = new Shoukaku(new Libraries.DiscordJS(client), nodes, shoukakuOptions);
         this.spotify = this.checkSpotifySupport(this._kazagumoOptions) ? new spotify(this._kazagumoOptions.spotify.clientId, this._kazagumoOptions.spotify.clientSecret) : null;
         this.client = client;
@@ -53,7 +53,7 @@ class Kazagumo extends eventEmitter {
      * @returns {player}
      */
     async createPlayer(kazagumoPlayerOptions) {
-        if(this.players.get(kazagumoPlayerOptions.guildId)) throw new error("Please destroy the player first")
+        if (this.players.get(kazagumoPlayerOptions.guildId)) throw new error("Please destroy the player first")
         console.log(kazagumoPlayerOptions)
         const shoukakuPlayer = await this.shoukaku.getNode().joinChannel({
             guildId: kazagumoPlayerOptions.guildId,
