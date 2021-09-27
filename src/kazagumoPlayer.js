@@ -1,5 +1,6 @@
 const search = require('./kazagumoSearch');
-const KazagumoTrack = require('./kazagumoTrack');
+const kazagumoTrack = require('./kazagumoTrack');
+const {searchResult} = require('./constants');
 const {moveArray} = require('./kazagumoUtils');
 
 /**
@@ -20,9 +21,12 @@ const {moveArray} = require('./kazagumoUtils');
  */
 class kazagumoPlayer {
     /**
-     * @param {Kazagumo} kazagumo
-     * @param {ShoukakuPlayer} player
-     * @param {Object} options
+     * @param {Kazagumo} kazagumo Kazagumo's instance
+     * @param {ShoukakuPlayer} player Shoukaku player
+     * @param {Object} options Options for this guild
+     * @param {string} options.guildId
+     * @param {string} options.voiceId
+     * @param {string} options.textId
      */
     constructor(kazagumo, player, options) {
         /**
@@ -52,24 +56,23 @@ class kazagumoPlayer {
         this.player = player;
         /**
          * Loop mode
-         * @type {String}
+         * @type {"off"|"track"|"queue"}
          * @readonly
          */
         this.loop = 'off';
         /**
          * Queue for this player
-         * @readonly
-         * @type {*[]}
+         * @type {kazagumoTrack[]}
          */
         this.queue = [];
         /**
          * Current playing song
-         * @type {null|ShoukakuTrack}
+         * @type {null|kazagumoTrack}
          */
         this.current = null;
         /**
          * Previous playing song
-         * @type {null|ShoukakuTrack}
+         * @type {null|kazagumoTrack}
          */
         this.previous = null;
         /**
@@ -102,7 +105,7 @@ class kazagumoPlayer {
         })
         for (let event of ["closed", "error"]) this.player.on(event, (...args) => {
             this.playing = false;
-            this.kazagumo.emit("playerError", this, {type: event, ...args})
+            this.kazagumo.emit("playerError", this, event, ...args)
         })
         this.player.on("update", (...args) => this.kazagumo.emit("playerUpdate", this, ...args))
         this.player.on("exception", (...args) => this.kazagumo.emit("playerException", this, ...args))
@@ -123,7 +126,7 @@ class kazagumoPlayer {
     /**
      * Add a song
      * @returns {kazagumoPlayer}
-     * @param {kazagumoTrack} track
+     * @param {kazagumoTrack} track Track to add
      */
     addSong(track) {
         this.queue.push(track);
@@ -132,8 +135,8 @@ class kazagumoPlayer {
 
     /**
      * Search for song/link
-     * @param {String} query
-     * @returns {Promise<{selectedTracks: (*|number), type: (*|null), tracks: (*|*[]), playlistName: (*|null)}|{selectedTracks: number, type: string, tracks, playlistName}>}
+     * @returns {Promise<searchResult>}
+     * @param {string} query
      */
     async search(query) {
         return await (new search(this.kazagumo, query)).search();
@@ -160,14 +163,22 @@ class kazagumoPlayer {
 
     /**
      * Play the first song from queue
-     * @param {?KazagumoTrack} [kazagumoTrack]
+     * @param {?kazagumoTrack} [kazagumoTrack]
      * @returns {kazagumoPlayer}
      */
     async play(kazagumoTrack) {
-        this.current = this.queue.shift();
-        this.playing = true;
-        if (!await this.current.resolve().catch(() => null)) return this.player.stopTrack();
-        this.player.setVolume(1).playTrack(this.current.track, {noReplace: false});
+        if(kazagumoTrack) {
+            this.queue.unshift();
+            this.current = kazagumoTrack;
+            this.playing = true;
+            if (!await this.current.resolve().catch(() => null)) return this.player.stopTrack();
+            this.player.setVolume(1).playTrack(this.current.track, {noReplace: false});
+        } else {
+            this.current = this.queue.shift();
+            this.playing = true;
+            if (!await this.current.resolve().catch(() => null)) return this.player.stopTrack();
+            this.player.setVolume(1).playTrack(this.current.track, {noReplace: false});
+        }
         return this;
     }
 
@@ -234,6 +245,7 @@ class kazagumoPlayer {
         this.player.connection.disconnect();
         this.kazagumo.players.delete(this.guild);
         this.kazagumo.emit('playerDestroy', this);
+        this.kazagumo.emit("debug", `Player was destroyed | Guild ID: ${this.guild}`)
         return this;
     }
 }

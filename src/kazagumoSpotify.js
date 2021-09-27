@@ -20,7 +20,7 @@ class kazagumoSpotify {
     /**
      * Request to spotify API
      * @param {String} endpoint Endpoint for the request
-     * @param {?Boolean} [disableBaseURI] Whether add or remove base URI on request
+     * @param {?Boolean} [disableBaseURI=false] Whether add or remove base URI on request
      * @returns {Object}
      */
     async request(endpoint, disableBaseURI) {
@@ -51,10 +51,9 @@ class kazagumoSpotify {
      * @returns {void}
      */
     async refresh() {
+        console.log(this.refreshToken)
         setTimeout(this.refresh, await this.refreshToken())
     }
 }
 
-// const sp = new kazagumoSpotify('8ae05e023ab847268ae30e60d1672ca0', '5c398694af1744d79f098e0b27edf89d');
-// setTimeout(() => sp.request('/albums/6n9DKpOxwifT5hOXtgLZSL').then(x => console.log(x)), 3000)
 module.exports = kazagumoSpotify;

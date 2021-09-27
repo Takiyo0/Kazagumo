@@ -14,7 +14,7 @@ const escapeRegExp = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 class kazagumoTrack {
     /**
      * Kazagumo Track's information
-     * @param kazagumoRawTrack
+     * @param {Object} kazagumoRawTrack
      * @param {Kazagumo} kazagumo
      */
     constructor(kazagumoRawTrack, kazagumo) {
@@ -41,10 +41,11 @@ class kazagumoTrack {
 
     /**
      * Resolve all required metadata of the song
-     * @param {?boolean} [overwrite]
+     * @param {?boolean} [overwrite=false]
      * @returns {Promise<kazagumoTrack>}
      */
     async resolve(overwrite) {
+        if(!this.checkValidation())this.kazagumo.emit("debug", `Resolving track. | Title: ${this.title}; URI: ${this.uri}`)
         if (this.checkValidation()) return this;
         const result = await this.getTrack();
         this.track = result.track;
