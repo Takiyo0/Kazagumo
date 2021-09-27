@@ -1,0 +1,112 @@
+
+<html><head></head><body><h1 id="kazagumo">Kazagumo</h1>
+<hr />
+<h3 id="a-shoukaku-wrapper-with-built-in-queue-system-and-other-features">A <a href="https://github.com/Deivu/Shoukaku">Shoukaku</a> wrapper with built-in queue system and other features</h3>
+<p><img src="https://i.imgur.com/jfVSvHj.png" alt="Kazagumo" style="max-width: 100%;"></p>
+<blockquote>
+<p>Kazagumo © Azur Lane</p>
+</blockquote>
+<h2 id="features-">Features:</h2>
+<hr />
+<p>✓ Built-in queue system<br>✓ Easy to use<br>✓ Built-in spotify support<br>✓ 💖 cute shipgirl</p>
+<h2 id="documentations">Documentations</h2>
+<hr />
+<blockquote>
+<p><a href="https://github.com/Deivu/Shoukaku">Shoukaku</a> by <a href="https://github.com/Deivu">Deivu</a>;  <a href="https://deivu.github.io/Shoukaku">https://deivu.github.io/Shoukaku</a><br>Kazagumo; <a href="https://takiyo0.github.io/Kazagumo">https://takiyo0.github.io/Kazagumo</a></p>
+</blockquote>
+<h2 id="installation">Installation</h2>
+<hr />
+<blockquote>
+<p>npm i kazagumo</p>
+</blockquote>
+<h2 id="lavalink-installation">Lavalink installation</h2>
+<hr />
+<blockquote>
+<p>Full tutorial step-by-step with image <a href="https://github.com/Weeb-Devs/Laffey/blob/main/readme/LAVALINK_INSTALLATION.md">here</a> ©Weeb-Devs, the owner is me tbh<br>System requirements <a href="https://github.com/freyacodes/Lavalink#requirements">here</a></p>
+</blockquote>
+<h2 id="support">Support</h2>
+<hr />
+<blockquote>
+<p>Kazagumo support server: <a href="https://discord.gg/nPPW2Gzqg2">https://discord.gg/nPPW2Gzqg2</a> (anywhere lmao)<br>Shoukaku support server: <a href="https://discord.gg/FVqbtGu">https://discord.gg/FVqbtGu</a> (#development)</p>
+</blockquote>
+<h2 id="example">Example</h2>
+<hr />
+<pre><code class="javascript">const {Client} = require('discord.js');
+const Kazagumo = require('kazagumo');
+
+const lavalinkServer = [{name: 'Localhost', url: 'localhost:6996', auth: 'you_weeb_indeed', secure: false}];
+const shoukakuOptions = {
+    moveOnDisconnect: false,
+    resumable: false,
+    resumableTimeout: 30,
+    reconnectTries: 2,
+    restTimeout: 10000
+};
+const kazagumoOptions = {
+    spotify: {clientId: "client_id_here_owo", clientSecret: "client_secret_here_owo"},
+    defaultSearchEngine: "youtube"
+};
+
+class example extends Client {
+    constructor() {
+        super(options);
+        this.kazagumo = new Kazagumo(this, lavalinkServer, shoukakuOptions, kazagumoOptions);
+
+        // Listen
+        this.on('ready', () =&gt; console.log(`${this.user.tag} is now ready!`));
+
+        this.kazagumo.shoukaku.on('ready', (name) =&gt; console.log(`Lavalink ${name}: Ready!`));
+        this.kazagumo.shoukaku.on('error', (name, error) =&gt; console.error(`Lavalink ${name}: Error Caught,`, error));
+        this.kazagumo.shoukaku.on('close', (name, code, reason) =&gt; console.warn(`Lavalink ${name}: Closed, Code ${code}, Reason ${reason || 'No reason'}`));
+        this.kazagumo.shoukaku.on('disconnect', (name, players, moved) =&gt; {
+            if (moved) return;
+            players.map(player =&gt; player.connection.disconnect())
+            console.warn(`Lavalink ${name}: Disconnected`);
+        });
+
+        this.kazagumo.on("playerStart", (player, track) =&gt; {
+            this.channels.cache.get(player.text)?.send({content: `Now playing ${track.title} by ${track.author} [&lt;@!${track.requester}&gt;]`})
+                .then(x =&gt; player.data.set("message", x));
+        });
+        this.kazagumo.on("playerEnd", player =&gt; {
+            if(player.data.get("message") &amp;&amp; !player.data.get("message").deleted) player.data.get("message").delete();
+        });
+        this.kazagumo.on("playerEmpty", player =&gt; {
+            if(player.data.get("message") &amp;&amp; !player.data.get("message").deleted) player.data.get("message").delete();
+            this.channels.cache.get(player.text)?.send({content: "There's no queue left"});
+            player.destroy();
+        })
+
+        this.on("messageCreate", async message =&gt; {
+            if (message.author.bot || !message.guild) return;
+
+
+            if (message.content.toLowerCase().includes("!play")) {
+                const url = message.content.substr(5);
+                if (!url) return message.reply({content: "Provide query"});
+                const player = await this.kazagumo.createPlayer({
+                    guildId: message.guild.id,
+                    voiceId: message.member.voice.channel.id,
+                    textId: message.channel.id
+                })
+                const result = await player.search(url);
+                console.log(result)
+                if (!result.tracks.length) return message.reply({content: "No result was found"})
+                const tracks = result.tracks.map(x =&gt; x.setRequester(message.author))
+
+                if (result.type === "PLAYLIST") for (let track of tracks) player.addSong(track);
+                else player.addSong(tracks[0]);
+                if (!player.current) player.play();
+                console.log(player.queue.map(x =&gt; x.title))
+                return message.reply({content: result.type === "PLAYLIST" ? `Queued ${tracks.length} from ${result.playlistName}` : `Queued ${tracks[0].title}`})
+            }
+        })
+    }
+
+    login(TOKEN) {
+        return super.login(TOKEN)
+    }
+}
+
+new example().login("YOUR_LOVELY_BOT_TOKEN_HERE")</code></pre>
+</body></html>
