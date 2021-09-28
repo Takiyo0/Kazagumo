@@ -136,10 +136,12 @@ class kazagumoPlayer {
     /**
      * Search for song/link
      * @returns {Promise<searchResult>}
-     * @param {string} query
+     * @param {string} query Title/URI to search
+     * @param {DiscordUser} requester The requester
+     * @param {("youtube"|"youtube_music"|"soundcloud")} [type=kazagumoOptions.defaultSearchEngine|"youtube"] The search engine
      */
-    async search(query) {
-        return await (new search(this.kazagumo, query)).search();
+    async search(query, requester, type) {
+        return await (new search(this.kazagumo, query, type, requester)).search();
     }
 
     /**
@@ -167,7 +169,7 @@ class kazagumoPlayer {
      * @returns {kazagumoPlayer}
      */
     async play(kazagumoTrack) {
-        if(kazagumoTrack) {
+        if (kazagumoTrack) {
             this.queue.unshift();
             this.current = kazagumoTrack;
             this.playing = true;

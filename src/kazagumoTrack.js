@@ -15,9 +15,23 @@ class kazagumoTrack {
     /**
      * Kazagumo Track's information
      * @param {Object} kazagumoRawTrack
-     * @param {Kazagumo} kazagumo
+     * @param {string} kazagumoRawTrack.track The Base64 string of this song
+     * @param {Object} kazagumoRawTrack.info Information of this song
+     * @property {string} kazagumoRawTrack.info.sourceName The source name
+     * @property {string} [kazagumoRawTrack.info.identifier] The song's identifier
+     * @property {boolean} [kazagumoRawTrack.info.isSeekable=false] Whether the song is seekable or not
+     * @property {string} [kazagumoRawTrack.info.author] The song's author
+     * @property {number} [kazagumoRawTrack.info.length=0] The song's length
+     * @property {boolean} [kazagumoRawTrack.info.isStream=false] Whether the song is stream or not
+     * @property {number} [kazagumoRawTrack.info.position=0] The song's start position
+     * @property {string} [kazagumoRawTrack.info.thumbnail] The song's thumbnail
+     * @property {string} kazagumoRawTrack.info.title The song's title
+     * @property {string} kazagumoRawTrack.info.uri The song's uri that will be shown
+     * @property {string} [kazagumoRawTrack.info.realUri] The real uri of this song, good to hide spotify track
+     * @param {Kazagumo} kazagumo Kazagumo's instance
+     * @param {DiscordUser} [requester=null] The requester of this song
      */
-    constructor(kazagumoRawTrack, kazagumo) {
+    constructor(kazagumoRawTrack, kazagumo, requester) {
         this.track = kazagumoRawTrack.track;
         this.sourceName = kazagumoRawTrack.info.sourceName;
         this.identifier = kazagumoRawTrack.info.identifier;
@@ -30,7 +44,7 @@ class kazagumoTrack {
         this.title = kazagumoRawTrack.info.title;
         this.uri = kazagumoRawTrack.info.uri;
         this.realUri = this.checkSupportedSource() ? kazagumoRawTrack.info.uri : null;
-        this.requester = null;
+        this.requester = requester ? requester : null;
 
         this.getThumbnail();
         /**
@@ -45,7 +59,7 @@ class kazagumoTrack {
      * @returns {Promise<kazagumoTrack>}
      */
     async resolve(overwrite) {
-        if(!this.checkValidation())this.kazagumo.emit("debug", `Resolving track. | Title: ${this.title}; URI: ${this.uri}`)
+        if (!this.checkValidation()) this.kazagumo.emit("debug", `Resolving track. | Title: ${this.title}; URI: ${this.uri}`)
         if (this.checkValidation()) return this;
         const result = await this.getTrack();
         this.track = result.track;

@@ -51,8 +51,7 @@ class kazagumoSpotify {
      * @returns {void}
      */
     async refresh() {
-        console.log(this.refreshToken)
-        setTimeout(this.refresh, await this.refreshToken())
+        setTimeout(() => this.refresh(), await this.refreshToken())
     }
 }
 

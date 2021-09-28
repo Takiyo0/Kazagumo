@@ -49,7 +49,6 @@ class Kazagumo extends eventEmitter {
         super();
         /** Kazagumo's options
          * @type {kazagumoOptions|{}}
-         * @private
          */
         this._kazagumoOptions = kazagumoOptions || {};
         /**
@@ -176,3 +175,4 @@ class Kazagumo extends eventEmitter {
 module.exports = Kazagumo;
 module.exports.kazagumoSpotify = kazagumoSpotify;
 module.exports.kazagumoUtils = kazagumoUtils;
+module.exports.kazagumoTrack = kazagumoTrack;

@@ -26,6 +26,33 @@
 > Full tutorial step-by-step with image [here](https://github.com/Weeb-Devs/Laffey/blob/main/readme/LAVALINK_INSTALLATION.md) ©Weeb-Devs, the owner is me tbh   
 > System requirements [here](https://github.com/freyacodes/Lavalink#requirements)
 
+## Changes
+```javascript
+// Search tracks
+- this.player.getNode().rest.resolve("ytsearch:never gonna give you up") // Shoukaku
++ this.player.search("never gonna give you up") // Kazagumo
+    
+// Add a track to the queue. MUST BE A kazagumoTrack, you can get from <kazagumoPlayer>.search()
++ this.player.players.get("69696969696969").addSong(kazagumoTrack) // Kazagumo
+
+// Play a track
+- this.player.players.get("69696969696969").playTrack(shoukakuTrack) // Shoukaku
++ this.player.players.get("69696969696969").play() // Kazagumo, take the first song on queue
++ this.player.players.get("69696969696969").play(kazagumoTrack) // Kazagumo, will unshift current song and forceplay this song
+
+// Pauses or resumes the player. Control from kazagumoPlayer instead of shoukakuPlayer
+- this.player.players.get("69696969696969").setPaused(true) // Shoukaku
++ this.player.players.get("69696969696969").setPaused(true) // Kazagumo
+    
+// Set filters. Access shoukakuPlayer from <kazagumoPlayer>.player
+- this.player.players.get("69696969696969").setFilters({lowPass: {smoothing: 2}}) // Shoukaku
++ this.player.players.get("69696969696969").player.setFilters({lowPass: {smoothing: 2}}) // Kazagumo
+
+// Set volume, use Kazagumo's for smoother volume
+- this.player.players.get("69696969696969").setVolume(1) // Shoukaku 100% volume
++ this.player.players.get("69696969696969").setVolume(100) // Kazagumo 100% volume
+```
+
 ## Support
 > Kazagumo support server: https://discord.gg/nPPW2Gzqg2 (anywhere lmao)   
 > Shoukaku support server: https://discord.gg/FVqbtGu (#development)

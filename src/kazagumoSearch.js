@@ -11,11 +11,13 @@ class kazagumoSearch {
      * @param {Kazagumo} kazagumo Kazagumo
      * @param {string} url The query itself
      * @param {string} [type=kazagumoOptions.defaultSearchEngine|"youtube"] The search type for non link query
+     * @param {DiscordUser} requester The user who request
      */
-    constructor(kazagumo, url, type = "") {
+    constructor(kazagumo, url, type = "", requester) {
         this.kazagumo = kazagumo;
         this.url = url;
         this.type = type;
+        this.requester = requester;
         this.kazagumo.emit("debug", `New search request was made | Request: ${this.url}`)
     }
 
@@ -54,7 +56,7 @@ class kazagumoSearch {
         return {
             playlistName: `${result.playlistName}` || null,
             selectedTrack: result.selectedTrack || 0,
-            tracks: result.tracks.map(x => new kazagumoTrack(x, this.kazagumo)) || [],
+            tracks: result.tracks.map(x => new kazagumoTrack(x, this.kazagumo, this.requester)) || [],
             type: result.type || null
         }
     }
@@ -149,7 +151,7 @@ class kazagumoSearch {
                 uri: `https://open.spotify.com/track/${spotifyTrack.id}`,
                 thumbnail: thumbnail ? thumbnail : spotifyTrack.album.images[0].url
             }
-        }, this.kazagumo)
+        }, this.kazagumo, this.requester)
     }
 
     /**

@@ -47,7 +47,7 @@ declare class Kazagumo {
      * @type {kazagumoOptions|{}}
      * @private
      */
-    private _kazagumoOptions;
+    _kazagumoOptions;
     /**
      * @type Shoukaku
      */
