@@ -24,6 +24,31 @@
 <blockquote>
 <p>Full tutorial step-by-step with image <a href="https://github.com/Weeb-Devs/Laffey/blob/main/readme/LAVALINK_INSTALLATION.md">here</a> ©Weeb-Devs, the owner is me tbh<br>System requirements <a href="https://github.com/freyacodes/Lavalink#requirements">here</a></p>
 </blockquote>
+<h2 id="changes">Changes</h2>
+<hr />
+<pre><code class="javascript">// Search tracks
+- this.player.getNode().rest.resolve("ytsearch:never gonna give you up") // Shoukaku
++ this.player.search("never gonna give you up") // Kazagumo
+
+// Add a track to the queue. MUST BE A kazagumoTrack, you can get from &lt;kazagumoPlayer&gt;.search()
++ this.player.players.get("69696969696969").addSong(kazagumoTrack) // Kazagumo
+
+// Play a track
+- this.player.players.get("69696969696969").playTrack(shoukakuTrack) // Shoukaku
++ this.player.players.get("69696969696969").play() // Kazagumo, take the first song on queue
++ this.player.players.get("69696969696969").play(kazagumoTrack) // Kazagumo, will unshift current song and forceplay this song
+
+// Pauses or resumes the player. Control from kazagumoPlayer instead of shoukakuPlayer
+- this.player.players.get("69696969696969").setPaused(true) // Shoukaku
++ this.player.players.get("69696969696969").setPaused(true) // Kazagumo
+
+// Set filters. Access shoukakuPlayer from &lt;kazagumoPlayer&gt;.player
+- this.player.players.get("69696969696969").setFilters({lowPass: {smoothing: 2}}) // Shoukaku
++ this.player.players.get("69696969696969").player.setFilters({lowPass: {smoothing: 2}}) // Kazagumo
+
+// Set volume, use Kazagumo's for smoother volume
+- this.player.players.get("69696969696969").setVolume(1) // Shoukaku 100% volume
++ this.player.players.get("69696969696969").setVolume(100) // Kazagumo 100% volume</code></pre>
 <h2 id="support">Support</h2>
 <hr />
 <blockquote>
@@ -69,10 +94,10 @@ class example extends Client {
                 .then(x =&gt; player.data.set("message", x));
         });
         this.kazagumo.on("playerEnd", player =&gt; {
-            if(player.data.get("message") &amp;&amp; !player.data.get("message").deleted) player.data.get("message").delete();
+            if(player.data.get("message") &amp;&amp; !player.data.get("message").deleted) player.data.get("message").delete().catch(() =&gt; null);
         });
         this.kazagumo.on("playerEmpty", player =&gt; {
-            if(player.data.get("message") &amp;&amp; !player.data.get("message").deleted) player.data.get("message").delete();
+            if(player.data.get("message") &amp;&amp; !player.data.get("message").deleted) player.data.get("message").delete().catch(() =&gt; null);
             this.channels.cache.get(player.text)?.send({content: "There's no queue left"});
             player.destroy();
         })
