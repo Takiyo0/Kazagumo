@@ -90,3 +90,4 @@ typings/
 # package owo
 package-lock.json
 tsconfig.json
+/.idea/
