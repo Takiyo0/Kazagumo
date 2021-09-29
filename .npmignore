@@ -1,0 +1,9 @@
+/.idea/
+.idea
+/docs/
+docs
+node_modules
+.gitignore
+docma.json
+README.md
+package-lock.json
