@@ -8,11 +8,13 @@ declare class kazagumoSearch {
      * @param {Kazagumo} kazagumo Kazagumo
      * @param {string} url The query itself
      * @param {string} [type=kazagumoOptions.defaultSearchEngine|"youtube"] The search type for non link query
+     * @param {DiscordUser} requester The user who request
      */
-    constructor(kazagumo: any, url: string, type?: string);
+    constructor(kazagumo: any, url: string, type?: string, requester: any);
     kazagumo: any;
     url: string;
     type: string;
+    requester: any;
     /**
      * Start searching for the track
      * @returns {Promise<searchResult>}

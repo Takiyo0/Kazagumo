@@ -1,6 +1,6 @@
-import kazagumoTrack from "./src/kazagumoTrack";
-
 export = Kazagumo;
+import {Client as DiscordClient} from "discord.js";
+import {NodeOptions as ShoukakuNode, ShoukakuOptions} from "shoukaku/types/Constants";
 /**
  * Discord.JS Client
  * @external DiscordClient
@@ -17,10 +17,6 @@ export = Kazagumo;
  * @see {@link https://deivu.github.io/Shoukaku/?api#Constants.shoukakuOptions}
  */
 /**
- * Kazagumo options
- * @external KazagumoOptions
- */
-/**
  * Initializes kazagumo and shoukaku
  * @class Kazagumo
  * @extends {EventEmitter}
@@ -28,7 +24,7 @@ export = Kazagumo;
 declare class Kazagumo {
     /**
      * @param {DiscordClient} client Your discord client
-     * @param {ShoukakuNode} nodes An array of Shoukaku nodes
+     * @param {ShoukakuNode[]} nodes An array of Shoukaku nodes
      * @param {ShoukakuOptions} shoukakuOptions Shoukaku options
      * @param {Object} kazagumoOptions Kazagumo options
      * @param {Object} [kazagumoOptions.spotify={}] Spotify options
@@ -45,9 +41,14 @@ declare class Kazagumo {
     });
     /** Kazagumo's options
      * @type {kazagumoOptions|{}}
-     * @private
      */
-    _kazagumoOptions;
+    _kazagumoOptions: {
+        spotify?: {
+            clientId: string;
+            clientSecret: string;
+        };
+        defaultSearchEngine?: "youtube" | "youtube_music" | "soundcloud";
+    } | {};
     /**
      * @type Shoukaku
      */
@@ -57,6 +58,14 @@ declare class Kazagumo {
      * @type {kazagumoSpotify|null}
      */
     spotify: kazagumoSpotify | null;
+    /**
+     * Search for a song/link
+     * @param {string} query The link or query to search
+     * @param {DiscordUser} [requester=null] The requester of this search
+     * @param {"youtube"|"youtube_music"|"soundcloud"} [type=kazagumoOptions.defaultSearchEngine|"youtube"] The search engine name
+     * @returns {Promise<searchResult>}
+     */
+    search: (query: string, requester?: any, type?: "youtube" | "youtube_music" | "soundcloud") => Promise<any>;
     /**
      * All active players on this instance
      * @type {Map<string, kazagumoPlayer>}
@@ -84,7 +93,7 @@ declare class Kazagumo {
      * Emitted when a track just played
      * @event Kazagumo#playerStart
      * @param {kazagumoPlayer} kazagumoPlayer The player
-     * @param {kazagumoTrack} kazagumoTrack The track that is played
+     * @param {kazagumoTrack|null} kazagumoTrack The track that is played
      * @memberOf Kazagumo
      */
     /**
@@ -137,6 +146,7 @@ declare class Kazagumo {
      * @param {string} kazagumoPlayerOptions.textId Text channel ID for the kazagumoPlayer
      * @param {boolean} [kazagumoPlayerOptions.deaf=false] Deafens the bot
      * @param {boolean} [kazagumoPlayerOptions.mute=false] Mutes the bot
+     * @param {string} [kazagumoPlayerOptions.node=null] Node for the player
      * @returns {kazagumoPlayer}
      */
     createPlayer(kazagumoPlayerOptions: {
@@ -146,7 +156,14 @@ declare class Kazagumo {
         textId: string;
         deaf?: boolean;
         mute?: boolean;
+        node?: string;
     }): kazagumoPlayer;
+    /**
+     * Destroy a player
+     * @param {string} guildID The player's guild ID
+     * @returns {kazagumoPlayer|undefined}
+     */
+    destroyPlayer(guildID: string): kazagumoPlayer | undefined;
     /**
      * Check if kazagumoSpotify support is enabled
      * @private
@@ -155,13 +172,13 @@ declare class Kazagumo {
     private checkSpotifySupport;
 }
 declare namespace Kazagumo {
-    export { kazagumoSpotify, kazagumoUtils };
+    export { kazagumoSpotify, kazagumoUtils, kazagumoTrack };
 }
 
 declare interface Kazagumo {
     on(event: 'playerCreate', listener: (player: kazagumoPlayer) => void): this;
     on(event: 'playerDestroy', listener: (player: kazagumoPlayer) => void): this;
-    on(event: 'playerStart', listener: (player: kazagumoPlayer, track: kazagumoTrack) => void): this;
+    on(event: 'playerStart', listener: (player: kazagumoPlayer, track: kazagumoTrack|null) => void): this;
     on(event: 'playerEnd', listener: (player: kazagumoPlayer) => void): this;
     on(event: 'playerEmpty', listener: (player: kazagumoPlayer) => void): this;
     on(event: 'playerError', listener: (player: kazagumoPlayer, error: object) => void): this;
@@ -170,7 +187,9 @@ declare interface Kazagumo {
     on(event: 'playerResumed', listener: (player: kazagumoPlayer) => void): this;
     on(event: 'debug', listener: (message: string) => void): this;
 }
+
 import { Shoukaku } from "shoukaku";
 import kazagumoSpotify = require("./src/kazagumoSpotify");
 import kazagumoPlayer = require("./src/kazagumoPlayer");
 import kazagumoUtils = require("./src/kazagumoUtils");
+import kazagumoTrack = require("./src/kazagumoTrack");

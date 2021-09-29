@@ -12,10 +12,27 @@ declare class kazagumoTrack {
     /**
      * Kazagumo Track's information
      * @param {Object} kazagumoRawTrack
-     * @param {Kazagumo} kazagumo
+     * @param {string} kazagumoRawTrack.track The Base64 string of this song
+     * @param {Object} kazagumoRawTrack.info Information of this song
+     * @property {string} kazagumoRawTrack.info.sourceName The source name
+     * @property {string} [kazagumoRawTrack.info.identifier] The song's identifier
+     * @property {boolean} [kazagumoRawTrack.info.isSeekable=false] Whether the song is seekable or not
+     * @property {string} [kazagumoRawTrack.info.author] The song's author
+     * @property {number} [kazagumoRawTrack.info.length=0] The song's length
+     * @property {boolean} [kazagumoRawTrack.info.isStream=false] Whether the song is stream or not
+     * @property {number} [kazagumoRawTrack.info.position=0] The song's start position
+     * @property {string} [kazagumoRawTrack.info.thumbnail] The song's thumbnail
+     * @property {string} kazagumoRawTrack.info.title The song's title
+     * @property {string} kazagumoRawTrack.info.uri The song's uri that will be shown
+     * @property {string} [kazagumoRawTrack.info.realUri] The real uri of this song, good to hide spotify track
+     * @param {Kazagumo} kazagumo Kazagumo's instance
+     * @param {DiscordUser} [requester=null] The requester of this song
      */
-    constructor(kazagumoRawTrack: any, kazagumo: any);
-    track: any;
+    constructor(kazagumoRawTrack: {
+        track: string;
+        info: any;
+    }, kazagumo: any, requester?: any);
+    track: string;
     sourceName: any;
     identifier: any;
     isSeekable: boolean;

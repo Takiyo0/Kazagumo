@@ -84,6 +84,11 @@ declare class kazagumoPlayer {
      */
     data: Map<any, any>;
     /**
+     * Whether to ignore end event to trigger the play func.
+     * @type {boolean}
+     */
+    ignoreEnd: boolean;
+    /**
      * Pause or resume the player
      * @param {boolean} pause
      * @returns {kazagumoPlayer}
@@ -98,14 +103,28 @@ declare class kazagumoPlayer {
     /**
      * Search for song/link
      * @returns {Promise<searchResult>}
-     * @param {string} query
+     * @param {string} query Title/URI to search
+     * @param {DiscordUser} requester The requester
+     * @param {("youtube"|"youtube_music"|"soundcloud")} [type=kazagumoOptions.defaultSearchEngine|"youtube"] The search engine
      */
-    search(query: string): Promise<{
+    search(query: string, requester: any, type?: ("youtube" | "youtube_music" | "soundcloud")): Promise<{
         selectedTrack: number;
         type: null;
         tracks: undefined[];
         playlistName: string;
     }>;
+    /**
+     * Sets the player's voice ID
+     * @param {string} voiceId
+     * @returns {kazagumoPlayer}
+     */
+    setVoiceChannel(voiceId: string): kazagumoPlayer;
+    /**
+     * Sets the player's text ID
+     * @param textId
+     * @returns {kazagumoPlayer}
+     */
+    setTextChannel(textId: any): kazagumoPlayer;
     /**
      * Set player's volume
      * @param {number} value
