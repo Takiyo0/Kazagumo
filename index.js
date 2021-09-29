@@ -1,5 +1,6 @@
 const eventEmitter = require('events');
 const {Shoukaku, Libraries: {DiscordJS}} = require('shoukaku');
+const kazagumoSearch = require('./src/kazagumoSearch');
 const kazagumoPlayer = require('./src/kazagumoPlayer');
 const kazagumoSpotify = require('./src/kazagumoSpotify');
 const kazagumoTrack = require('./src/kazagumoTrack');
@@ -37,7 +38,7 @@ const error = require('./src/kazagumoError');
 class Kazagumo extends eventEmitter {
     /**
      * @param {DiscordClient} client Your discord client
-     * @param {ShoukakuNode} nodes An array of Shoukaku nodes
+     * @param {ShoukakuNode[]} nodes An array of Shoukaku nodes
      * @param {ShoukakuOptions} shoukakuOptions Shoukaku options
      * @param {Object} kazagumoOptions Kazagumo options
      * @param {Object} [kazagumoOptions.spotify={}] Spotify options
@@ -60,12 +61,21 @@ class Kazagumo extends eventEmitter {
          * @type {kazagumoSpotify|null}
          */
         this.spotify = this.checkSpotifySupport() ? new kazagumoSpotify(this._kazagumoOptions.spotify.clientId, this._kazagumoOptions.spotify.clientSecret) : null;
-        this.emit("debug", `Started Kazagumo with Spotify ${this.checkSpotifySupport() ? "enabled" : "disabled"}`)
+        /**
+         * Search for a song/link
+         * @param {string} query The link or query to search
+         * @param {DiscordUser} [requester=null] The requester of this search
+         * @param {"youtube"|"youtube_music"|"soundcloud"} [type=kazagumoOptions.defaultSearchEngine|"youtube"] The search engine name
+         * @returns {Promise<searchResult>}
+         */
+        this.search = (query, requester, type) => new kazagumoSearch(this, query, type, requester).search();
         /**
          * All active players on this instance
          * @type {Map<string, kazagumoPlayer>}
          */
         this.players = new Map();
+
+        this.emit("debug", `Started Kazagumo with Spotify ${this.checkSpotifySupport() ? "enabled" : "disabled"}`);
     }
 
 
@@ -91,7 +101,7 @@ class Kazagumo extends eventEmitter {
      * Emitted when a track just played
      * @event Kazagumo#playerStart
      * @param {kazagumoPlayer} kazagumoPlayer The player
-     * @param {kazagumoTrack} kazagumoTrack The track that is played
+     * @param {kazagumoTrack|null} kazagumoTrack The track that is played
      * @memberOf Kazagumo
      */
     /**
@@ -128,6 +138,7 @@ class Kazagumo extends eventEmitter {
      * @param {Object} reason
      * @memberOf Kazagumo
      */
+
     /**
      * Emitted when shoukaku resumed this player
      * @event Kazagumo#playerResumed
@@ -145,11 +156,12 @@ class Kazagumo extends eventEmitter {
      * @param {string} kazagumoPlayerOptions.textId Text channel ID for the kazagumoPlayer
      * @param {boolean} [kazagumoPlayerOptions.deaf=false] Deafens the bot
      * @param {boolean} [kazagumoPlayerOptions.mute=false] Mutes the bot
+     * @param {string} [kazagumoPlayerOptions.node=null] Node for the player
      * @returns {kazagumoPlayer}
      */
     async createPlayer(kazagumoPlayerOptions) {
         if (this.players.get(kazagumoPlayerOptions.guildId)) return this.players.get(kazagumoPlayerOptions.guildId);
-        const shoukakuPlayer = await this.shoukaku.getNode().joinChannel({
+        const shoukakuPlayer = await this.shoukaku.getNode(kazagumoPlayerOptions.node ? kazagumoPlayerOptions.node : null).joinChannel({
             guildId: kazagumoPlayerOptions.guildId,
             shardId: kazagumoPlayerOptions.shardId || 0,
             channelId: kazagumoPlayerOptions.voiceId,
@@ -160,6 +172,15 @@ class Kazagumo extends eventEmitter {
         this.players.set(kazagumoPlayerOptions.guildId, new kazagumoPlayer(this, shoukakuPlayer, kazagumoPlayerOptions));
         this.emit("playerCreate", this.players.get(kazagumoPlayerOptions.guildId))
         return this.players.get(kazagumoPlayerOptions.guildId);
+    }
+
+    /**
+     * Destroy a player
+     * @param {string} guildID The player's guild ID
+     * @returns {kazagumoPlayer|undefined}
+     */
+    destroyPlayer(guildID) {
+        return this.players.get(guildID) ? this.players.get(guildID).destroy() : undefined;
     }
 
     /**
