@@ -32,6 +32,10 @@
 - this.player.getNode().rest.resolve("ytsearch:never gonna give you up") // Shoukaku
 + this.player.search("never gonna give you up") // Kazagumo
     
+// Create a player
+- this.player.getNode().joinChannel(...) // Shoukaku
++ this.player.createPlayer(...) // Kazagumo
+    
 // Add a track to the queue. MUST BE A kazagumoTrack, you can get from <kazagumoPlayer>.search()
 + this.player.players.get("69696969696969").addSong(kazagumoTrack) // Kazagumo
 
@@ -139,3 +143,10 @@ class example extends Client {
 
 new example().login("YOUR_LOVELY_BOT_TOKEN_HERE")
 ```
+
+## Contributors
+> - Deivu as the owner of Shoukaku   
+>   &nbsp;&nbsp;&nbsp;&nbsp; Github: https://github.com/Deivu    
+>   &nbsp;
+> - Takiyo as the owner of this project   
+>   &nbsp;&nbsp;&nbsp;&nbsp; Github: https://github.com/Takiyo
