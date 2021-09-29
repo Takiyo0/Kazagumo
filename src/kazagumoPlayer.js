@@ -85,12 +85,18 @@ class kazagumoPlayer {
          * @type {Map<any, any>}
          */
         this.data = new Map();
+        /**
+         * Whether to ignore end event to trigger the play func.
+         * @type {boolean}
+         */
+        this.ignoreEnd = true;
 
-        this.player.on("start", () => {
+        this.player.on("start", (data) => {
             this.playing = true;
             this.kazagumo.emit("playerStart", this, this.current)
-        })
-        this.player.on("end", () => {
+        });
+
+        this.player.on("end", (data) => {
             if (this.loop === 'track') this.queue.unshift(this.current);
             if (this.loop === 'queue') this.queue.push(this.current);
             this.previous = this.current;
@@ -101,15 +107,17 @@ class kazagumoPlayer {
                 this.current = null;
                 return this.kazagumo.emit("playerEmpty", this);
             }
-            this.play();
-        })
+            if (data.reason !== "REPLACED") this.play();
+        });
+
         for (let event of ["closed", "error"]) this.player.on(event, (...args) => {
             this.playing = false;
             this.kazagumo.emit("playerError", this, event, ...args)
-        })
-        this.player.on("update", (...args) => this.kazagumo.emit("playerUpdate", this, ...args))
-        this.player.on("exception", (...args) => this.kazagumo.emit("playerException", this, ...args))
-        this.player.on("resumed", () => this.kazagumo.emit("playerResumed", this))
+        });
+
+        this.player.on("update", (...args) => this.kazagumo.emit("playerUpdate", this, ...args));
+        this.player.on("exception", (...args) => this.kazagumo.emit("playerException", this, ...args));
+        this.player.on("resumed", () => this.kazagumo.emit("playerResumed", this));
     }
 
     /**
@@ -121,7 +129,7 @@ class kazagumoPlayer {
         this.playing = !pause;
         this.player.setPaused(!!pause)
         return this;
-    }
+    };
 
     /**
      * Add a song
@@ -131,7 +139,7 @@ class kazagumoPlayer {
     addSong(track) {
         this.queue.push(track);
         return this;
-    }
+    };
 
     /**
      * Search for song/link
@@ -142,7 +150,27 @@ class kazagumoPlayer {
      */
     async search(query, requester, type) {
         return await (new search(this.kazagumo, query, type, requester)).search();
-    }
+    };
+
+    /**
+     * Sets the player's voice ID
+     * @param {string} voiceId
+     * @returns {kazagumoPlayer}
+     */
+    setVoiceChannel(voiceId) {
+        this.voice = voiceId;
+        return this;
+    };
+
+    /**
+     * Sets the player's text ID
+     * @param textId
+     * @returns {kazagumoPlayer}
+     */
+    setTextChannel(textId) {
+        this.text = textId;
+        return this;
+    };
 
     /**
      * Set player's volume
@@ -161,7 +189,7 @@ class kazagumoPlayer {
             volume: this.player.filters.volume
         })
         return this;
-    }
+    };
 
     /**
      * Play the first song from queue
@@ -170,7 +198,7 @@ class kazagumoPlayer {
      */
     async play(kazagumoTrack) {
         if (kazagumoTrack) {
-            this.queue.unshift();
+            this.queue.unshift(this.current);
             this.current = kazagumoTrack;
             this.playing = true;
             if (!await this.current.resolve().catch(() => null)) return this.player.stopTrack();
@@ -182,7 +210,7 @@ class kazagumoPlayer {
             this.player.setVolume(1).playTrack(this.current.track, {noReplace: false});
         }
         return this;
-    }
+    };
 
     /**
      * Pause the player
@@ -192,7 +220,7 @@ class kazagumoPlayer {
         this.playing = false;
         this.player.setPaused(true);
         return this;
-    }
+    };
 
     /**
      * Set loop
@@ -208,7 +236,7 @@ class kazagumoPlayer {
         else if (this.loop === 'queue') this.loop = 'track';
         else if (this.loop === 'track') this.loop = 'off';
         return this;
-    }
+    };
 
     /**
      * Move a song to a specific index
@@ -224,7 +252,7 @@ class kazagumoPlayer {
         }
         moveArray(this.queue, oldIndex, newIndex);
         return this;
-    }
+    };
 
     /**
      * Shuffle the queue
@@ -236,7 +264,7 @@ class kazagumoPlayer {
             [this.queue[i], this.queue[j]] = [this.queue[j], this.queue[i]];
         }
         return this;
-    }
+    };
 
     /**
      * Destroy the player
@@ -249,7 +277,7 @@ class kazagumoPlayer {
         this.kazagumo.emit('playerDestroy', this);
         this.kazagumo.emit("debug", `Player was destroyed | Guild ID: ${this.guild}`)
         return this;
-    }
+    };
 }
 
 module.exports = kazagumoPlayer;
