@@ -137,9 +137,10 @@ declare class kazagumoPlayer {
     /**
      * Play the first song from queue
      * @param {?kazagumoTrack} [kazagumoTrack]
+     * @param {boolean} [removeCurrent=false] Whether to remove the current song when forcing track to be played
      * @returns {kazagumoPlayer}
      */
-    play(kazagumoTrack?: kazagumoTrack | null): kazagumoPlayer;
+    play(kazagumoTrack?: kazagumoTrack | null, removeCurrent?: boolean): kazagumoPlayer;
     /**
      * Pause the player
      * @returns {kazagumoPlayer}

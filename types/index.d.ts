@@ -1,15 +1,10 @@
 export = Kazagumo;
 import {Client as DiscordClient} from "discord.js";
-import {NodeOptions as ShoukakuNode, ShoukakuOptions} from "shoukaku/types/Constants";
+import {nodeOptions, ShoukakuOptions} from "shoukaku/types/Constants";
 /**
  * Discord.JS Client
  * @external DiscordClient
  * @see {@link https://discord.js.org/#/docs/main/stable/class/Client}
- */
-/**
- * Shoukaku Node options
- * @external ShoukakuNode
- * @see {@link https://deivu.github.io/Shoukaku/?api#Constants.nodeOptions}
  */
 /**
  * Shoukaku options
@@ -24,7 +19,7 @@ import {NodeOptions as ShoukakuNode, ShoukakuOptions} from "shoukaku/types/Const
 declare class Kazagumo {
     /**
      * @param {DiscordClient} client Your discord client
-     * @param {ShoukakuNode[]} nodes An array of Shoukaku nodes
+     * @param {nodeOptions[]} nodes An array of Shoukaku nodes
      * @param {ShoukakuOptions} shoukakuOptions Shoukaku options
      * @param {Object} kazagumoOptions Kazagumo options
      * @param {Object} [kazagumoOptions.spotify={}] Spotify options
@@ -32,7 +27,7 @@ declare class Kazagumo {
      * @param {string} kazagumoOptions.spotify.clientSecret Spotify client secret
      * @param {"youtube"|"youtube_music"|"soundcloud"} [kazagumoOptions.defaultSearchEngine="youtube"] Default engine for searching tracks
      */
-    constructor(client: any, nodes: any, shoukakuOptions: any, kazagumoOptions: {
+    constructor(client: any, nodes: any[], shoukakuOptions: any, kazagumoOptions: {
         spotify?: {
             clientId: string;
             clientSecret: string;
