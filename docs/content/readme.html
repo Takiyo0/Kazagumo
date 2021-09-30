@@ -30,6 +30,10 @@
 - this.player.getNode().rest.resolve("ytsearch:never gonna give you up") // Shoukaku
 + this.player.search("never gonna give you up") // Kazagumo
 
+// Create a player
+- this.player.getNode().joinChannel(...) // Shoukaku
++ this.player.createPlayer(...) // Kazagumo
+
 // Add a track to the queue. MUST BE A kazagumoTrack, you can get from &lt;kazagumoPlayer&gt;.search()
 + this.player.players.get("69696969696969").addSong(kazagumoTrack) // Kazagumo
 
@@ -114,15 +118,13 @@ class example extends Client {
                     voiceId: message.member.voice.channel.id,
                     textId: message.channel.id
                 })
-                const result = await player.search(url);
-                console.log(result)
+                const result = await player.search(url, message.author);
                 if (!result.tracks.length) return message.reply({content: "No result was found"})
-                const tracks = result.tracks.map(x =&gt; x.setRequester(message.author))
+                const tracks = result.tracks;
 
                 if (result.type === "PLAYLIST") for (let track of tracks) player.addSong(track);
                 else player.addSong(tracks[0]);
                 if (!player.current) player.play();
-                console.log(player.queue.map(x =&gt; x.title))
                 return message.reply({content: result.type === "PLAYLIST" ? `Queued ${tracks.length} from ${result.playlistName}` : `Queued ${tracks[0].title}`})
             }
         })

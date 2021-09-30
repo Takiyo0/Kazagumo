@@ -122,15 +122,13 @@ class example extends Client {
                     voiceId: message.member.voice.channel.id,
                     textId: message.channel.id
                 })
-                const result = await player.search(url);
-                console.log(result)
+                const result = await player.search(url, message.author);
                 if (!result.tracks.length) return message.reply({content: "No result was found"})
-                const tracks = result.tracks.map(x => x.setRequester(message.author))
+                const tracks = result.tracks;
 
                 if (result.type === "PLAYLIST") for (let track of tracks) player.addSong(track);
                 else player.addSong(tracks[0]);
                 if (!player.current) player.play();
-                console.log(player.queue.map(x => x.title))
                 return message.reply({content: result.type === "PLAYLIST" ? `Queued ${tracks.length} from ${result.playlistName}` : `Queued ${tracks[0].title}`})
             }
         })
