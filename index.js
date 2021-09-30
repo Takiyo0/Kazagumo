@@ -1,5 +1,6 @@
 const eventEmitter = require('events');
 const {Shoukaku, Libraries: {DiscordJS}} = require('shoukaku');
+const {nodeOptions} = require("shoukaku/src/Constants");
 const kazagumoSearch = require('./src/kazagumoSearch');
 const kazagumoPlayer = require('./src/kazagumoPlayer');
 const kazagumoSpotify = require('./src/kazagumoSpotify');
@@ -12,11 +13,6 @@ const error = require('./src/kazagumoError');
  * Discord.JS Client
  * @external DiscordClient
  * @see {@link https://discord.js.org/#/docs/main/stable/class/Client}
- */
-/**
- * Shoukaku Node options
- * @external ShoukakuNode
- * @see {@link https://deivu.github.io/Shoukaku/?api#Constants.nodeOptions}
  */
 /**
  * Shoukaku options
@@ -38,7 +34,7 @@ const error = require('./src/kazagumoError');
 class Kazagumo extends eventEmitter {
     /**
      * @param {DiscordClient} client Your discord client
-     * @param {ShoukakuNode[]} nodes An array of Shoukaku nodes
+     * @param {nodeOptions[]} nodes An array of Shoukaku nodes
      * @param {ShoukakuOptions} shoukakuOptions Shoukaku options
      * @param {Object} kazagumoOptions Kazagumo options
      * @param {Object} [kazagumoOptions.spotify={}] Spotify options
