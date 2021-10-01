@@ -97,6 +97,7 @@ class kazagumoPlayer {
         });
 
         this.player.on("end", (data) => {
+            if (data.reason === "REPLACED") return this.kazagumo.emit("playerEnd", this);
             if (this.loop === 'track') this.queue.unshift(this.current);
             if (this.loop === 'queue') this.queue.push(this.current);
             this.previous = this.current;
@@ -199,13 +200,10 @@ class kazagumoPlayer {
      */
     async play(kazagumoTrack, removeCurrent = false) {
         if (kazagumoTrack) {
-            if (!removeCurrent)
-                this.queue.unshift(this.current);
-            
+            if (!removeCurrent) this.queue.unshift(this.current);
             this.current = kazagumoTrack;
-        } else
-            this.current = this.queue.unshift();
-        
+        } else this.current = this.queue.shift();
+
         this.playing = true;
         if (!await this.current.resolve().catch(() => null)) return this.player.stopTrack();
         this.player.setVolume(1).playTrack(this.current.track, {noReplace: false});
