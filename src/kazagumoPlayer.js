@@ -97,6 +97,7 @@ class kazagumoPlayer {
         });
 
         this.player.on("end", (data) => {
+            if (data.reason === "REPLACED") return this.kazagumo.emit("playerEnd", this);
             if (this.loop === 'track') this.queue.unshift(this.current);
             if (this.loop === 'queue') this.queue.push(this.current);
             this.previous = this.current;
