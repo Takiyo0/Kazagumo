@@ -200,17 +200,16 @@ class kazagumoPlayer {
      */
     async play(kazagumoTrack, removeCurrent = false) {
         if (kazagumoTrack) {
-            if (!removeCurrent) this.queue.unshift(this.current);
+            if (!removeCurrent)
+                this.queue.unshift(this.current);
+
             this.current = kazagumoTrack;
-            this.playing = true;
-            if (!await this.current.resolve().catch(() => null)) return this.player.stopTrack();
-            this.player.setVolume(1).playTrack(this.current.track, {noReplace: false});
-        } else {
-            this.current = this.queue.shift();
-            this.playing = true;
-            if (!await this.current.resolve().catch(() => null)) return this.player.stopTrack();
-            this.player.setVolume(1).playTrack(this.current.track, {noReplace: false});
-        }
+        } else
+            this.current = this.queue.unshift();
+
+        this.playing = true;
+        if (!await this.current.resolve().catch(() => null)) return this.player.stopTrack();
+        this.player.setVolume(1).playTrack(this.current.track, {noReplace: false});
         return this;
     };
 
