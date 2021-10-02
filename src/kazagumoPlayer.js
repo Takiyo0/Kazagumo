@@ -196,9 +196,12 @@ class kazagumoPlayer {
      * Play the first song from queue
      * @param {?kazagumoTrack} [kazagumoTrack]
      * @param {boolean} [removeCurrent=false] Whether to remove the current song when forcing track to be played
+     * @param {Object} [options] The play options
+     * @param {number} [options.startTime] When to start in ms
+     * @param {number} [options.endTime] When to end in ms
      * @returns {kazagumoPlayer}
      */
-    async play(kazagumoTrack, removeCurrent = false) {
+    async play(kazagumoTrack, removeCurrent = false, options) {
         if (kazagumoTrack) {
             if (!removeCurrent) this.queue.unshift(this.current);
             this.current = kazagumoTrack;
@@ -206,7 +209,10 @@ class kazagumoPlayer {
 
         this.playing = true;
         if (!await this.current.resolve().catch(() => null)) return this.player.stopTrack();
-        this.player.setVolume(1).playTrack(this.current.track, {noReplace: false});
+        this.player.setVolume(1).playTrack(this.current.track, options ? {
+            ...options,
+            noReplace: false
+        } : {noReplace: false});
         return this;
     };
 
