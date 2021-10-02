@@ -1,6 +1,6 @@
 {
   "name": "kazagumo",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "a shoukaku wrapper with built-in queue system",
   "main": "index.js",
   "types": "./types/index.d.ts",
