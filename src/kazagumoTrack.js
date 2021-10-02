@@ -1,4 +1,5 @@
 const error = require('./kazagumoError');
+const { supportedSources, sourceIds } = require('./constants');
 const escapeRegExp = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
 /**
@@ -44,7 +45,7 @@ class kazagumoTrack {
         this.title = kazagumoRawTrack.info.title;
         this.uri = kazagumoRawTrack.info.uri;
         this.realUri = this.checkSupportedSource() ? kazagumoRawTrack.info.uri : null;
-        this.requester = requester ? requester : null;
+        this.requester = requester || null;
 
         this.getThumbnail();
         /**
@@ -82,12 +83,7 @@ class kazagumoTrack {
      * @returns {Promise<ShoukakuTrack>}
      */
     async getTrack() {
-        const sources = {
-            "youtube": "yt",
-            "youtube_music": "ytm",
-            "soundcloud": "sc"
-        };
-        const source = sources[this.kazagumo._kazagumoOptions.defaultSearchEngine || "youtube"];
+        const source = sourceIds[this.kazagumo._kazagumoOptions.defaultSearchEngine || "youtube"];
         const query = [this.author, this.title].filter(x => !!x).join(" - ");
         const node = this.kazagumo.shoukaku.getNode();
 
@@ -134,20 +130,7 @@ class kazagumoTrack {
      * @private
      */
     checkSupportedSource() {
-        let sources = [
-            'bandcamp',
-            'beam',
-            'getyarn',
-            'http',
-            'local',
-            'nico',
-            'soundcloud',
-            'stream',
-            'twitch',
-            'vimeo',
-            'youtube'
-        ]
-        return sources.includes(this.sourceName);
+        return supportedSources.includes(this.sourceName);
     }
 
     /**
