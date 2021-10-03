@@ -196,20 +196,21 @@ class kazagumoPlayer {
      * Play the first song from queue
      * @param {?kazagumoTrack} [kazagumoTrack]
      * @param {boolean} [removeCurrent=false] Whether to remove the current song when forcing track to be played
-     * @param {Object} [options] The play options
+     * @param {Object} [options={}] The play options
      * @param {number} [options.startTime] When to start in ms
      * @param {number} [options.endTime] When to end in ms
      * @param {boolean} [options.resolveOverwrite] Whether the song's data will be overwrote when resolving
      * @returns {kazagumoPlayer}
      */
-    async play(kazagumoTrack, removeCurrent = false, options) {
+    async play(kazagumoTrack, removeCurrent = false, options = {}) {
         if (kazagumoTrack) {
             if (!removeCurrent) this.queue.unshift(this.current);
             this.current = kazagumoTrack;
         } else this.current = this.queue.shift();
 
         this.playing = true;
-        if (!await this.current.resolve(!!options?.resolveOverwrite).catch(() => null)) return this.player.stopTrack();
+
+        if (!await this.current.resolve(!!options?.resolveOverwrite || !!this.kazagumo._kazagumoOptions.resolveSource.includes(this.current.sourceName)).catch(() => null)) return this.player.stopTrack();
         this.player.setVolume(1).playTrack(this.current.track, options ? {
             ...options,
             noReplace: false
