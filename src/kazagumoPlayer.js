@@ -111,7 +111,7 @@ class kazagumoPlayer {
             if (data.reason !== "REPLACED") this.play();
         });
 
-        for (let event of ["closed", "error"]) this.player.on(event, (...args) => {
+        for (const event of ["closed", "error"]) this.player.on(event, (...args) => {
             this.playing = false;
             this.kazagumo.emit("playerError", this, event, ...args)
         });

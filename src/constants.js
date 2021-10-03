@@ -34,5 +34,25 @@ module.exports = {
         type: null,
         tracks: [],
         playlistName: ""
+    },
+    
+    supportedSources: [
+        'bandcamp',
+        'beam',
+        'getyarn',
+        'http',
+        'local',
+        'nico',
+        'soundcloud',
+        'stream',
+        'twitch',
+        'vimeo',
+        'youtube'
+    ],
+    
+    sourceIds: {
+        youtube: "yt",
+        youtube_music: "ytm",
+        soundcloud: "sc"
     }
 }
