@@ -150,9 +150,10 @@ declare class kazagumoPlayer {
      * @param {Object} [options] The play options
      * @param {number} [options.startTime] When to start in ms
      * @param {number} [options.endTime] When to end in ms
+     * @param {boolean} [options.resolveOverwrite] Whether the song's data will be overwrote when resolving
      * @returns {kazagumoPlayer}
      */
-    play(kazagumoTrack?: kazagumoTrack | null, removeCurrent?: boolean, options?: { startTime?: number, endTime?: number }): kazagumoPlayer;
+    play(kazagumoTrack?: kazagumoTrack | null, removeCurrent?: boolean, options?: { startTime?: number, endTime?: number, resolveOverwrite?: boolean }): kazagumoPlayer;
 
     /**
      * Pause the player
