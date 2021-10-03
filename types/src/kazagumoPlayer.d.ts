@@ -4,7 +4,6 @@ export = kazagumoPlayer;
  * @external ShoukakuPlayer
  * @see {@link https://deivu.github.io/Shoukaku/?api#ShoukakuPlayer}
  */
-
 /**
  * Shoukaku player
  * @external ShoukakuTrack
@@ -28,7 +27,6 @@ declare class kazagumoPlayer {
         voiceId: string;
         textId: string;
     });
-
     /**
      * Kazagumo
      * @type {Kazagumo}
@@ -90,21 +88,18 @@ declare class kazagumoPlayer {
      * @type {boolean}
      */
     ignoreEnd: boolean;
-
     /**
      * Pause or resume the player
      * @param {boolean} pause
      * @returns {kazagumoPlayer}
      */
     setPaused(pause: boolean): kazagumoPlayer;
-
     /**
      * Add a song
      * @returns {kazagumoPlayer}
      * @param {kazagumoTrack} track Track to add
      */
     addSong(track: kazagumoTrack): kazagumoPlayer;
-
     /**
      * Search for song/link
      * @returns {Promise<searchResult>}
@@ -118,21 +113,18 @@ declare class kazagumoPlayer {
         tracks: undefined[];
         playlistName: string;
     }>;
-
     /**
      * Sets the player's voice ID
      * @param {string} voiceId
      * @returns {kazagumoPlayer}
      */
     setVoiceChannel(voiceId: string): kazagumoPlayer;
-
     /**
      * Sets the player's text ID
      * @param textId
      * @returns {kazagumoPlayer}
      */
     setTextChannel(textId: any): kazagumoPlayer;
-
     /**
      * Set player's volume
      * @param {number} value
@@ -142,32 +134,32 @@ declare class kazagumoPlayer {
         error: boolean;
         message: string;
     };
-
     /**
      * Play the first song from queue
      * @param {?kazagumoTrack} [kazagumoTrack]
      * @param {boolean} [removeCurrent=false] Whether to remove the current song when forcing track to be played
-     * @param {Object} [options] The play options
+     * @param {Object} [options={}] The play options
      * @param {number} [options.startTime] When to start in ms
      * @param {number} [options.endTime] When to end in ms
      * @param {boolean} [options.resolveOverwrite] Whether the song's data will be overwrote when resolving
      * @returns {kazagumoPlayer}
      */
-    play(kazagumoTrack?: kazagumoTrack | null, removeCurrent?: boolean, options?: { startTime?: number, endTime?: number, resolveOverwrite?: boolean }): kazagumoPlayer;
-
+    play(kazagumoTrack?: kazagumoTrack | null, removeCurrent?: boolean, options?: {
+        startTime?: number;
+        endTime?: number;
+        resolveOverwrite?: boolean;
+    }): kazagumoPlayer;
     /**
      * Pause the player
      * @returns {kazagumoPlayer}
      */
     pause(): kazagumoPlayer;
-
     /**
      * Set loop
      * @param {?string} [mode]
      * @returns {kazagumoPlayer}
      */
     setLoop(mode?: string | null): kazagumoPlayer;
-
     /**
      * Move a song to a specific index
      * @param {number} oldIndex
@@ -178,18 +170,15 @@ declare class kazagumoPlayer {
         error: boolean;
         message: string;
     };
-
     /**
      * Shuffle the queue
      * @returns {kazagumoPlayer}
      */
     shuffle(): kazagumoPlayer;
-
     /**
      * Destroy the player
      * @returns {kazagumoPlayer}
      */
     destroy(): kazagumoPlayer;
 }
-
 import kazagumoTrack = require("./kazagumoTrack");

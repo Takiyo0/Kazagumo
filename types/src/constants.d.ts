@@ -11,3 +11,9 @@ export namespace searchResult {
     const tracks: any[];
     const playlistName: string;
 }
+export const supportedSources: string[];
+export namespace sourceIds {
+    const youtube: string;
+    const youtube_music: string;
+    const soundcloud: string;
+}

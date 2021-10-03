@@ -50,11 +50,17 @@ declare class kazagumoTrack {
      */
     private kazagumo;
     /**
+     * Whether the track has been resolved automatically when the track's source is in resolveSource option
+     * @private
+     */
+    private resolvedBySource;
+    /**
      * Resolve all required metadata of the song
-     * @param {?boolean} [overwrite=false]
+     * @param {boolean} [overwrite=false] Overwrite all the track's data
+     * @param {boolean} [forceResolve=false] Force the track to be resolved again
      * @returns {Promise<kazagumoTrack>}
      */
-    resolve(overwrite?: boolean | null): Promise<kazagumoTrack>;
+    resolve(overwrite?: boolean, forceResolve?: boolean): Promise<kazagumoTrack>;
     /**
      * Get track metadata from node
      * @private

@@ -14,14 +14,15 @@ declare class kazagumoSpotify {
     API_URL: string;
     /**
      * Request to spotify API
-     * @param {String} endpoint Endpoint for the request
-     * @param {?Boolean} [disableBaseURI=false] Whether add or remove base URI on request
+     * @param {string} endpoint Endpoint for the request
+     * @param {?boolean} [disableBaseURI=false] Whether add or remove base URI on request
+     * @param {?Object} headers The request header
      * @returns {Object}
      */
-    request(endpoint: string, disableBaseURI?: boolean | null): any;
+    request(endpoint: string, disableBaseURI?: boolean | null, headers?: any | null): any;
     /**
      * Refresh a token
-     * @returns {Promise<Number>}
+     * @returns {Promise<number>}
      */
     refreshToken(): Promise<number>;
     /**
