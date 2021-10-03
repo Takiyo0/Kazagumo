@@ -35,6 +35,7 @@
     "spotify-uri": "^2.2.0"
   },
   "devDependencies": {
+    "@types/node": "^16.10.2",
     "docma": "^3.2.2"
   }
 }
