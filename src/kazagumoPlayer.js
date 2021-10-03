@@ -209,7 +209,7 @@ class kazagumoPlayer {
         } else this.current = this.queue.shift();
 
         this.playing = true;
-        if (!await this.current.resolve(!!options.resolveOverwrite).catch(() => null)) return this.player.stopTrack();
+        if (!await this.current.resolve(!!options?.resolveOverwrite).catch(() => null)) return this.player.stopTrack();
         this.player.setVolume(1).playTrack(this.current.track, options ? {
             ...options,
             noReplace: false
