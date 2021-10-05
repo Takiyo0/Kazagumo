@@ -59,7 +59,8 @@
 
 ## Support
 > Kazagumo support server: https://discord.gg/nPPW2Gzqg2 (anywhere lmao)   
-> Shoukaku support server: https://discord.gg/FVqbtGu (#development)
+> Shoukaku support server: https://discord.gg/FVqbtGu (#development)   
+> Report if you found a bug here https://github.com/Takiyo0/Kazagumo/issues/new/choose
 
 ## Example
 
