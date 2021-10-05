@@ -22,7 +22,7 @@ module.exports = {
     },
 
     /**
-     * Kagazumo's search result
+     * Kazagumo's search result
      * @property {number} selectedTrack
      * @property {("PLAYLIST"|"TRACK"|"SEARCH"|null)} type Result's type
      * @property {void[]|kazagumoTrack[]} tracks Result's tracks
@@ -35,7 +35,11 @@ module.exports = {
         tracks: [],
         playlistName: ""
     },
-    
+
+    /**
+     * Lavalink supported sources
+     * @memberOf constant
+     */
     supportedSources: [
         'bandcamp',
         'beam',
@@ -49,7 +53,14 @@ module.exports = {
         'vimeo',
         'youtube'
     ],
-    
+
+    /**
+     * The source ids
+     * @property {"yt"} youtube
+     * @property {"ytm"} youtube_music
+     * @property {"sc"} soundcloud
+     * @memberOf constant
+     */
     sourceIds: {
         youtube: "yt",
         youtube_music: "ytm",

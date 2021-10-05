@@ -1,5 +1,5 @@
 const error = require('./kazagumoError');
-const { supportedSources, sourceIds } = require('./constants');
+const {supportedSources, sourceIds} = require('./constants');
 const escapeRegExp = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
 /**
@@ -52,16 +52,26 @@ class kazagumoTrack {
          * @private
          */
         this.kazagumo = kazagumo;
+        /**
+         * Whether the track has been resolved automatically when the track's source is in resolveSource option
+         * @private
+         */
+        this.resolvedBySource = false;
     }
 
     /**
      * Resolve all required metadata of the song
-     * @param {?boolean} [overwrite=false]
+     * @param {boolean} [overwrite=false] Overwrite all the track's data
+     * @param {boolean} [forceResolve=false] Force the track to be resolved again
      * @returns {Promise<kazagumoTrack>}
      */
-    async resolve(overwrite) {
-        if (!this.checkValidation()) this.kazagumo.emit("debug", `Resolving track. | Title: ${this.title}; URI: ${this.uri}`)
-        if (this.checkValidation()) return this;
+    async resolve(overwrite, forceResolve) {
+        if (!forceResolve && this.checkValidation()) return this;
+        if (this.kazagumo._kazagumoOptions.resolveSource.includes(this.sourceName) && overwrite && this.resolvedBySource) return this;
+        if (this.kazagumo._kazagumoOptions.resolveSource.includes(this.sourceName) && overwrite) this.resolvedBySource = true;
+
+        this.kazagumo.emit("debug", `Resolving track. | Title: ${this.title}; URI: ${this.uri}`);
+
         const result = await this.getTrack();
         this.track = result.track;
         this.realUri = result.info.uri;

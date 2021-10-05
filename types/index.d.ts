@@ -12,6 +12,10 @@ import {nodeOptions, ShoukakuOptions} from "shoukaku/types/Constants";
  * @see {@link https://deivu.github.io/Shoukaku/?api#Constants.shoukakuOptions}
  */
 /**
+ * Kazagumo options
+ * @external KazagumoOptions
+ */
+/**
  * Initializes kazagumo and shoukaku
  * @class Kazagumo
  * @extends {EventEmitter}
@@ -26,6 +30,7 @@ declare class Kazagumo {
      * @param {string} kazagumoOptions.spotify.clientId Spotify client ID
      * @param {string} kazagumoOptions.spotify.clientSecret Spotify client secret
      * @param {"youtube"|"youtube_music"|"soundcloud"} [kazagumoOptions.defaultSearchEngine="youtube"] Default engine for searching tracks
+     * @param {Array} [kazagumoOptions.resolveSource] If the track's source is included, the track will be resolved once no mather what when got played
      */
     constructor(client: any, nodes: any[], shoukakuOptions: any, kazagumoOptions: {
         spotify?: {
@@ -33,6 +38,7 @@ declare class Kazagumo {
             clientSecret: string;
         };
         defaultSearchEngine?: "youtube" | "youtube_music" | "soundcloud";
+        resolveSource?: any[];
     });
     /** Kazagumo's options
      * @type {kazagumoOptions|{}}
@@ -43,6 +49,7 @@ declare class Kazagumo {
             clientSecret: string;
         };
         defaultSearchEngine?: "youtube" | "youtube_music" | "soundcloud";
+        resolveSource?: any[];
     } | {};
     /**
      * @type Shoukaku
