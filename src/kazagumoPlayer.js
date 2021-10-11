@@ -2,6 +2,7 @@ const search = require('./kazagumoSearch');
 const kazagumoTrack = require('./kazagumoTrack');
 const {searchResult} = require('./constants');
 const {moveArray} = require('./kazagumoUtils');
+const error = require('./kazagumoError');
 
 /**
  * Shoukaku player
@@ -210,6 +211,7 @@ class kazagumoPlayer {
      * @returns {kazagumoPlayer}
      */
     async play(kazagumoTrack, removeCurrent = false, options = {}) {
+        if (!kazagumoTrack && !this.queue.length) throw new error("There's no song inside queue to play")
         if (kazagumoTrack) {
             if (!removeCurrent) this.queue.unshift(this.current);
             this.current = kazagumoTrack;
@@ -217,7 +219,7 @@ class kazagumoPlayer {
 
         this.playing = true;
 
-        if (!await this.current.resolve(!!options?.resolveOverwrite || !!this.kazagumo._kazagumoOptions.resolveSource.includes(this.current.sourceName)).catch(() => null)) return this.player.stopTrack();
+        if (!await this.current.resolve(!!options?.resolveOverwrite || !!this.kazagumo._kazagumoOptions?.resolveSource?.includes(this.current.sourceName)).catch(() => null)) return this.player.stopTrack();
         this.player.setVolume(1).playTrack(this.current.track, options ? {
             ...options,
             noReplace: false
