@@ -66,16 +66,17 @@ class kazagumoTrack {
      * @returns {Promise<kazagumoTrack>}
      */
     async resolve(overwrite, forceResolve) {
+        const resolveSource = !!this.kazagumo._kazagumoOptions?.resolveSource?.includes(this.sourceName);
         if (!forceResolve && this.checkValidation()) return this;
-        if (this.kazagumo._kazagumoOptions.resolveSource.includes(this.sourceName) && overwrite && this.resolvedBySource) return this;
-        if (this.kazagumo._kazagumoOptions.resolveSource.includes(this.sourceName) && overwrite) this.resolvedBySource = true;
+        if (resolveSource && this.resolvedBySource) return this;
+        if (resolveSource) this.resolvedBySource = true;
 
         this.kazagumo.emit("debug", `Resolving track. | Title: ${this.title}; URI: ${this.uri}`);
 
         const result = await this.getTrack();
         this.track = result.track;
         this.realUri = result.info.uri;
-        if (overwrite) {
+        if (overwrite || resolveSource) {
             this.title = result.info.title;
             this.identifier = result.info.identifier;
             this.isSeekable = result.info.isSeekable;
@@ -130,7 +131,7 @@ class kazagumoTrack {
      */
     getThumbnail() {
         if (this.thumbnail) return;
-        if (this.sourceName === "youtube") this.thumbnail = `https://img.youtube.com/vi/${this.identifier}/maxresdefault.jpg`;
+        if (this.sourceName === "youtube") this.thumbnail = `https://img.youtube.com/vi/${this.identifier}/${this.kazagumo._kazagumoOptions?.defaultThumbnail ? this.kazagumo._kazagumoOptions.defaultThumbnail : "maxresdefault"}.jpg`;
         else this.thumbnail = null;
     }
 

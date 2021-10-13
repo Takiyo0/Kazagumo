@@ -191,11 +191,11 @@ class kazagumoPlayer {
             error: true,
             message: `<kazagumoPlayer>#setVolume() value must be a valid number. Received ${typeof value}`
         };
-        this.player.filters.volume = value;
+        this.player.filters.volume = value / 100;
         this.player.connection.node.send({
             op: "volume",
             guildId: this.guild,
-            volume: this.player.filters.volume
+            volume: this.player.filters.volume * 100
         })
         return this;
     };
@@ -219,7 +219,7 @@ class kazagumoPlayer {
 
         this.playing = true;
 
-        if (!await this.current.resolve(!!options?.resolveOverwrite || !!this.kazagumo._kazagumoOptions?.resolveSource?.includes(this.current.sourceName)).catch(() => null)) return this.player.stopTrack();
+        if (!await this.current.resolve(!!options?.resolveOverwrite).catch(() => null)) return this.player.stopTrack();
         this.player.setVolume(1).playTrack(this.current.track, options ? {
             ...options,
             noReplace: false

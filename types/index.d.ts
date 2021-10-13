@@ -11,6 +11,7 @@ import {nodeOptions, ShoukakuOptions} from "shoukaku/types/Constants";
  * @external ShoukakuOptions
  * @see {@link https://deivu.github.io/Shoukaku/?api#Constants.shoukakuOptions}
  */
+
 /**
  * Kazagumo options
  * @external KazagumoOptions
@@ -31,6 +32,7 @@ declare class Kazagumo {
      * @param {string} kazagumoOptions.spotify.clientSecret Spotify client secret
      * @param {"youtube"|"youtube_music"|"soundcloud"} [kazagumoOptions.defaultSearchEngine="youtube"] Default engine for searching tracks
      * @param {Array} [kazagumoOptions.resolveSource] If the track's source is included, the track will be resolved once no mather what when got played
+     * @param {"default"|"hqdefault"|"mqdefault"|"sddefault"|"maxresdefault"} [kazagumoOptions.defaultThumbnail="mqdefault"] The default thumbnail type for youtube track
      */
     constructor(client: any, nodes: any[], shoukakuOptions: any, kazagumoOptions: {
         spotify?: {
@@ -39,7 +41,10 @@ declare class Kazagumo {
         };
         defaultSearchEngine?: "youtube" | "youtube_music" | "soundcloud";
         resolveSource?: any[];
+        defaultThumbnail?: "default" | "hqdefault" | "mqdefault" | "sddefault" | "maxresdefault";
+
     });
+
     /** Kazagumo's options
      * @type {kazagumoOptions|{}}
      */
@@ -132,6 +137,7 @@ declare class Kazagumo {
      * @param {Object} reason
      * @memberOf Kazagumo
      */
+
     /**
      * Emitted when shoukaku resumed this player
      * @event Kazagumo#playerResumed
@@ -160,12 +166,14 @@ declare class Kazagumo {
         mute?: boolean;
         node?: string;
     }): kazagumoPlayer;
+
     /**
      * Destroy a player
      * @param {string} guildID The player's guild ID
      * @returns {kazagumoPlayer|undefined}
      */
     destroyPlayer(guildID: string): kazagumoPlayer | undefined;
+
     /**
      * Check if kazagumoSpotify support is enabled
      * @private
@@ -173,24 +181,34 @@ declare class Kazagumo {
      */
     private checkSpotifySupport;
 }
+
 declare namespace Kazagumo {
-    export { kazagumoSpotify, kazagumoUtils, kazagumoTrack };
+    export {kazagumoSpotify, kazagumoUtils, kazagumoTrack};
 }
 
 declare interface Kazagumo {
     on(event: 'playerCreate', listener: (player: kazagumoPlayer) => void): this;
+
     on(event: 'playerDestroy', listener: (player: kazagumoPlayer) => void): this;
-    on(event: 'playerStart', listener: (player: kazagumoPlayer, track: kazagumoTrack|null) => void): this;
+
+    on(event: 'playerStart', listener: (player: kazagumoPlayer, track: kazagumoTrack | null) => void): this;
+
     on(event: 'playerEnd', listener: (player: kazagumoPlayer) => void): this;
+
     on(event: 'playerEmpty', listener: (player: kazagumoPlayer) => void): this;
+
     on(event: 'playerError', listener: (player: kazagumoPlayer, error: object) => void): this;
+
     on(event: 'playerException', listener: (player: kazagumoPlayer, exceptionEvents: TrackExceptionEvent[]) => void): this;
+
     on(event: 'playerUpdate', listener: (player: kazagumoPlayer, playerUpdates: playerUpdate[]) => void): this;
+
     on(event: 'playerResumed', listener: (player: kazagumoPlayer) => void): this;
+
     on(event: 'debug', listener: (message: string) => void): this;
 }
 
-import { Shoukaku } from "shoukaku";
+import {Shoukaku} from "shoukaku";
 import kazagumoSpotify = require("./src/kazagumoSpotify");
 import kazagumoPlayer = require("./src/kazagumoPlayer");
 import kazagumoUtils = require("./src/kazagumoUtils");
