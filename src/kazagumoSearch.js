@@ -95,12 +95,12 @@ class kazagumoSearch {
         const request = await this.kazagumo.spotify.request('/playlists/' + id);
         const tracks = [];
         if (request.error) return {tracks: [], playlistName: null}
-        tracks.push(...request.tracks.items.map(x => x.track).filter(this.filterSpotifyTrack).map(track => this.buildKazagumoTrack(track)))
+        tracks.push(...request.tracks.items.filter(this.filterSpotifyTrack).map(x => x.track).filter(this.filterSpotifyTrack).map(track => this.buildKazagumoTrack(track)))
         let next = request.tracks.next;
 
         while (next) {
             const nextPage = await this.kazagumo.spotify.request(next, true);
-            tracks.push(...nextPage.items.map(x => x.track).filter(this.filterSpotifyTrack).map(track => this.buildKazagumoTrack(track)));
+            tracks.push(...nextPage.items.filter(this.filterSpotifyTrack).map(x => x.track).filter(this.filterSpotifyTrack).map(track => this.buildKazagumoTrack(track)));
             next = nextPage.next;
         }
         this.kazagumo.emit("debug", `Requested Spotify playlist. | ID: ${id}; Name: ${request.name}; Tracks: ${tracks.length}`)
@@ -149,7 +149,7 @@ class kazagumoSearch {
                 position: 0,
                 title: spotifyTrack.name,
                 uri: `https://open.spotify.com/track/${spotifyTrack.id}`,
-                thumbnail: thumbnail ? thumbnail : spotifyTrack.album.images[0].url
+                thumbnail: thumbnail ? thumbnail : spotifyTrack.album?.images[0]?.url
             }
         }, this.kazagumo, this.requester)
     }
