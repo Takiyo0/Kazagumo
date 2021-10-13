@@ -42,6 +42,7 @@ class Kazagumo extends eventEmitter {
      * @param {string} kazagumoOptions.spotify.clientSecret Spotify client secret
      * @param {"youtube"|"youtube_music"|"soundcloud"} [kazagumoOptions.defaultSearchEngine="youtube"] Default engine for searching tracks
      * @param {Array} [kazagumoOptions.resolveSource] If the track's source is included, the track will be resolved once no mather what when got played
+     * @param {"default"|"hqdefault"|"mqdefault"|"sddefault"|"maxresdefault"} [kazagumoOptions.defaultThumbnail="mqdefault"] The default thumbnail type for youtube track
      */
     constructor(client, nodes, shoukakuOptions, kazagumoOptions) {
         super();
