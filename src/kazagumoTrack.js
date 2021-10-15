@@ -131,7 +131,7 @@ class kazagumoTrack {
      */
     getThumbnail() {
         if (this.thumbnail) return;
-        if (this.sourceName === "youtube") this.thumbnail = `https://img.youtube.com/vi/${this.identifier}/${this.kazagumo._kazagumoOptions?.defaultThumbnail ? this.kazagumo._kazagumoOptions.defaultThumbnail : "maxresdefault"}.jpg`;
+        if (this.sourceName === "youtube") this.thumbnail = `https://img.youtube.com/vi/${this.identifier}/${this.kazagumo?._kazagumoOptions?.defaultThumbnail || "maxresdefault"}.jpg`;
         else this.thumbnail = null;
     }
 
