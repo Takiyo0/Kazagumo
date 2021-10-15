@@ -47,7 +47,9 @@ class kazagumoTrack {
         this.realUri = this.checkSupportedSource() ? kazagumoRawTrack.info.uri : null;
         this.requester = requester || null;
 
-        this.getThumbnail();
+        if (!this.thumbnail && this.sourceName === "youtube")
+            this.thumbnail = `https://img.youtube.com/vi/${this.identifier}/${this.kazagumo?._kazagumoOptions?.defaultThumbnail || "maxresdefault"}.jpg`;
+        
         /**
          * @private
          */
@@ -123,16 +125,6 @@ class kazagumoTrack {
     setRequester(discordUser) {
         this.requester = discordUser;
         return this;
-    }
-
-    /**
-     * Get thumbnail for the track
-     * @private
-     */
-    getThumbnail() {
-        if (this.thumbnail) return;
-        if (this.sourceName === "youtube") this.thumbnail = `https://img.youtube.com/vi/${this.identifier}/${this.kazagumo?._kazagumoOptions?.defaultThumbnail || "maxresdefault"}.jpg`;
-        else this.thumbnail = null;
     }
 
     /**
