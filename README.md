@@ -12,7 +12,7 @@
 ✓ Built-in spotify support  
 ✓ 💖 cute shipgirl
 
-## Documentations
+## Documentation
 
 > [Shoukaku](https://github.com/Deivu/Shoukaku) by [Deivu](https://github.com/Deivu);  https://deivu.github.io/Shoukaku   
 > Kazagumo; https://takiyo0.github.io/Kazagumo
@@ -134,10 +134,6 @@ class example extends Client {
             }
         })
     }
-    
-    login(TOKEN) {
-        return super.login(TOKEN)
-    }
 }
 
 new example().login("YOUR_LOVELY_BOT_TOKEN_HERE")
@@ -149,3 +145,6 @@ new example().login("YOUR_LOVELY_BOT_TOKEN_HERE")
 >   &nbsp;
 > - Takiyo as the owner of this project   
 >   &nbsp;&nbsp;&nbsp;&nbsp; Github: https://github.com/Takiyo0
+> - null as a member of this project  
+>   &nbsp;
+>   &nbsp;&nbsp;&nbsp;&nbsp; Github: https://github.com/vierofernando
