@@ -18,7 +18,8 @@ module.exports = {
             clientId: null,
             clientSecret: null
         },
-        defaultSearchEngine: null
+        defaultSearchEngine: null,
+        defaultThumbnail: null
     },
 
     /**
