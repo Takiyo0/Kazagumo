@@ -11,6 +11,7 @@ module.exports = {
      * @property {string} spotify.clientId Spotify client ID
      * @property {string} spotify.clientSecret Spotify client Secret
      * @property {("youtube"|"youtube_music"|"soundcloud")} [defaultSearchEngine="youtube"] Search engine for resolving and search
+     * @property {"default"|"hqdefault"|"mqdefault"|"sddefault"|"maxresdefault"} [defaultThumbnail="maxresdefault"] The default thumbnail size for youtube videos
      * @memberOf constant
      */
     kazagumoOptions: {
@@ -19,7 +20,7 @@ module.exports = {
             clientSecret: null
         },
         defaultSearchEngine: null,
-        defaultThumbnail: null
+        defaultThumbnail: 'maxresdefault'
     },
 
     /**
