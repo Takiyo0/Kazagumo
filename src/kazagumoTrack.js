@@ -46,9 +46,10 @@ class kazagumoTrack {
         this.uri = kazagumoRawTrack.info.uri;
         this.realUri = this.checkSupportedSource() ? kazagumoRawTrack.info.uri : null;
         this.requester = requester || null;
-
-        if (this.kazagumo?._kazagumoOptions?.defaultThumbnail && this.identifier && this.sourceName === "youtube")
-            this.thumbnail = `https://img.youtube.com/vi/${this.identifier}/${this.kazagumo?._kazagumoOptions?.defaultThumbnail || "maxresdefault"}.jpg`;
+        
+        console.log(`https://img.youtube.com/vi/${this.identifier}/${this.kazagumo?._kazagumoOptions?.defaultThumbnail || "maxresdefault"}.jpg okok `, this.thumbnail);
+        if (this.kazagumo?._kazagumoOptions?.defaultThumbnail && this.identifier && this.sourceName === "youtube") this.thumbnail = `https://img.youtube.com/vi/${this.identifier}/${this.kazagumo?._kazagumoOptions?.defaultThumbnail || "maxresdefault"}.jpg`;
+        console.log(`https://img.youtube.com/vi/${this.identifier}/${this.kazagumo?._kazagumoOptions?.defaultThumbnail || "maxresdefault"}.jpg okok `, this.thumbnail);
         
         /**
          * @private
