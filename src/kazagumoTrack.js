@@ -47,7 +47,7 @@ class kazagumoTrack {
         this.realUri = this.checkSupportedSource() ? kazagumoRawTrack.info.uri : null;
         this.requester = requester || null;
 
-        if (!this.thumbnail && this.sourceName === "youtube")
+        if (this.kazagumo?._kazagumoOptions?.defaultThumbnail && this.identifier && this.sourceName === "youtube")
             this.thumbnail = `https://img.youtube.com/vi/${this.identifier}/${this.kazagumo?._kazagumoOptions?.defaultThumbnail || "maxresdefault"}.jpg`;
         
         /**
