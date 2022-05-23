@@ -32,7 +32,8 @@ class kazagumoSearch {
         const sources = {
             "youtube": "yt",
             "youtube_music": "ytm",
-            "soundcloud": "sc"
+            "soundcloud": "sc",
+            "yandex": "ym"
         };
         const source = sources[this.type || this.kazagumo._kazagumoOptions.defaultSearchEngine || "youtube"];
 
