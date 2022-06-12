@@ -1,6 +1,12 @@
 import { Kazagumo } from "../Kazagumo";
 import KazagumoTrack from "../Managers/Supports/KazagumoTrack";
 
+export class Plugin {
+    public load(kazagumo: Kazagumo): void {}
+  
+    public unload(kazagumo: Kazagumo): void {}
+  }
+
 export interface KazagumoOptions {
     defaultSearchEngine: SearchEngines;
     plugins?: KazagumoPlugin[];

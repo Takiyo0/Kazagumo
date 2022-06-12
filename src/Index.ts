@@ -9,5 +9,6 @@ import KazagumoPlayer from "./Managers/KazagumoPlayer";
 
 export * from "./Kazagumo";
 export { KazagumoTrack, KazagumoQueue, KazagumoPlayer };
+export * from "./Modules/Interfaces";
 
 export const version = "2.0.0";
