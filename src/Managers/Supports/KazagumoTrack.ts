@@ -57,12 +57,28 @@ export default class KazagumoTrack {
       this.thumbnail = `https://img.youtube.com/vi/${this.identifier}/hqdefault.jpg`;
   }
 
+  public getRaw(): Object {
+    return {
+      track: this.track,
+      info: {
+        title: this.title,
+        uri: this.uri,
+        identifier: this.identifier,
+        author: this.author,
+        sourceName: this.sourceName,
+        isSeekable: this.isSeekable,
+        isStream: this.isStream,
+        length: this.length,
+        position: this.position,
+        thumbnail: this.thumbnail,
+      },
+    }
+  }
+
   setKazagumo(kazagumo: Kazagumo): KazagumoTrack {
     this.kazagumo = kazagumo;
     if (this.sourceName === 'youtube' && this.identifier)
-      this.thumbnail = `https://img.youtube.com/vi/${this.identifier}/${
-        kazagumo.KazagumoOptions.defaultYoutubeThumbnail ?? 'hqdefault'
-      }.jpg`;
+      this.thumbnail = `https://img.youtube.com/vi/${this.identifier}/${kazagumo.KazagumoOptions.defaultYoutubeThumbnail ?? 'hqdefault'}.jpg`;
 
     return this;
   }
