@@ -8,6 +8,15 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true
   },
-  "include": ["src"],
-  "exclude": ["node_modules", "**/__tests__/*", "test"]
+  "rules": {
+    "unified-signatures": false
+  },
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/__tests__/*",
+    "test"
+  ]
 }
