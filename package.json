@@ -1,6 +1,6 @@
 {
   "name": "kazagumo",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "A shoukaku wrapper with built-in queue support.",
   "main": "dist/Index.js",
   "types": "dist/Index.d.ts",
@@ -10,7 +10,7 @@
     "format": "prettier --write \"src/**/**/*.ts\"",
     "lint": "tslint -p tsconfig.json"
   },
-  "keywords": [],
+  "keywords": ["lavalink", "lavalink-client", "shoukaku", "kazagumo", "lavalink-player", "player", "discord-player"],
   "author": "Takiyo",
   "files": [
     "dist/**/**/*"
