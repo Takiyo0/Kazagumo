@@ -45,7 +45,7 @@
 - this.player.getNode().joinChannel(...) // Shoukaku
 + this.player.createPlayer(...) // Kazagumo
     
-// Add a track to the queue. MUST BE A kazagumoTrack, you can get from <kazagumoPlayer>.search()
+// Add a track to the queue. MUST BE A kazagumoTrack, you can get from <KazagumoPlayer>.search()
 + this.player.players.get("69696969696969").queue.add(kazagumoTrack) // Kazagumo
 
 // Play a track
@@ -57,7 +57,7 @@
 - this.player.players.get("69696969696969").setPaused(true) // Shoukaku
 + this.player.players.get("69696969696969").pause(true) // Kazagumo
     
-// Set filters. Access shoukakuPlayer from <kazagumoPlayer>.player
+// Set filters. Access shoukakuPlayer from <KazagumoPlayer>.player
 - this.player.players.get("69696969696969").setFilters({lowPass: {smoothing: 2}}) // Shoukaku
 + this.player.players.get("69696969696969").shoukaku.setFilters({lowPass: {smoothing: 2}}) // Kazagumo
 
