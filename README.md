@@ -1,6 +1,7 @@
 # Kazagumo
+#### A [Shoukaku](https://github.com/Deivu/Shoukaku) wrapper with built in queue system
 
-### A [Shoukaku](https://github.com/Deivu/Shoukaku) wrapper with built-in queue system and other features
+#### ⚠️ Unfinished 2.0.0 update, Do not use for production  ⚠️   
 
 ![Kazagumo](https://i.imgur.com/jfVSvHj.png)
 > Kazagumo © Azur Lane
@@ -9,7 +10,9 @@
 
 ✓ Built-in queue system  
 ✓ Easy to use  
-✓ Built-in spotify support  
+✓ Plugin system  
+✓ Uses shoukaku v3   
+✓ Stable _🙏_   
 ✓ 💖 cute shipgirl
 
 ## Documentation
@@ -28,16 +31,20 @@
 
 ## Changes
 ```javascript
+// You can get ShoukakuPlayer from here
++ <KazagumoPlayer>.shoukaku
++ this.player.players.get("69696969696969").shoukaku
+
 // Search tracks
-- this.player.getNode().rest.resolve("ytsearch:never gonna give you up") // Shoukaku
-+ this.player.search("never gonna give you up") // Kazagumo
+- this.player.getNode().rest.resolve("ytsearch:pretender Official髭男dism") // Shoukaku
++ this.player.search("pretender Official髭男dism") // Kazagumo
     
 // Create a player
 - this.player.getNode().joinChannel(...) // Shoukaku
 + this.player.createPlayer(...) // Kazagumo
     
 // Add a track to the queue. MUST BE A kazagumoTrack, you can get from <kazagumoPlayer>.search()
-+ this.player.players.get("69696969696969").addSong(kazagumoTrack) // Kazagumo
++ this.player.players.get("69696969696969").queue.add(kazagumoTrack) // Kazagumo
 
 // Play a track
 - this.player.players.get("69696969696969").playTrack(shoukakuTrack) // Shoukaku
@@ -46,97 +53,115 @@
 
 // Pauses or resumes the player. Control from kazagumoPlayer instead of shoukakuPlayer
 - this.player.players.get("69696969696969").setPaused(true) // Shoukaku
-+ this.player.players.get("69696969696969").setPaused(true) // Kazagumo
++ this.player.players.get("69696969696969").pause(true) // Kazagumo
     
 // Set filters. Access shoukakuPlayer from <kazagumoPlayer>.player
 - this.player.players.get("69696969696969").setFilters({lowPass: {smoothing: 2}}) // Shoukaku
-+ this.player.players.get("69696969696969").player.setFilters({lowPass: {smoothing: 2}}) // Kazagumo
++ this.player.players.get("69696969696969").shoukaku.setFilters({lowPass: {smoothing: 2}}) // Kazagumo
 
 // Set volume, use Kazagumo's for smoother volume
 - this.player.players.get("69696969696969").setVolume(1) // Shoukaku 100% volume
 + this.player.players.get("69696969696969").setVolume(100) // Kazagumo 100% volume
+
+// Skip the current song
+- this.player.players.get("69696969696969").stopTrack() // Stoptrack basically skip on shoukaku
++ this.player.players.get("69696969696969").skip() // skip on kazagumo. easier to find :v
 ```
 
 ## Support
+⚠️ Please read the docs first before asking question ⚠️ 
 > Kazagumo support server: https://discord.gg/nPPW2Gzqg2 (anywhere lmao)   
 > Shoukaku support server: https://discord.gg/FVqbtGu (#development)   
 > Report if you found a bug here https://github.com/Takiyo0/Kazagumo/issues/new/choose
 
-## Example
-
+## Example bot
 ```javascript
-const {Client} = require('discord.js');
-const Kazagumo = require('kazagumo');
+const { Client, Intents } = require('discord.js');
+const { FLAGS } = Intents;
+const { Connectors } = require("shoukaku");
+const { Kazagumo, KazagumoTrack } = require("kazagumo");
 
-const lavalinkServer = [{name: 'Localhost', url: 'localhost:6996', auth: 'you_weeb_indeed', secure: false}];
-const shoukakuOptions = {
-    moveOnDisconnect: false,
-    resumable: false,
-    resumableTimeout: 30,
-    reconnectTries: 2,
-    restTimeout: 10000
-};
-const kazagumoOptions = {
-    spotify: {clientId: "client_id_here_owo", clientSecret: "client_secret_here_owo"},
-    defaultSearchEngine: "youtube"
-};
-
-class example extends Client {
-    constructor() {
-        super(options);
-        this.kazagumo = new Kazagumo(this, lavalinkServer, shoukakuOptions, kazagumoOptions);
-        
-        // Listen
-        this.on('ready', () => console.log(`${this.user.tag} is now ready!`));
-
-        this.kazagumo.shoukaku.on('ready', (name) => console.log(`Lavalink ${name}: Ready!`));
-        this.kazagumo.shoukaku.on('error', (name, error) => console.error(`Lavalink ${name}: Error Caught,`, error));
-        this.kazagumo.shoukaku.on('close', (name, code, reason) => console.warn(`Lavalink ${name}: Closed, Code ${code}, Reason ${reason || 'No reason'}`));
-        this.kazagumo.shoukaku.on('disconnect', (name, players, moved) => {
-            if (moved) return;
-            players.map(player => player.connection.disconnect())
-            console.warn(`Lavalink ${name}: Disconnected`);
-        });
-        
-        this.kazagumo.on("playerStart", (player, track) => {
-            this.channels.cache.get(player.text)?.send({content: `Now playing ${track.title} by ${track.author} [<@!${track.requester}>]`})
-                .then(x => player.data.set("message", x));
-        });
-        this.kazagumo.on("playerEnd", player => {
-            if(player.data.get("message") && !player.data.get("message").deleted) player.data.get("message").delete().catch(() => null);
-        });
-        this.kazagumo.on("playerEmpty", player => {
-            if(player.data.get("message") && !player.data.get("message").deleted) player.data.get("message").delete().catch(() => null);
-            this.channels.cache.get(player.text)?.send({content: "There's no queue left"});
-            player.destroy();
-        })
-
-        this.on("messageCreate", async message => {
-            if (message.author.bot || !message.guild) return;
-
-
-            if (message.content.toLowerCase().includes("!play")) {
-                const url = message.content.substr(5);
-                if (!url) return message.reply({content: "Provide query"});
-                const player = await this.kazagumo.createPlayer({
-                    guildId: message.guild.id,
-                    voiceId: message.member.voice.channel.id,
-                    textId: message.channel.id
-                })
-                const result = await player.search(url, message.author);
-                if (!result.tracks.length) return message.reply({content: "No result was found"})
-                const tracks = result.tracks;
-
-                if (result.type === "PLAYLIST") for (let track of tracks) player.addSong(track);
-                else player.addSong(tracks[0]);
-                if (!player.current) player.play();
-                return message.reply({content: result.type === "PLAYLIST" ? `Queued ${tracks.length} from ${result.playlistName}` : `Queued ${tracks[0].title}`})
-            }
-        })
+const Nodes = [{
+    name: 'owo',
+    url: 'localhost:2333',
+    auth: 'youshallnotpass',
+    secure: false
+}];
+const client = new Client({ intents: [FLAGS.GUILDS, FLAGS.GUILD_VOICE_STATES, FLAGS.GUILD_MESSAGES] });
+const kazagumo = new Kazagumo({
+    defaultSearchEngine: "youtube", 
+    // MAKE SURE YOU HAVE THIS
+    send: (guildId, payload) => {
+        const guild = client.guilds.cache.get(guildId);
+        if (guild) guild.shard.send(payload);
     }
-}
+}, new Connectors.DiscordJS(client), Nodes);
 
-new example().login("YOUR_LOVELY_BOT_TOKEN_HERE")
+client.on("ready", () => console.log(client.user.tag + " Ready!"));
+
+kazagumo.shoukaku.on('ready', (name) => console.log(`Lavalink ${name}: Ready!`));
+kazagumo.shoukaku.on('error', (name, error) => console.error(`Lavalink ${name}: Error Caught,`, error));
+kazagumo.shoukaku.on('close', (name, code, reason) => console.warn(`Lavalink ${name}: Closed, Code ${code}, Reason ${reason || 'No reason'}`));
+kazagumo.shoukaku.on('disconnect', (name, players, moved) => {
+    if (moved) return;
+    players.map(player => player.connection.disconnect())
+    console.warn(`Lavalink ${name}: Disconnected`);
+});
+
+kazagumo.on("playerStart", (player, track) => {
+    client.channels.cache.get(player.textId)?.send({ content: `Now playing **${track.title}** by **${track.author}**` })
+        .then(x => player.data.set("message", x));
+});
+
+kazagumo.on("playerEnd", (player) => {
+    player.data.get("message")?.edit({ content: `Finished playing` });
+});
+
+kazagumo.on("playerEmpty", player => {
+    client.channels.cache.get(player.textId)?.send({ content: `Destroyed player due to inactivity.` })
+        .then(x => player.data.set("message", x));
+    player.destroy();
+});
+
+client.on("messageCreate", async msg => {
+    if (msg.author.bot) return;
+    
+    if (msg.content.startsWith("!play")) {
+        const args = msg.content.split(" ");
+        const query = args.slice(1).join(" ");
+
+        const { channel } = msg.member.voice;
+        if (!channel) return msg.reply("You need to be in a voice channel to use this command!");
+
+        let player = await kazagumo.createPlayer({
+            guildId: msg.guild.id,
+            textId: msg.channel.id,
+            voiceId: channel.id
+        })
+
+        let result = await kazagumo.search(query, { requester: msg.author });
+        if (!result.tracks.length) return msg.reply("No results found!");
+
+        if (result.type === "PLAYLIST") for (let track of result.tracks) player.queue.add(track);
+        else player.queue.add(result.tracks[0]);
+
+        if (!player.playing) player.play();
+        return msg.reply({ content: result.type === "PLAYLIST" ? `Queued ${result.tracks.length} from ${result.playlistName}` : `Queued ${result.tracks[0].title}` });
+    }
+
+    if (msg.content.startsWith("!forceplay")) {
+        let player = kazagumo.players.get(msg.guild.id);
+        if (!player) return msg.reply("No player found!");
+        const args = msg.content.split(" ");
+        const query = args.slice(1).join(" ");
+        let result = await kazagumo.search(query, { requester: msg.author });
+        if (!result.tracks.length) return msg.reply("No results found!");
+        player.play(new KazagumoTrack(result.tracks[0].getRaw(), msg.author));
+        return msg.reply({ content: `Forced playing **${result.tracks[0].title}** by **${result.tracks[0].author}**` });
+    }
+})
+
+client.login('');
 ```
 
 ## Contributors
@@ -145,6 +170,3 @@ new example().login("YOUR_LOVELY_BOT_TOKEN_HERE")
 >   &nbsp;
 > - Takiyo as the owner of this project   
 >   &nbsp;&nbsp;&nbsp;&nbsp; Github: https://github.com/Takiyo0
-> - null as a member of this project  
->   &nbsp;
->   &nbsp;&nbsp;&nbsp;&nbsp; Github: https://github.com/vierofernando
