@@ -80,7 +80,6 @@ const { Client, Intents } = require('discord.js');
 const { FLAGS } = Intents;
 const { Connectors } = require("shoukaku");
 const { Kazagumo, KazagumoTrack } = require("kazagumo");
-const Spotify = require("kazagumo-spotify");
 
 const Nodes = [{
     name: 'owo',
@@ -95,13 +94,7 @@ const kazagumo = new Kazagumo({
     send: (guildId, payload) => {
         const guild = client.guilds.cache.get(guildId);
         if (guild) guild.shard.send(payload);
-    },
-    plugins: [
-        new Spotify({
-            clientId: "",
-            clientSecret: ""
-        })
-    ]
+    }
 }, new Connectors.DiscordJS(client), Nodes);
 
 client.on("ready", () => console.log(client.user.tag + " Ready!"));
