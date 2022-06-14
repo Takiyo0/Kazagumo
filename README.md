@@ -1,7 +1,5 @@
 # Kazagumo
-#### A [Shoukaku](https://github.com/Deivu/Shoukaku) wrapper with built in queue system
-
-#### ⚠️ Unfinished 2.0.0 update, Do not use for production  ⚠️   
+#### A [Shoukaku](https://github.com/Deivu/Shoukaku) wrapper with built in queue system 
 
 ![Kazagumo](https://i.imgur.com/jfVSvHj.png)
 > Kazagumo © Azur Lane
