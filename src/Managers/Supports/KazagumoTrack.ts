@@ -20,17 +20,29 @@ export default class KazagumoTrack {
    */
   public requester: unknown | undefined;
 
+  /** Track's Base64 */
   public track: string;
+  /** Track's source */
   public sourceName: string;
+  /** Track's title */
   public title: string;
+  /** Track's URI */
   public uri: string;
+  /** Track's identifier */
   public identifier: string;
+  /** Whether the track is seekable */
   public isSeekable: boolean;
+  /** Whether the track is a stream */
   public isStream: boolean;
+  /** Track's author */
   public author: string | undefined;
+  /** Track's length */
   public length: number | undefined;
+  /** Track's position (idk this) */
   public position: number | undefined;
+  /** Track's thumbnail, if available */
   public thumbnail: string | undefined;
+  /** The youtube/soundcloud URI for spotify and other unsupported source */
   public realUri: string | null;
 
   private resolvedBySource: boolean = false;
@@ -57,6 +69,10 @@ export default class KazagumoTrack {
       this.thumbnail = `https://img.youtube.com/vi/${this.identifier}/hqdefault.jpg`;
   }
 
+  /**
+   * Get json of this track
+   * @returns {Object}
+   */
   public getRaw(): Object {
     return {
       track: this.track,
@@ -75,6 +91,11 @@ export default class KazagumoTrack {
     }
   }
 
+  /**
+   * Set kazagumo instance
+   * @param kazagumo Kazagumo instance
+   * @returns KazagumoTrack
+   */
   setKazagumo(kazagumo: Kazagumo): KazagumoTrack {
     this.kazagumo = kazagumo;
     if (this.sourceName === 'youtube' && this.identifier)
@@ -83,6 +104,9 @@ export default class KazagumoTrack {
     return this;
   }
 
+  /**
+   * Whether the track is ready to play or need to be solved
+   */
   get readyToPlay(): boolean {
     return (
       this.kazagumo !== undefined &&
@@ -97,6 +121,11 @@ export default class KazagumoTrack {
     );
   }
 
+  /**
+   * Resolve the track
+   * @param options Resolve options
+   * @returns Promise<KazagumoTrack>
+   */
   public async resolve(options?: ResolveOptions): Promise<KazagumoTrack> {
     if (!this.kazagumo) throw new KazagumoError(1, 'Kazagumo is not set');
     const resolveSource = this.kazagumo.KazagumoOptions?.sourceForceResolve?.includes(this.sourceName);

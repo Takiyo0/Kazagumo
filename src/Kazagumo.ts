@@ -72,9 +72,18 @@ export declare interface Kazagumo {
 }
 
 export class Kazagumo extends EventEmitter {
+  /** Shoukaku instance */
   public shoukaku: Shoukaku;
+  /** Kazagumo players */
   public readonly players: Map<string, KazagumoPlayer> = new Map();
 
+  /**
+   * Initialize a Kazagumo instance.
+   * @param KazagumoOptions KazagumoOptions
+   * @param connector Connector
+   * @param nodes NodeOption[]
+   * @param options ShoukakuOptions
+   */
   constructor(
     public KazagumoOptions: KazagumoOptionsOwO,
     connector: Connector,
@@ -95,6 +104,11 @@ export class Kazagumo extends EventEmitter {
     this.players = new Map<string, KazagumoPlayer>();
   }
 
+  /**
+   * Create a player.
+   * @param options CreatePlayerOptions
+   * @returns Promise<KazagumoPlayer>
+   */
   public async createPlayer(options: CreatePlayerOptions): Promise<KazagumoPlayer> {
     const exist = this.players.get(options.guildId);
     if (exist) return exist;
@@ -127,10 +141,20 @@ export class Kazagumo extends EventEmitter {
     return kazagumoPlayer;
   }
 
+  /**
+   * Get a player by guildId.
+   * @param guildId Guild ID
+   * @returns KazagumoPlayer | undefined
+   */
   public getPlayer(guildId: string): KazagumoPlayer | undefined {
     return this.players.get(guildId);
   }
 
+  /**
+   * Destroy a player.
+   * @param guildId Guild ID
+   * @returns void
+   */
   public destroyPlayer(guildId: string): void {
     const player = this.getPlayer(guildId);
     if (!player) return;
@@ -138,6 +162,10 @@ export class Kazagumo extends EventEmitter {
     this.players.delete(guildId);
   }
 
+  /**
+   * Get a least used node.
+   * @returns Node
+   */
   public getLeastUsedNode(): Node {
     const nodes: Node[] = [...this.shoukaku.nodes.values()];
 
@@ -148,6 +176,12 @@ export class Kazagumo extends EventEmitter {
     return leastUsedNode;
   }
 
+  /**
+   * Search a track by query or uri.
+   * @param query Query
+   * @param options KazagumoOptions
+   * @returns Promise<KazagumoSearchResult>
+   */
   public async search(query: string, options?: KazagumoSearchOptions): Promise<KazagumoSearchResult> {
     const node = this.getLeastUsedNode();
     if (!node) throw new KazagumoError(3, 'No node is available');

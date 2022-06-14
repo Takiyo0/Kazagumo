@@ -62,6 +62,12 @@ export default class KazagumoPlayer {
    */
   public readonly data: Map<string, any> = new Map();
 
+  /**
+   * Initialize the player
+   * @param kazagumo Kazagumo instance
+   * @param player Shoukaku's Player instance
+   * @param options Kazagumo options
+   */
   constructor(kazagumo: Kazagumo, player: Player, options: KazagumoPlayerOptions) {
     this.options = options;
     this.kazagumo = kazagumo;
@@ -76,12 +82,12 @@ export default class KazagumoPlayer {
     this.shoukaku.on('start', (track) => {
       this.paused = false;
 
-      const queues = [...this.queue];
-      if (this.queue.current) queues.push(this.queue.current);
-      if (this.queue.previous) queues.push(this.queue.previous);
+      // const queues = [...this.queue];
+      // if (this.queue.current) queues.push(this.queue.current);
+      // if (this.queue.previous) queues.push(this.queue.previous);
 
-      const kazagumoTrack = queues.find((q) => q.track === track.track);
-      this.emit(Events.PlayerStart, this, kazagumoTrack);
+      // const kazagumoTrack = queues.find((q) => q.track === track.track);
+      this.emit(Events.PlayerStart, this, this.queue.current);
     });
 
     this.shoukaku.on('end', (data) => {
@@ -129,14 +135,23 @@ export default class KazagumoPlayer {
     this.shoukaku.on('update', (data: PlayerUpdate) => this.emit(Events.PlayerUpdate, this, data));
   }
 
+  /**
+   * Get playing status
+   */
   public get playing(): boolean {
     return !this.paused;
   }
 
+  /**
+   * Get volume
+   */
   public get volume(): number {
     return this.shoukaku.filters.volume;
   }
 
+  /**
+   * Get filters
+   */
   public get filters(): Filters {
     return this.shoukaku.filters;
   }
@@ -149,6 +164,11 @@ export default class KazagumoPlayer {
     this.node.queue.add(...args);
   }
 
+  /**
+   * Pause the player
+   * @param pause Whether to pause or not
+   * @returns KazagumoPlayer
+   */
   public pause(pause: boolean): KazagumoPlayer {
     if (typeof pause !== 'boolean') throw new KazagumoError(1, 'pause must be a boolean');
 
@@ -165,6 +185,11 @@ export default class KazagumoPlayer {
     return this;
   }
 
+  /**
+   * Set text channel
+   * @param textId Text channel Id
+   * @returns KazagumoPlayer
+   */
   public setTextChannel(textId: string): KazagumoPlayer {
     if (this.state === PlayerState.DESTROYED) throw new KazagumoError(1, 'Player is already destroyed');
 
@@ -173,6 +198,11 @@ export default class KazagumoPlayer {
     return this;
   }
 
+  /**
+   * Set voice channel and move the player to the voice channel
+   * @param voiceId Voice channel Id
+   * @returns KazagumoPlayer
+   */
   public setVoiceChannel(voiceId: string): KazagumoPlayer {
     if (this.state === PlayerState.DESTROYED) throw new KazagumoError(1, 'Player is already destroyed');
     this.state = PlayerState.CONNECTING;
@@ -193,6 +223,11 @@ export default class KazagumoPlayer {
     return this;
   }
 
+  /**
+   * Set loop mode
+   * @param [loop] Loop mode
+   * @returns KazagumoPlayer
+   */
   public setLoop(loop: 'none' | 'queue' | 'track' | undefined): KazagumoPlayer {
     if (loop === undefined) {
       if (this.loop === 'none') this.loop = 'queue';
@@ -209,6 +244,12 @@ export default class KazagumoPlayer {
     throw new KazagumoError(1, "loop must be one of 'none', 'queue', 'track'");
   }
 
+  /**
+   * Play a track
+   * @param track Track to play
+   * @param options Play options
+   * @returns KazagumoPlayer
+   */
   public async play(track?: KazagumoTrack, options?: PlayOptions | undefined): Promise<KazagumoPlayer> {
     if (this.state === PlayerState.DESTROYED) throw new KazagumoError(1, 'Player is already destroyed');
 
@@ -242,6 +283,10 @@ export default class KazagumoPlayer {
     return this;
   }
 
+  /**
+   * Skip the current track
+   * @returns KazagumoPlayer
+   */
   public skip(): KazagumoPlayer {
     if (this.state === PlayerState.DESTROYED) throw new KazagumoError(1, 'Player is already destroyed');
 
@@ -250,6 +295,11 @@ export default class KazagumoPlayer {
     return this;
   }
 
+  /**
+   * Set the volume
+   * @param volume Volume
+   * @returns KazagumoPlayer
+   */
   public setVolume(volume: number): KazagumoPlayer {
     if (this.state === PlayerState.DESTROYED) throw new KazagumoError(1, 'Player is already destroyed');
     if (isNaN(volume)) throw new KazagumoError(1, 'volume must be a number');
@@ -265,6 +315,10 @@ export default class KazagumoPlayer {
     return this;
   }
 
+  /**
+   * Connect to the voice channel
+   * @returns KazagumoPlayer
+   */
   public connect(): KazagumoPlayer {
     if (this.state === PlayerState.DESTROYED) throw new KazagumoError(1, 'Player is already destroyed');
     if (this.state === PlayerState.CONNECTED || !!this.voiceId)
@@ -288,6 +342,10 @@ export default class KazagumoPlayer {
     return this;
   }
 
+  /**
+   * Disconnect from the voice channel
+   * @returns KazagumoPlayer
+   */
   public disconnect(): KazagumoPlayer {
     if (this.state === PlayerState.DISCONNECTED || !this.voiceId)
       throw new KazagumoError(1, 'Player is already disconnected');
@@ -312,6 +370,10 @@ export default class KazagumoPlayer {
     return this;
   }
 
+  /**
+   * Destroy the player
+   * @returns KazagumoPlayer
+   */
   destroy(): KazagumoPlayer {
     if (this.state === PlayerState.DESTROYING || this.state === PlayerState.DESTROYED)
       throw new KazagumoError(1, 'Player is already destroyed');
