@@ -22,6 +22,10 @@
 
 > npm i kazagumo
 
+## Plugins
+- Official [spotify plugin](https://github.com/Takiyo0/kazagumo-spotify)
+> npm i kazagumo-spotify
+
 ## Lavalink installation
 
 > Full tutorial step-by-step with image [here](https://github.com/Weeb-Devs/Laffey/blob/main/readme/LAVALINK_INSTALLATION.md) ©Weeb-Devs, the owner is me tbh   
