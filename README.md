@@ -21,7 +21,7 @@
 
 ## Installation
 
-> npm i kazagumo
+> npm i kazagumo@next
 
 ## Lavalink installation
 
