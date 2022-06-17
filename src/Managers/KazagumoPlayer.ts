@@ -77,7 +77,7 @@ export default class KazagumoPlayer {
     this.textId = options.textId;
     this.queue = new KazagumoQueue();
 
-    this.search = this.kazagumo.search;
+    this.search = this.kazagumo.search.bind(this.kazagumo);
 
     this.shoukaku.on('start', (track) => {
       this.paused = false;
