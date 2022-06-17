@@ -23,7 +23,7 @@
 > npm i kazagumo
 
 ## Plugins
-- Official [spotify plugin](https://github.com/Takiyo0/kazagumo-spotify)
+- Official [spotify plugin](https://npmjs.com/package/kazagumo-spotify)
 > npm i kazagumo-spotify
 
 ## Lavalink installation
@@ -164,6 +164,18 @@ client.on("messageCreate", async msg => {
 })
 
 client.login('');
+```
+
+## Known issue
+###### This part should be in kazagumo-spotify but whatever
+- Force playing song from spotify module (player.play(result.tracks[0]); `result.tracks[0]` is from spotify) is currently not working. Please use this workaround
+```js
+    const { KazagumoTrack } = require("kazagumo"); // CommonJS
+    import { KazagumoTrack } from "kazagumo"; // ES6; don't laugh if it's wrong
+
+    let track = result.tracks[0] // the spotify track
+    let convertedTrack = new KazagumoTrack(track.getRaw(), track.author);
+    player.play(convertedTrack);
 ```
 
 ## Contributors
