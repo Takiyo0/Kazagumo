@@ -381,8 +381,10 @@ export default class KazagumoPlayer {
     this.disconnect();
     this.state = PlayerState.DESTROYING;
     this.shoukaku.connection.destroyLavalinkPlayer();
+    this.shoukaku.removeAllListeners();
     this.kazagumo.players.delete(this.guildId);
     this.state = PlayerState.DESTROYED;
+
 
     this.emit(Events.PlayerDestroy, this);
     this.emit(Events.Debug, `Player destroyed; Guild id: ${this.guildId}`);
