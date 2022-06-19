@@ -76,6 +76,16 @@
 > Shoukaku support server: https://discord.gg/FVqbtGu (#development)   
 > Report if you found a bug here https://github.com/Takiyo0/Kazagumo/issues/new/choose
 
+## Enable playerMoved event
+```javascript
+import { Kazagumo, Payload, Plugins } from "kazagumo";
+
+const kazagumo = new Kazagumo({
+    ...,
+    plugins: [new Plugins.PlayerMoved(client)]
+}, Connector, Nodes, ShoukakuOptions)
+```
+
 ## Example bot
 ```javascript
 const { Client, Intents } = require('discord.js');
