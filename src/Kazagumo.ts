@@ -1,7 +1,6 @@
 import { EventEmitter } from 'events';
 import {
   KazagumoOptions as KazagumoOptionsOwO,
-  KazagumoPlugin,
   KazagumoError,
   CreatePlayerOptions,
   State,
@@ -10,6 +9,8 @@ import {
   SourceIDs,
   Events,
   SearchResultTypes,
+  PlayerMovedState,
+  PlayerMovedChannels,
 } from './Modules/Interfaces';
 import {
   NodeOption,
@@ -43,6 +44,11 @@ export declare interface Kazagumo {
    */
   on(event: 'playerDestroy', listener: (player: KazagumoPlayer) => void): this;
   /**
+   * Emitted when a player created.
+   * @event Kazagumo#playerCreate
+   */
+  on(event: 'playerCreate', listener: (player: KazagumoPlayer) => void): this;
+  /**
    * Emitted when a track ended.
    * @event Kazagumo#playerEnd
    */
@@ -57,6 +63,14 @@ export declare interface Kazagumo {
    * @event Kazagumo#playerClosed
    */
   on(event: 'playerClosed', listener: (player: KazagumoPlayer, data: WebSocketClosedEvent) => void): this;
+  /**
+   * Emitted only when you use playerMoved plugin and when the bot moved, joined, or left voice channel.
+   * @event Kazagumo#playerMoved
+   */
+  on(
+    event: 'playerMoved',
+    listener: (player: KazagumoPlayer, state: PlayerMovedState, channels: PlayerMovedChannels) => void,
+  ): this;
   /**
    * Emitted when an exception occured.
    * @event Kazagumo#playerException
@@ -96,7 +110,8 @@ export class Kazagumo extends EventEmitter {
 
     if (this.KazagumoOptions.plugins) {
       for (const [, plugin] of this.KazagumoOptions.plugins.entries()) {
-        if (plugin.constructor.name !== "KazagumoPlugin") throw new KazagumoError(1, 'Plugin must be an instance of KazagumoPlugin');
+        if (plugin.constructor.name !== 'KazagumoPlugin')
+          throw new KazagumoError(1, 'Plugin must be an instance of KazagumoPlugin');
         plugin.load(this);
       }
     }
@@ -138,6 +153,7 @@ export class Kazagumo extends EventEmitter {
       deaf: options.deaf,
     });
     this.players.set(options.guildId, kazagumoPlayer);
+    this.emit(Events.PlayerCreate, kazagumoPlayer);
     return kazagumoPlayer;
   }
 
