@@ -73,6 +73,7 @@ export interface RawTrack {
 export const Events = {
   // Player events
   PlayerDestroy: 'playerDestroy',
+  PlayerCreate: 'playerCreate',
   PlayerStart: 'playerStart',
   PlayerEnd: 'playerEnd',
   PlayerEmpty: 'playerEmpty',
@@ -82,10 +83,18 @@ export const Events = {
   PlayerError: 'playerError',
   PlayerResumed: 'playerResumed',
   PlayerResolveError: 'playerResolveError',
+  PlayerMoved: 'playerMoved',
 
   // Kazagumo events
   Debug: 'debug',
 };
+
+export interface PlayerMovedChannels {
+  oldChannelId?: string | null;
+  newChannelId?: string | null;
+}
+
+export type PlayerMovedState = 'UNKNOWN' | 'JOINED' | 'LEFT' | 'MOVED';
 
 export interface KazagumoSearchOptions {
   requester: unknown;
