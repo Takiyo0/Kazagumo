@@ -71,9 +71,9 @@ export default class KazagumoTrack {
 
   /**
    * Get json of this track
-   * @returns {Object}
+   * @returns {object}
    */
-  public getRaw(): Object {
+  public getRaw(): object {
     return {
       track: this.track,
       info: {
@@ -88,7 +88,7 @@ export default class KazagumoTrack {
         position: this.position,
         thumbnail: this.thumbnail,
       },
-    };
+    }
   }
 
   /**
@@ -99,9 +99,7 @@ export default class KazagumoTrack {
   setKazagumo(kazagumo: Kazagumo): KazagumoTrack {
     this.kazagumo = kazagumo;
     if (this.sourceName === 'youtube' && this.identifier)
-      this.thumbnail = `https://img.youtube.com/vi/${this.identifier}/${
-        kazagumo.KazagumoOptions.defaultYoutubeThumbnail ?? 'hqdefault'
-      }.jpg`;
+      this.thumbnail = `https://img.youtube.com/vi/${this.identifier}/${kazagumo.KazagumoOptions.defaultYoutubeThumbnail ?? 'hqdefault'}.jpg`;
 
     return this;
   }
