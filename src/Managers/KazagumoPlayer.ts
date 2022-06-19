@@ -385,7 +385,6 @@ export default class KazagumoPlayer {
     this.kazagumo.players.delete(this.guildId);
     this.state = PlayerState.DESTROYED;
 
-
     this.emit(Events.PlayerDestroy, this);
     this.emit(Events.Debug, `Player destroyed; Guild id: ${this.guildId}`);
 
