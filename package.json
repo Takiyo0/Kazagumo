@@ -13,7 +13,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
     "format": "prettier --write \"src/**/**/*.ts\"",
-    "lint": "tslint -p tsconfig.json"
+    "lint": "tslint -p tsconfig.json",
+    "build:docs": "typedoc --readme README.md --out docs/ --entryPointStrategy expand src/."
   },
   "keywords": [
     "lavalink",
