@@ -9,7 +9,7 @@ export interface KazagumoOptions {
   send: (guildId: string, payload: Payload) => void;
 }
 
-export type SearchEngines = 'youtube' | 'soundcloud' | 'youtube_music';
+export type SearchEngines = 'youtube' | 'soundcloud' | 'youtube_music' | string;
 export type YoutubeThumbnail = 'default' | 'hqdefault' | 'mqdefault' | 'sddefault' | 'maxresdefault';
 
 export interface Payload {
