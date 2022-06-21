@@ -228,7 +228,7 @@ export default class KazagumoPlayer {
    * @param [loop] Loop mode
    * @returns KazagumoPlayer
    */
-  public setLoop(loop: 'none' | 'queue' | 'track' | undefined): KazagumoPlayer {
+  public setLoop(loop?: 'none' | 'queue' | 'track'): KazagumoPlayer {
     if (loop === undefined) {
       if (this.loop === 'none') this.loop = 'queue';
       else if (this.loop === 'queue') this.loop = 'track';
@@ -250,7 +250,7 @@ export default class KazagumoPlayer {
    * @param options Play options
    * @returns KazagumoPlayer
    */
-  public async play(track?: KazagumoTrack, options?: PlayOptions | undefined): Promise<KazagumoPlayer> {
+  public async play(track?: KazagumoTrack, options?: PlayOptions): Promise<KazagumoPlayer> {
     if (this.state === PlayerState.DESTROYED) throw new KazagumoError(1, 'Player is already destroyed');
 
     if (track && !(track instanceof KazagumoTrack)) throw new KazagumoError(1, 'track must be a KazagumoTrack');
