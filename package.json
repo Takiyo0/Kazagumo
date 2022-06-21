@@ -42,6 +42,6 @@
   },
   "dependencies": {
     "events": "^3.3.0",
-    "shoukaku": "github:Deivu/Shoukaku#15b4457c20862308abc39c181b0e51e1755bef28"
+    "shoukaku": "^3.1.0"
   }
 }
