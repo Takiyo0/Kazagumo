@@ -71,9 +71,9 @@ export default class KazagumoTrack {
 
   /**
    * Get json of this track
-   * @returns {object}
+   * @returns {RawTrack}
    */
-  public getRaw(): object {
+  public getRaw(): RawTrack {
     return {
       track: this.track,
       info: {
@@ -157,7 +157,8 @@ export default class KazagumoTrack {
   private async getTrack(): Promise<Track> {
     if (!this.kazagumo) throw new Error('Kazagumo is not set');
 
-    const source = SourceIDs[this.kazagumo?.KazagumoOptions.defaultSearchEngine || 'youtube'];
+    const defaultSearchEngine = this.kazagumo.KazagumoOptions.defaultSearchEngine;
+    const source = (SourceIDs as any)[defaultSearchEngine || 'youtube'] || "yt";
     const query = [this.author, this.title].filter((x) => !!x).join(' - ');
     const node = this.kazagumo.getLeastUsedNode();
 
