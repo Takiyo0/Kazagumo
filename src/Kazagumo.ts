@@ -202,15 +202,19 @@ export class Kazagumo extends EventEmitter {
     const node = this.getLeastUsedNode();
     if (!node) throw new KazagumoError(3, 'No node is available');
 
-    const source = SourceIDs[options?.engine || this.KazagumoOptions.defaultSearchEngine || 'youtube'];
+    const source = (SourceIDs as any)[(options?.engine && ["youtube", "youtube_music", "soundcloud"].includes(options.engine) ? options.engine : null)
+      || (!!this.KazagumoOptions.defaultSearchEngine && ["youtube", "youtube_music", "soundcloud"].includes(this.KazagumoOptions.defaultSearchEngine!) ? this.KazagumoOptions.defaultSearchEngine : null)
+      || 'youtube'];
+
+    const isUrl = /^https?:\/\/.*/.test(query);
 
     const result = await node.rest
-      .resolve(!/^https?:\/\//.test(query) ? `${source}search:${query}` : query)
+      .resolve(!isUrl ? `${source}search:${query}` : query)
       .catch((_) => null);
     if (!result) return this.buildSearch(undefined, [], 'SEARCH');
     this.emit(Events.Debug, `Searched ${query}; Track results: ${result.tracks.length}`);
 
-    let loadType = 'TRACK' as SearchResultTypes;
+    let loadType = (isUrl ? 'TRACK' : 'SEARCH') as SearchResultTypes;
     if (result.playlistInfo.name) loadType = 'PLAYLIST';
 
     return this.buildSearch(
@@ -228,7 +232,7 @@ export class Kazagumo extends EventEmitter {
     return {
       playlistName,
       tracks,
-      type: type ?? 'TRACK',
+      type: type ?? 'SEARCH',
     };
   }
 }
