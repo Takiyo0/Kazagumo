@@ -48,7 +48,11 @@ export default class KazagumoPlayer {
   /**
    * Paused state of the player
    */
-  public paused: boolean = true;
+  public paused: boolean = false;
+  /**
+   * Whether the player is playing or not
+   */
+  public playing: boolean = false;
   /**
    * Loop status
    */
@@ -80,13 +84,7 @@ export default class KazagumoPlayer {
     this.search = this.kazagumo.search.bind(this.kazagumo);
 
     this.shoukaku.on('start', (track) => {
-      this.paused = false;
-
-      // const queues = [...this.queue];
-      // if (this.queue.current) queues.push(this.queue.current);
-      // if (this.queue.previous) queues.push(this.queue.previous);
-
-      // const kazagumoTrack = queues.find((q) => q.track === track.track);
+      this.playing = true;
       this.emit(Events.PlayerStart, this, this.queue.current);
     });
 
@@ -98,7 +96,7 @@ export default class KazagumoPlayer {
       if (data.reason === 'REPLACED') return this.emit(Events.PlayerEnd, this);
       if (['LOAD_FAILED', 'CLEAN_UP'].includes(data.reason)) {
         this.queue.previous = this.queue.current;
-        this.paused = true;
+        this.playing = false;
         if (!this.queue.length) return this.emit(Events.PlayerEmpty, this);
         this.emit(Events.PlayerEnd, this, this.queue.current);
         this.queue.current = null;
@@ -111,11 +109,10 @@ export default class KazagumoPlayer {
       this.queue.previous = this.queue.current;
       const currentSong = this.queue.current;
       this.queue.current = null;
-      this.paused = false;
 
       if (this.queue.length) this.emit(Events.PlayerEnd, this, currentSong);
       else {
-        this.paused = true;
+        this.playing = false;
         return this.emit(Events.PlayerEmpty, this);
       }
 
@@ -123,23 +120,16 @@ export default class KazagumoPlayer {
     });
 
     this.shoukaku.on('closed', (data: WebSocketClosedEvent) => {
-      this.paused = true;
+      this.playing = false;
       this.emit(Events.PlayerClosed, this, data);
     });
 
     this.shoukaku.on('exception', (data: TrackExceptionEvent) => {
-      this.paused = true;
+      this.playing = false;
       this.emit(Events.PlayerException, this, data);
     });
 
     this.shoukaku.on('update', (data: PlayerUpdate) => this.emit(Events.PlayerUpdate, this, data));
-  }
-
-  /**
-   * Get playing status
-   */
-  public get playing(): boolean {
-    return !this.paused;
   }
 
   /**
@@ -172,15 +162,10 @@ export default class KazagumoPlayer {
   public pause(pause: boolean): KazagumoPlayer {
     if (typeof pause !== 'boolean') throw new KazagumoError(1, 'pause must be a boolean');
 
-    if (pause) {
-      if (this.paused) return this;
-      this.paused = true;
-      this.shoukaku.setPaused(true);
-    } else {
-      if (!this.paused) return this;
-      this.paused = false;
-      this.shoukaku.setPaused(false);
-    }
+    if (this.paused === pause || !this.queue.totalSize) return this;
+    this.paused = pause;
+    this.playing = !pause;
+    this.shoukaku.setPaused(pause);
 
     return this;
   }
