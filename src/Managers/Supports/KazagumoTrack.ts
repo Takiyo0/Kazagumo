@@ -88,7 +88,7 @@ export default class KazagumoTrack {
         position: this.position,
         thumbnail: this.thumbnail,
       },
-    }
+    };
   }
 
   /**
@@ -99,7 +99,9 @@ export default class KazagumoTrack {
   setKazagumo(kazagumo: Kazagumo): KazagumoTrack {
     this.kazagumo = kazagumo;
     if (this.sourceName === 'youtube' && this.identifier)
-      this.thumbnail = `https://img.youtube.com/vi/${this.identifier}/${kazagumo.KazagumoOptions.defaultYoutubeThumbnail ?? 'hqdefault'}.jpg`;
+      this.thumbnail = `https://img.youtube.com/vi/${this.identifier}/${
+        kazagumo.KazagumoOptions.defaultYoutubeThumbnail ?? 'hqdefault'
+      }.jpg`;
 
     return this;
   }
@@ -158,7 +160,7 @@ export default class KazagumoTrack {
     if (!this.kazagumo) throw new Error('Kazagumo is not set');
 
     const defaultSearchEngine = this.kazagumo.KazagumoOptions.defaultSearchEngine;
-    const source = (SourceIDs as any)[defaultSearchEngine || 'youtube'] || "yt";
+    const source = (SourceIDs as any)[defaultSearchEngine || 'youtube'] || 'yt';
     const query = [this.author, this.title].filter((x) => !!x).join(' - ');
     const node = this.kazagumo.getLeastUsedNode();
 
