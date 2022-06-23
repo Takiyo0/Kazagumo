@@ -14,7 +14,7 @@
 ✓ 💖 cute shipgirl
 
 ## Documentation
-
+Pls read the docs before asking 🙏🙏🙏 There is a useful search feature there
 > [Shoukaku](https://github.com/Deivu/Shoukaku) by [Deivu](https://github.com/Deivu);  https://deivu.github.io/Shoukaku   
 > Kazagumo; https://takiyo0.github.io/Kazagumo
 
@@ -157,7 +157,7 @@ client.on("messageCreate", async msg => {
         if (result.type === "PLAYLIST") for (let track of result.tracks) player.queue.add(track);
         else player.queue.add(result.tracks[0]);
 
-        if (!player.playing) player.play();
+        if (!player.playing && !player.paused) player.play();
         return msg.reply({ content: result.type === "PLAYLIST" ? `Queued ${result.tracks.length} from ${result.playlistName}` : `Queued ${result.tracks[0].title}` });
     }
 
@@ -178,7 +178,7 @@ client.login('');
 
 ## Known issue
 ###### This part should be in kazagumo-spotify but whatever
-- Force playing song from spotify module (player.play(result.tracks[0]); `result.tracks[0]` is from spotify) is currently not working. Please use this workaround
+- Force playing song from spotify module (player.play(result.tracks[0]); `result.tracks[0]` is from spotify) is currently not working. **ONLY WHEN YOU DO player.play(thing), NOT player.play() OR player.queue.add(new KazagumoTrack(...))** Please use this workaround
 ```js
     const { KazagumoTrack } = require("kazagumo"); // CommonJS
     import { KazagumoTrack } from "kazagumo"; // ES6; don't laugh if it's wrong
