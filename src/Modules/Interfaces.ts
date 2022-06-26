@@ -1,4 +1,5 @@
 import { Kazagumo } from '../Kazagumo';
+import { KazagumoPlayer } from '../Index';
 import KazagumoTrack from '../Managers/Supports/KazagumoTrack';
 
 export interface KazagumoOptions {
@@ -6,6 +7,9 @@ export interface KazagumoOptions {
   plugins?: KazagumoPlugin[];
   sourceForceResolve?: string[];
   defaultYoutubeThumbnail?: YoutubeThumbnail;
+  extends?: {
+    player?: KazagumoPlayer
+  };
   send: (guildId: string, payload: Payload) => void;
 }
 

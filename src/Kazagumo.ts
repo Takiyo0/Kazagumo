@@ -146,7 +146,7 @@ export class Kazagumo extends EventEmitter {
       shardId: options.shardId && !isNaN(options.shardId) ? options.shardId : 0,
     });
 
-    const kazagumoPlayer = new KazagumoPlayer(this, shoukakuPlayer, {
+    const kazagumoPlayer = new (this.KazagumoOptions.extends?.player ?? KazagumoPlayer)(this, shoukakuPlayer, {
       guildId: options.guildId,
       voiceId: options.voiceId,
       textId: options.textId,
