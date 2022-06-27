@@ -1,6 +1,7 @@
 import { Kazagumo } from '../Kazagumo';
 import { KazagumoPlayer } from '../Index';
 import KazagumoTrack from '../Managers/Supports/KazagumoTrack';
+import { Constructor } from 'shoukaku/dist/src/Utils';
 
 export interface KazagumoOptions {
   defaultSearchEngine: SearchEngines;
@@ -8,7 +9,7 @@ export interface KazagumoOptions {
   sourceForceResolve?: string[];
   defaultYoutubeThumbnail?: YoutubeThumbnail;
   extends?: {
-    player?: KazagumoPlayer
+    player?: Constructor<KazagumoPlayer>;
   };
   send: (guildId: string, payload: Payload) => void;
 }
