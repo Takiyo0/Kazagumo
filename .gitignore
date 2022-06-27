@@ -1,7 +1,6 @@
 node_modules
 dist
 test
-package-lock.json
 
 # Logs
 logs
@@ -107,5 +106,3 @@ dist
 
 # TernJS port file
 .tern-port
-
-package-lock.json
