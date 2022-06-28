@@ -1,6 +1,6 @@
 {
   "name": "kazagumo",
-  "version": "2.1.7",
+  "version": "2.2.0",
   "description": "A shoukaku wrapper with built-in queue support.",
   "main": "dist/Index.js",
   "types": "dist/Index.d.ts",
@@ -10,8 +10,12 @@
     "url": "https://github.com/Takiyo0/Kazagumo",
     "email": "takiyotakahashi@gmail.com"
   },
+  "engines": {
+    "node": "^16.5.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "build:full": "npm run lint && npm run format && npm run build:docs && npm run build",
     "build": "tsc",
     "format": "prettier --write \"src/**/**/*.ts\"",
     "lint": "tslint -p tsconfig.json",

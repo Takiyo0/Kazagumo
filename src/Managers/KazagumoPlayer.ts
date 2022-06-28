@@ -1,6 +1,14 @@
 import { Kazagumo } from '../Kazagumo';
 import { KazagumoQueue } from './Supports/KazagumoQueue';
-import { Player, Node, WebSocketClosedEvent, TrackExceptionEvent, PlayerUpdate, Filters } from 'shoukaku';
+import {
+  Player,
+  Node,
+  WebSocketClosedEvent,
+  TrackExceptionEvent,
+  PlayerUpdate,
+  Filters,
+  TrackStuckEvent,
+} from 'shoukaku';
 import {
   KazagumoError,
   KazagumoPlayerOptions,
@@ -72,7 +80,12 @@ export default class KazagumoPlayer {
    * @param player Shoukaku's Player instance
    * @param options Kazagumo options
    */
-  constructor(kazagumo: Kazagumo, player: Player, options: KazagumoPlayerOptions) {
+  constructor(
+    kazagumo: Kazagumo,
+    player: Player,
+    options: KazagumoPlayerOptions,
+    private readonly customData: unknown,
+  ) {
     this.options = options;
     this.kazagumo = kazagumo;
     this.shoukaku = player;
@@ -83,7 +96,7 @@ export default class KazagumoPlayer {
 
     this.search = this.kazagumo.search.bind(this.kazagumo);
 
-    this.shoukaku.on('start', (track) => {
+    this.shoukaku.on('start', () => {
       this.playing = true;
       this.emit(Events.PlayerStart, this, this.queue.current);
     });
@@ -130,6 +143,8 @@ export default class KazagumoPlayer {
     });
 
     this.shoukaku.on('update', (data: PlayerUpdate) => this.emit(Events.PlayerUpdate, this, data));
+    this.shoukaku.on('stuck', (data: TrackStuckEvent) => this.emit(Events.PlayerStuck, this, data));
+    this.shoukaku.on('resumed', () => this.emit(Events.PlayerResumed, this));
   }
 
   /**
