@@ -74,7 +74,7 @@ export interface CreatePlayerOptions {
   /** Use specific node */
   nodeName?: string;
   /** The player's data, usable when you extends it */
-  data?: any;
+  data?: unknown;
 }
 
 export interface RawTrack {

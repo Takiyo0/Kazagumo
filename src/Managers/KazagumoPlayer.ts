@@ -80,7 +80,12 @@ export default class KazagumoPlayer {
    * @param player Shoukaku's Player instance
    * @param options Kazagumo options
    */
-  constructor(kazagumo: Kazagumo, player: Player, options: KazagumoPlayerOptions, customData: any) {
+  constructor(
+    kazagumo: Kazagumo,
+    player: Player,
+    options: KazagumoPlayerOptions,
+    private readonly customData: unknown,
+  ) {
     this.options = options;
     this.kazagumo = kazagumo;
     this.shoukaku = player;
