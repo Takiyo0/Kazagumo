@@ -15,6 +15,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
+      - run: npm install
       - run: npm run build:docs
       - run: npm run build
 
@@ -30,6 +31,7 @@ jobs:
         with:
           node-version: 16
           registry-url: https://npm.pkg.github.com/
+      - run: npm install
       - run: npm run lint
       - run: npm run build
       - run: npm publish
