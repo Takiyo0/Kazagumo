@@ -130,6 +130,12 @@ export default class KazagumoTrack {
    */
   public async resolve(options?: ResolveOptions): Promise<KazagumoTrack> {
     if (!this.kazagumo) throw new KazagumoError(1, 'Kazagumo is not set');
+    if (
+      this.kazagumo.KazagumoOptions.trackResolver &&
+      typeof this.kazagumo.KazagumoOptions.trackResolver === 'function' &&
+      (await this.kazagumo.KazagumoOptions.trackResolver.bind(this)(options))
+    )
+      return this;
     const resolveSource = this.kazagumo.KazagumoOptions?.sourceForceResolve?.includes(this.sourceName);
     const { forceResolve, overwrite } = options ? options : { forceResolve: false, overwrite: false };
 

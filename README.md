@@ -1,6 +1,8 @@
 # Kazagumo
 #### A [Shoukaku](https://github.com/Deivu/Shoukaku) wrapper with built in queue system 
 
+![AppVeyor](https://img.shields.io/appveyor/build/Takiyo0/kazagumo) ![Downloads](https://img.shields.io/npm/dm/kazagumo) ![npm](https://img.shields.io/npm/v/kazagumo) ![Code Quality](https://api.codiga.io/project/33922/score/svg) ![Code Rating](https://api.codiga.io/project/33922/status/svg) ![GitHub contributors](https://img.shields.io/github/contributors/Takiyo0/Kazagumo) ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/Takiyo0/Kazagumo) ![GitHub last commit](https://img.shields.io/github/last-commit/Takiyo0/Kazagumo) ![NPM](https://img.shields.io/npm/l/kazagumo)  
+
 ![Kazagumo](https://i.imgur.com/jfVSvHj.png)
 > Kazagumo © Azur Lane
 

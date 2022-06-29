@@ -1,11 +1,24 @@
 import { Kazagumo } from '../Kazagumo';
+import { KazagumoPlayer } from '../Index';
 import KazagumoTrack from '../Managers/Supports/KazagumoTrack';
+import { Constructor } from 'shoukaku/dist/src/Utils';
 
 export interface KazagumoOptions {
+  /** Default search engine if no engine was provided. Default to youtube */
   defaultSearchEngine: SearchEngines;
+  /** Kazagumo plugins */
   plugins?: KazagumoPlugin[];
+  /** Source that will be forced to resolve when playing it */
   sourceForceResolve?: string[];
+  /** The track resolver. Make sure you set <KazagumoTrack>.track for it to work. (I'm not responsible for any error during playback if you don't set it right) */
+  trackResolver?: (this: KazagumoTrack, options?: ResolveOptions) => Promise<boolean>;
+  /** The default youtube thumbnail's size */
   defaultYoutubeThumbnail?: YoutubeThumbnail;
+  /** Extend some of the Structures */
+  extends?: {
+    player?: Constructor<KazagumoPlayer>;
+  };
+  /** Send to guild's shard */
   send: (guildId: string, payload: Payload) => void;
 }
 
@@ -44,14 +57,24 @@ export interface ResolveOptions {
 }
 
 export interface CreatePlayerOptions {
+  /** The player's guild ID */
   guildId: string;
+  /** The player's voice ID */
   voiceId: string;
+  /** The player's text ID */
   textId: string;
+  /** Whether the bot should deafen */
   deaf?: boolean;
+  /** Whether the bot should mute */
   mute?: boolean;
+  /** The player's guild's shardId */
   shardId?: number;
+  /** Balance the node? */
   loadBalancer?: boolean;
+  /** Use specific node */
   nodeName?: string;
+  /** The player's data, usable when you extends it */
+  data?: unknown;
 }
 
 export interface RawTrack {
@@ -82,6 +105,7 @@ export const Events = {
   PlayerException: 'playerException',
   PlayerError: 'playerError',
   PlayerResumed: 'playerResumed',
+  PlayerStuck: 'playerStuck',
   PlayerResolveError: 'playerResolveError',
   PlayerMoved: 'playerMoved',
 
