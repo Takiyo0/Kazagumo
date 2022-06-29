@@ -14,7 +14,7 @@ export default class KazagumoTrack {
   /**
    * Kazagumo Instance
    */
-  private kazagumo: Kazagumo | undefined;
+  public kazagumo: Kazagumo | undefined;
   /**
    * Track Requester
    */
@@ -45,7 +45,7 @@ export default class KazagumoTrack {
   /** The youtube/soundcloud URI for spotify and other unsupported source */
   public realUri: string | null;
 
-  private resolvedBySource: boolean = false;
+  public resolvedBySource: boolean = false;
 
   constructor(raw: RawTrack, requester: unknown) {
     this.kazagumo = undefined;
