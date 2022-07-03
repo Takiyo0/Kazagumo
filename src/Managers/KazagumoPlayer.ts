@@ -268,10 +268,20 @@ export default class KazagumoPlayer {
 
     const current = this.queue.current;
     current.setKazagumo(this.kazagumo);
-    const resolveResult = await current.resolve().catch((e) => null);
+
+    let errorMessage: string | undefined;
+
+    const resolveResult = await current.resolve().catch((e) => {
+      errorMessage = e.message;
+      return null;
+    });
+
     if (!resolveResult) {
-      this.emit(Events.PlayerResolveError, current);
-      return this.skip();
+      this.emit(Events.PlayerResolveError, current, errorMessage);
+      this.emit(Events.Debug, `Player ${this.guildId} resolve error: ${errorMessage}`);
+      this.queue.current = null;
+      this.queue.size ? this.play() : this.emit(Events.PlayerEmpty, this);
+      return this;
     }
 
     const playOptions = { track: current.track, options: {} };
