@@ -150,6 +150,8 @@ export default class KazagumoTrack {
 
     this.track = result.track;
     this.realUri = result.info.uri;
+    this.length = result.info.length;
+
     if (overwrite || resolveSource) {
       this.title = result.info.title;
       this.identifier = result.info.identifier;
