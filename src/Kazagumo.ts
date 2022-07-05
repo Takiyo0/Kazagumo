@@ -38,7 +38,7 @@ export declare interface Kazagumo {
    * Emitted when an error occured while resolving track.
    * @event Kazagumo#playerResolveError
    */
-  on(event: 'playerResolveError', listener: (track: KazagumoTrack) => void): this;
+  on(event: 'playerResolveError', listener: (player: KazagumoPlayer, track: KazagumoTrack, message?: string) => void): this;
   /**
    * Emitted when a player got destroyed.
    * @event Kazagumo#playerDestroy
@@ -99,7 +99,7 @@ export declare interface Kazagumo {
   on(event: 'playerUpdate', listener: (data: unknown) => void): this;
 
   once(event: 'playerStart', listener: (track: KazagumoTrack) => void): this;
-  once(event: 'playerResolveError', listener: (track: KazagumoTrack) => void): this;
+  once(event: 'playerResolveError', listener: (player: KazagumoPlayer, track: KazagumoTrack, message?: string) => void): this;
   once(event: 'playerDestroy', listener: (player: KazagumoPlayer) => void): this;
   once(event: 'playerCreate', listener: (player: KazagumoPlayer) => void): this;
   once(event: 'playerEnd', listener: (player: KazagumoPlayer) => void): this;
