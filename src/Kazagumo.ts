@@ -116,7 +116,7 @@ export declare interface Kazagumo {
   once(event: 'playerUpdate', listener: (data: unknown) => void): this;
 
   off(event: 'playerStart', listener: (track: KazagumoTrack) => void): this;
-  off(event: 'playerResolveError', listener: (track: KazagumoTrack) => void): this;
+  off(event: 'playerResolveError', listener: (player: KazagumoPlayer, track: KazagumoTrack, message?: string) => void): this;
   off(event: 'playerDestroy', listener: (player: KazagumoPlayer) => void): this;
   off(event: 'playerCreate', listener: (player: KazagumoPlayer) => void): this;
   off(event: 'playerEnd', listener: (player: KazagumoPlayer) => void): this;
@@ -259,11 +259,11 @@ export class Kazagumo extends EventEmitter {
       (options?.engine && ['youtube', 'youtube_music', 'soundcloud'].includes(options.engine)
         ? options.engine
         : null) ||
-        (!!this.KazagumoOptions.defaultSearchEngine &&
+      (!!this.KazagumoOptions.defaultSearchEngine &&
         ['youtube', 'youtube_music', 'soundcloud'].includes(this.KazagumoOptions.defaultSearchEngine!)
-          ? this.KazagumoOptions.defaultSearchEngine
-          : null) ||
-        'youtube'
+        ? this.KazagumoOptions.defaultSearchEngine
+        : null) ||
+      'youtube'
     ];
 
     const isUrl = /^https?:\/\/.*/.test(query);

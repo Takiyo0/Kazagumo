@@ -277,7 +277,7 @@ export default class KazagumoPlayer {
     });
 
     if (!resolveResult) {
-      this.emit(Events.PlayerResolveError, current, errorMessage);
+      this.emit(Events.PlayerResolveError, this, current, errorMessage);
       this.emit(Events.Debug, `Player ${this.guildId} resolve error: ${errorMessage}`);
       this.queue.current = null;
       this.queue.size ? this.play() : this.emit(Events.PlayerEmpty, this);
