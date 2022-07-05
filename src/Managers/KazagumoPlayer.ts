@@ -257,7 +257,7 @@ export default class KazagumoPlayer {
 
     if (!track && !this.queue.totalSize) throw new KazagumoError(1, 'No track is available to play');
 
-    if (!options || typeof options.replaceCurrent !== 'boolean') options = { replaceCurrent: false };
+    if (!options || typeof options.replaceCurrent !== 'boolean') options = { ...options, replaceCurrent: false };
 
     if (track) {
       if (!options.replaceCurrent && this.queue.current) this.queue.unshift(this.queue.current);
