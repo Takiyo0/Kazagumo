@@ -1,6 +1,6 @@
 {
   "name": "kazagumo",
-  "version": "2.2.3",
+  "version": "2.3.0-rc.1",
   "description": "A shoukaku wrapper with built-in queue support.",
   "main": "dist/Index.js",
   "types": "dist/Index.d.ts",
@@ -11,7 +11,7 @@
     "email": "takiyotakahashi@gmail.com"
   },
   "engines": {
-    "node": ">=16.0.0"
+    "node": ">=16.5.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
