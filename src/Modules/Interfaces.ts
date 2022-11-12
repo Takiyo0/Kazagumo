@@ -1,7 +1,8 @@
 import { Kazagumo } from '../Kazagumo';
 import { KazagumoPlayer } from '../Index';
-import KazagumoTrack from '../Managers/Supports/KazagumoTrack';
+import { KazagumoTrack } from '../Managers/Supports/KazagumoTrack';
 import { Constructor } from 'shoukaku/dist/src/Utils';
+import { Snowflake } from 'discord.js';
 
 export interface KazagumoOptions {
   /** Default search engine if no engine was provided. Default to youtube */
@@ -19,7 +20,7 @@ export interface KazagumoOptions {
     player?: Constructor<KazagumoPlayer>;
   };
   /** Send to guild's shard */
-  send: (guildId: string, payload: Payload) => void;
+  send: (guildId: Snowflake, payload: Payload) => void;
 }
 
 export type SearchEngines = 'youtube' | 'soundcloud' | 'youtube_music' | string;
@@ -45,10 +46,13 @@ export const SourceIDs = {
 };
 
 export interface KazagumoPlayerOptions {
-  guildId: string;
-  voiceId: string;
-  textId: string;
+  guildId: Snowflake;
+  voiceId: Snowflake;
+  textId: Snowflake;
   deaf: boolean;
+  volume: number;
+  /** Whether the node for searching track should be the same as the node for playing track. Default: true */
+  searchWithSameNode?: boolean;
 }
 
 export interface ResolveOptions {
@@ -58,11 +62,11 @@ export interface ResolveOptions {
 
 export interface CreatePlayerOptions {
   /** The player's guild ID */
-  guildId: string;
+  guildId: Snowflake;
   /** The player's voice ID */
-  voiceId: string;
+  voiceId: Snowflake;
   /** The player's text ID */
-  textId: string;
+  textId: Snowflake;
   /** Whether the bot should deafen */
   deaf?: boolean;
   /** Whether the bot should mute */
@@ -71,6 +75,8 @@ export interface CreatePlayerOptions {
   shardId?: number;
   /** Balance the node? */
   loadBalancer?: boolean;
+  /** The player's volume */
+  volume?: number;
   /** Use specific node */
   nodeName?: string;
   /** The player's data, usable when you extends it */
@@ -122,7 +128,8 @@ export type PlayerMovedState = 'UNKNOWN' | 'JOINED' | 'LEFT' | 'MOVED';
 
 export interface KazagumoSearchOptions {
   requester: unknown;
-  engine: SearchEngines;
+  engine?: SearchEngines;
+  nodeName?: string;
 }
 
 export interface KazagumoSearchResult {

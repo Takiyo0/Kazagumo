@@ -1,31 +1,32 @@
 import { EventEmitter } from 'events';
 import {
-  KazagumoOptions as KazagumoOptionsOwO,
-  KazagumoError,
   CreatePlayerOptions,
-  State,
+  Events,
+  KazagumoError,
+  KazagumoOptions as KazagumoOptionsOwO,
   KazagumoSearchOptions,
   KazagumoSearchResult,
-  SourceIDs,
-  Events,
-  SearchResultTypes,
-  PlayerMovedState,
   PlayerMovedChannels,
+  PlayerMovedState,
+  SearchResultTypes,
+  SourceIDs,
+  State,
 } from './Modules/Interfaces';
 import {
-  NodeOption,
-  ShoukakuOptions,
-  Shoukaku,
   Node,
-  WebSocketClosedEvent,
-  TrackExceptionEvent,
+  NodeOption,
   PlayerUpdate,
+  Shoukaku,
+  ShoukakuOptions,
+  TrackExceptionEvent,
   TrackStuckEvent,
+  WebSocketClosedEvent,
 } from 'shoukaku';
 import { Connector } from 'shoukaku/dist/src/connectors/Connector';
 
-import KazagumoPlayer from './Managers/KazagumoPlayer';
-import KazagumoTrack from './Managers/Supports/KazagumoTrack';
+import { KazagumoPlayer } from './Managers/KazagumoPlayer';
+import { KazagumoTrack } from './Managers/Supports/KazagumoTrack';
+import { Snowflake } from 'discord.js';
 
 export declare interface Kazagumo {
   /* tslint:disable:unified-signatures */
@@ -33,7 +34,7 @@ export declare interface Kazagumo {
    * Emitted when a track is going to play.
    * @event Kazagumo#playerStart
    */
-  on(event: 'playerStart', listener: (track: KazagumoTrack) => void): this;
+  on(event: 'playerStart', listener: (player: KazagumoPlayer, track: KazagumoTrack) => void): this;
   /**
    * Emitted when an error occured while resolving track.
    * @event Kazagumo#playerResolveError
@@ -101,7 +102,7 @@ export declare interface Kazagumo {
    */
   on(event: 'playerUpdate', listener: (data: unknown) => void): this;
 
-  once(event: 'playerStart', listener: (track: KazagumoTrack) => void): this;
+  once(event: 'playerStart', listener: (player: KazagumoPlayer, track: KazagumoTrack) => void): this;
   once(
     event: 'playerResolveError',
     listener: (player: KazagumoPlayer, track: KazagumoTrack, message?: string) => void,
@@ -121,7 +122,7 @@ export declare interface Kazagumo {
   once(event: 'playerUpdate', listener: (player: KazagumoPlayer, data: PlayerUpdate) => void): this;
   once(event: 'playerUpdate', listener: (data: unknown) => void): this;
 
-  off(event: 'playerStart', listener: (track: KazagumoTrack) => void): this;
+  off(event: 'playerStart', listener: (player: KazagumoPlayer, track: KazagumoTrack) => void): this;
   off(
     event: 'playerResolveError',
     listener: (player: KazagumoPlayer, track: KazagumoTrack, message?: string) => void,
@@ -196,8 +197,8 @@ export class Kazagumo extends EventEmitter {
     if (!node) throw new KazagumoError(3, 'No node found');
 
     const shoukakuPlayer = await node.joinChannel({
-      guildId: options.guildId,
-      channelId: options.voiceId,
+      guildId: options.guildId as string,
+      channelId: options.voiceId as string,
       deaf: options.deaf,
       mute: options.mute,
       shardId: options.shardId && !isNaN(options.shardId) ? options.shardId : 0,
@@ -211,6 +212,7 @@ export class Kazagumo extends EventEmitter {
         voiceId: options.voiceId,
         textId: options.textId,
         deaf: options.deaf,
+        volume: isNaN(Number(options.volume)) ? 100 : (options.volume as number),
       },
       options.data,
     );
@@ -224,7 +226,7 @@ export class Kazagumo extends EventEmitter {
    * @param guildId Guild ID
    * @returns KazagumoPlayer | undefined
    */
-  public getPlayer<T extends KazagumoPlayer>(guildId: string): (T | KazagumoPlayer) | undefined {
+  public getPlayer<T extends KazagumoPlayer>(guildId: Snowflake): (T | KazagumoPlayer) | undefined {
     return this.players.get(guildId);
   }
 
@@ -233,7 +235,7 @@ export class Kazagumo extends EventEmitter {
    * @param guildId Guild ID
    * @returns void
    */
-  public destroyPlayer<T extends KazagumoPlayer>(guildId: string): void {
+  public destroyPlayer<T extends KazagumoPlayer>(guildId: Snowflake): void {
     const player = this.getPlayer<T>(guildId);
     if (!player) return;
     player.destroy();
@@ -250,8 +252,7 @@ export class Kazagumo extends EventEmitter {
     const onlineNodes = nodes.filter((node) => node.state === State.CONNECTED);
     if (!onlineNodes.length) throw new KazagumoError(2, 'No nodes are online');
 
-    const leastUsedNode = onlineNodes.reduce((a, b) => (a.players.size < b.players.size ? a : b));
-    return leastUsedNode;
+    return onlineNodes.reduce((a, b) => (a.players.size < b.players.size ? a : b));
   }
 
   /**
@@ -261,7 +262,7 @@ export class Kazagumo extends EventEmitter {
    * @returns Promise<KazagumoSearchResult>
    */
   public async search(query: string, options?: KazagumoSearchOptions): Promise<KazagumoSearchResult> {
-    const node = this.getLeastUsedNode();
+    const node = options?.nodeName ? this.shoukaku.getNode(options.nodeName) : this.getLeastUsedNode();
     if (!node) throw new KazagumoError(3, 'No node is available');
 
     const source = (SourceIDs as any)[

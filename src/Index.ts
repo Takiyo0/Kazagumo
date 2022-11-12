@@ -1,7 +1,7 @@
 // import { NodeOption, PlayerUpdate, ShoukakuOptions, TrackExceptionEvent, WebSocketClosedEvent } from "shoukaku";
-import KazagumoTrack from './Managers/Supports/KazagumoTrack';
+import { KazagumoTrack } from './Managers/Supports/KazagumoTrack';
 import { KazagumoQueue } from './Managers/Supports/KazagumoQueue';
-import KazagumoPlayer from './Managers/KazagumoPlayer';
+import { KazagumoPlayer } from './Managers/KazagumoPlayer';
 import Plugins from './Modules/Plugins';
 // import KazagumoPlayer from "./Managers/KazagumoPlayer";
 // import { KazagumoOptions } from "./Modules/Interfaces";
