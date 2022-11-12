@@ -1,4 +1,4 @@
-import KazagumoTrack from './KazagumoTrack';
+import { KazagumoTrack } from './KazagumoTrack';
 import { KazagumoError } from '../../Modules/Interfaces';
 
 export class KazagumoQueue extends Array<KazagumoTrack> {

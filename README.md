@@ -24,6 +24,12 @@ Pls read the docs before asking 🙏🙏🙏 There is a useful search feature th
 
 > npm i kazagumo
 
+## Metadata
+
+> version: 2.3.0-rc.1  
+> pre-release: true  
+> Last build: 11-12-2022 10:25
+
 ## Plugins
 - Official [spotify plugin](https://npmjs.com/package/kazagumo-spotify)
 > npm i kazagumo-spotify
@@ -90,10 +96,10 @@ const kazagumo = new Kazagumo({
 
 ## Example bot
 ```javascript
-const { Client, Intents } = require('discord.js');
-const { FLAGS } = Intents;
-const { Connectors } = require("shoukaku");
-const { Kazagumo, KazagumoTrack } = require("kazagumo");
+const {Client, GatewayIntentBits} = require('discord.js');
+const {Guilds, GuildVoiceStates, GuildMessages, MessageContent} = GatewayIntentBits;
+const {Connectors} = require("shoukaku");
+const {Kazagumo, KazagumoTrack} = require("../dist");
 
 const Nodes = [{
     name: 'owo',
@@ -101,9 +107,9 @@ const Nodes = [{
     auth: 'youshallnotpass',
     secure: false
 }];
-const client = new Client({ intents: [FLAGS.GUILDS, FLAGS.GUILD_VOICE_STATES, FLAGS.GUILD_MESSAGES] });
+const client = new Client({intents: [Guilds, GuildVoiceStates, GuildMessages, MessageContent]});
 const kazagumo = new Kazagumo({
-    defaultSearchEngine: "youtube", 
+    defaultSearchEngine: "youtube",
     // MAKE SURE YOU HAVE THIS
     send: (guildId, payload) => {
         const guild = client.guilds.cache.get(guildId);
@@ -123,44 +129,45 @@ kazagumo.shoukaku.on('disconnect', (name, players, moved) => {
 });
 
 kazagumo.on("playerStart", (player, track) => {
-    client.channels.cache.get(player.textId)?.send({ content: `Now playing **${track.title}** by **${track.author}**` })
+    client.channels.cache.get(player.textId)?.send({content: `Now playing **${track.title}** by **${track.author}**`})
         .then(x => player.data.set("message", x));
 });
 
 kazagumo.on("playerEnd", (player) => {
-    player.data.get("message")?.edit({ content: `Finished playing` });
+    player.data.get("message")?.edit({content: `Finished playing`});
 });
 
 kazagumo.on("playerEmpty", player => {
-    client.channels.cache.get(player.textId)?.send({ content: `Destroyed player due to inactivity.` })
+    client.channels.cache.get(player.textId)?.send({content: `Destroyed player due to inactivity.`})
         .then(x => player.data.set("message", x));
     player.destroy();
 });
 
 client.on("messageCreate", async msg => {
     if (msg.author.bot) return;
-    
+
     if (msg.content.startsWith("!play")) {
         const args = msg.content.split(" ");
         const query = args.slice(1).join(" ");
 
-        const { channel } = msg.member.voice;
+        const {channel} = msg.member.voice;
         if (!channel) return msg.reply("You need to be in a voice channel to use this command!");
 
         let player = await kazagumo.createPlayer({
             guildId: msg.guild.id,
             textId: msg.channel.id,
-            voiceId: channel.id
+            voiceId: channel.id,
+            volume: 40
         })
 
-        let result = await kazagumo.search(query, { requester: msg.author });
+        let result = await kazagumo.search(query, {requester: msg.author});
         if (!result.tracks.length) return msg.reply("No results found!");
 
         if (result.type === "PLAYLIST") for (let track of result.tracks) player.queue.add(track);
         else player.queue.add(result.tracks[0]);
 
         if (!player.playing && !player.paused) player.play();
-        return msg.reply({ content: result.type === "PLAYLIST" ? `Queued ${result.tracks.length} from ${result.playlistName}` : `Queued ${result.tracks[0].title}` });
+        return msg.reply({content: result.type === "PLAYLIST" ? `Queued ${result.tracks.length} from ${result.playlistName}` : `Queued ${result.tracks[0].title}`});
     }
 
     if (msg.content.startsWith("!forceplay")) {
@@ -168,12 +175,13 @@ client.on("messageCreate", async msg => {
         if (!player) return msg.reply("No player found!");
         const args = msg.content.split(" ");
         const query = args.slice(1).join(" ");
-        let result = await kazagumo.search(query, { requester: msg.author });
+        let result = await kazagumo.search(query, {requester: msg.author});
         if (!result.tracks.length) return msg.reply("No results found!");
         player.play(new KazagumoTrack(result.tracks[0].getRaw(), msg.author));
-        return msg.reply({ content: `Forced playing **${result.tracks[0].title}** by **${result.tracks[0].author}**` });
+        return msg.reply({content: `Forced playing **${result.tracks[0].title}** by **${result.tracks[0].author}**`});
     }
 })
+
 
 client.login('');
 ```

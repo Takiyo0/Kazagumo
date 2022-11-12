@@ -10,7 +10,7 @@ import {
 } from '../../Modules/Interfaces';
 import { Track } from 'shoukaku';
 
-export default class KazagumoTrack {
+export class KazagumoTrack {
   /**
    * Kazagumo Instance
    */
