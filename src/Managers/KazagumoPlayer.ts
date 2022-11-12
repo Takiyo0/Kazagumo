@@ -18,9 +18,10 @@ import {
   KazagumoSearchOptions,
   KazagumoSearchResult,
 } from '../Modules/Interfaces';
-import KazagumoTrack from './Supports/KazagumoTrack';
+import { KazagumoTrack } from './Supports/KazagumoTrack';
+import { Snowflake } from 'discord.js';
 
-export default class KazagumoPlayer {
+export class KazagumoPlayer {
   /**
    * Kazagumo options
    */
@@ -28,7 +29,7 @@ export default class KazagumoPlayer {
   /**
    * Kazagumo Instance
    */
-  private kazagumo: Kazagumo;
+  private readonly kazagumo: Kazagumo;
   /**
    * Shoukaku's Player instance
    */
@@ -36,15 +37,15 @@ export default class KazagumoPlayer {
   /**
    * The guild Id of the player
    */
-  public readonly guildId: string;
+  public readonly guildId: Snowflake;
   /**
    * The voice channel Id of the player
    */
-  public voiceId: string | null;
+  public voiceId: Snowflake | null;
   /**
    * The text channel Id of the player
    */
-  public textId: string;
+  public textId: Snowflake;
   /**
    * Player's queue
    */
@@ -79,6 +80,7 @@ export default class KazagumoPlayer {
    * @param kazagumo Kazagumo instance
    * @param player Shoukaku's Player instance
    * @param options Kazagumo options
+   * @param customData private readonly customData
    */
   constructor(
     kazagumo: Kazagumo,
@@ -94,7 +96,12 @@ export default class KazagumoPlayer {
     this.textId = options.textId;
     this.queue = new KazagumoQueue();
 
-    this.search = this.kazagumo.search.bind(this.kazagumo);
+    if (options.volume !== 100) this.setVolume(options.volume);
+
+    this.search = (typeof this.options.searchWithSameNode === 'boolean' ? this.options.searchWithSameNode : true)
+      ? (query: string, opt?: KazagumoSearchOptions) =>
+          kazagumo.search.bind(kazagumo)(query, opt ? { ...opt, nodeName: this.shoukaku.node.name } : undefined)
+      : kazagumo.search.bind(kazagumo);
 
     this.shoukaku.on('start', () => {
       this.playing = true;
@@ -129,7 +136,7 @@ export default class KazagumoPlayer {
         return this.emit(Events.PlayerEmpty, this);
       }
 
-      this.play();
+      return this.play();
     });
 
     this.shoukaku.on('closed', (data: WebSocketClosedEvent) => {
@@ -190,7 +197,7 @@ export default class KazagumoPlayer {
    * @param textId Text channel Id
    * @returns KazagumoPlayer
    */
-  public setTextChannel(textId: string): KazagumoPlayer {
+  public setTextChannel(textId: Snowflake): KazagumoPlayer {
     if (this.state === PlayerState.DESTROYED) throw new KazagumoError(1, 'Player is already destroyed');
 
     this.textId = textId;
@@ -203,7 +210,7 @@ export default class KazagumoPlayer {
    * @param voiceId Voice channel Id
    * @returns KazagumoPlayer
    */
-  public setVoiceChannel(voiceId: string): KazagumoPlayer {
+  public setVoiceChannel(voiceId: Snowflake): KazagumoPlayer {
     if (this.state === PlayerState.DESTROYED) throw new KazagumoError(1, 'Player is already destroyed');
     this.state = PlayerState.CONNECTING;
 
@@ -280,7 +287,7 @@ export default class KazagumoPlayer {
       this.emit(Events.PlayerResolveError, this, current, errorMessage);
       this.emit(Events.Debug, `Player ${this.guildId} resolve error: ${errorMessage}`);
       this.queue.current = null;
-      this.queue.size ? this.play() : this.emit(Events.PlayerEmpty, this);
+      this.queue.size ? await this.play() : this.emit(Events.PlayerEmpty, this);
       return this;
     }
 
