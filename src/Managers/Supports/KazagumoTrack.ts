@@ -9,6 +9,8 @@ import {
   Events,
 } from '../../Modules/Interfaces';
 import { Track } from 'shoukaku';
+import { KazagumoPlayer } from '../KazagumoPlayer';
+import { KazagumoUtils } from '../../Modules/Utils';
 
 export class KazagumoTrack {
   /**
@@ -38,11 +40,11 @@ export class KazagumoTrack {
   public author: string | undefined;
   /** Track's length */
   public length: number | undefined;
-  /** Track's position (idk this) */
+  /** Track's position (I don't know this) */
   public position: number | undefined;
   /** Track's thumbnail, if available */
   public thumbnail: string | undefined;
-  /** The youtube/soundcloud URI for spotify and other unsupported source */
+  /** The YouTube/soundcloud URI for spotify and other unsupported source */
   public realUri: string | null;
 
   public resolvedBySource: boolean = false;
@@ -145,7 +147,7 @@ export class KazagumoTrack {
 
     this.kazagumo.emit(Events.Debug, `Resolving ${this.sourceName} track ${this.title}; Source: ${this.sourceName}`);
 
-    const result = await this.getTrack();
+    const result = await this.getTrack(options?.player ?? null);
     if (!result) throw new KazagumoError(2, 'No results found');
 
     this.track = result.track;
@@ -164,7 +166,7 @@ export class KazagumoTrack {
     return this;
   }
 
-  private async getTrack(): Promise<Track> {
+  private async getTrack(player: KazagumoPlayer | null): Promise<Track> {
     if (!this.kazagumo) throw new Error('Kazagumo is not set');
 
     const defaultSearchEngine = this.kazagumo.KazagumoOptions.defaultSearchEngine;
@@ -174,8 +176,12 @@ export class KazagumoTrack {
 
     if (!node) throw new KazagumoError(1, 'No nodes available');
 
-    const result = await node.rest.resolve(`${source}search:${query}`);
+    const result = player
+      ? await player?.search(`${source}:${query}`)
+      : await node.rest.resolve(`${source}search:${query}`);
     if (!result || !result.tracks.length) throw new KazagumoError(2, 'No results found');
+
+    result.tracks = result.tracks.map((x) => KazagumoUtils.convertKazagumoTrackToTrack(x));
 
     if (this.author) {
       const author = [this.author, `${this.author} - Topic`];

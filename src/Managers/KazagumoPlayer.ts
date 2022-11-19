@@ -278,7 +278,7 @@ export class KazagumoPlayer {
 
     let errorMessage: string | undefined;
 
-    const resolveResult = await current.resolve().catch((e) => {
+    const resolveResult = await current.resolve({ player: this as KazagumoPlayer }).catch((e) => {
       errorMessage = e.message;
       return null;
     });
