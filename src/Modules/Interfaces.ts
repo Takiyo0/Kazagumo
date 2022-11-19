@@ -56,8 +56,9 @@ export interface KazagumoPlayerOptions {
 }
 
 export interface ResolveOptions {
-  overwrite: boolean;
-  forceResolve: boolean;
+  overwrite?: boolean;
+  forceResolve?: boolean;
+  player?: KazagumoPlayer;
 }
 
 export interface CreatePlayerOptions {
