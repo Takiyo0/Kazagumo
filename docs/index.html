@@ -36,25 +36,35 @@
 </a>
 <p>Pls read the docs before asking 🙏🙏🙏 There is a useful search feature there</p>
 <blockquote>
-<p><a href="https://github.com/Deivu/Shoukaku">Shoukaku</a> by <a href="https://github.com/Deivu">Deivu</a>;  <a href="https://deivu.github.io/Shoukaku">https://deivu.github.io/Shoukaku</a><br>Kazagumo; <a href="https://takiyo0.github.io/Kazagumo">https://takiyo0.github.io/Kazagumo</a></p>
+<p><a href="https://github.com/Deivu/Shoukaku">Shoukaku</a> by <a href="https://github.com/Deivu">Deivu</a>; <a
+        href="https://deivu.github.io/Shoukaku">https://deivu.github.io/Shoukaku</a><br>Kazagumo; <a
+        href="https://takiyo0.github.io/Kazagumo">https://takiyo0.github.io/Kazagumo</a></p>
 </blockquote>
 
-<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
-  <h2>Installation</h2>
-</a>
-<blockquote>
-<p>npm i kazagumo</p>
-</blockquote>
+    <a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
+        <h2>Installation</h2>
+    </a>
+    <blockquote>
+        <p>npm i kazagumo</p>
+    </blockquote>
 
-<a href="#plugins" id="plugins" style="color: inherit; text-decoration: none;">
-  <h2>Plugins</h2>
-</a>
-<ul>
-<li>Official <a href="https://npmjs.com/package/kazagumo-spotify">spotify plugin</a><blockquote>
-<p>npm i kazagumo-spotify</p>
-</blockquote>
-</li>
-</ul>
+    <a href="#metadata" id="metadata" style="color: inherit; text-decoration: none;">
+        <h2>Metadata</h2>
+    </a>
+    <blockquote>
+        <p>version: 2.3.0<br>pre-release: false<br>Last build: 11-19-2022 09:01</p>
+    </blockquote>
+
+    <a href="#plugins" id="plugins" style="color: inherit; text-decoration: none;">
+        <h2>Plugins</h2>
+    </a>
+    <ul>
+        <li>Official <a href="https://npmjs.com/package/kazagumo-spotify">spotify plugin</a>
+            <blockquote>
+                <p>npm i kazagumo-spotify</p>
+            </blockquote>
+        </li>
+    </ul>
 
 <a href="#lavalink-installation" id="lavalink-installation" style="color: inherit; text-decoration: none;">
   <h2>Lavalink installation</h2>
@@ -86,7 +96,283 @@
 <a href="#example-bot" id="example-bot" style="color: inherit; text-decoration: none;">
   <h2>Example bot</h2>
 </a>
-<pre><code class="language-javascript"><span class="hl-3">const</span><span class="hl-1"> { </span><span class="hl-8">Client</span><span class="hl-1">, </span><span class="hl-8">Intents</span><span class="hl-1"> } = </span><span class="hl-4">require</span><span class="hl-1">(</span><span class="hl-5">&#39;discord.js&#39;</span><span class="hl-1">);</span><br/><span class="hl-3">const</span><span class="hl-1"> { </span><span class="hl-8">FLAGS</span><span class="hl-1"> } = </span><span class="hl-2">Intents</span><span class="hl-1">;</span><br/><span class="hl-3">const</span><span class="hl-1"> { </span><span class="hl-8">Connectors</span><span class="hl-1"> } = </span><span class="hl-4">require</span><span class="hl-1">(</span><span class="hl-5">&quot;shoukaku&quot;</span><span class="hl-1">);</span><br/><span class="hl-3">const</span><span class="hl-1"> { </span><span class="hl-8">Kazagumo</span><span class="hl-1">, </span><span class="hl-8">KazagumoTrack</span><span class="hl-1"> } = </span><span class="hl-4">require</span><span class="hl-1">(</span><span class="hl-5">&quot;kazagumo&quot;</span><span class="hl-1">);</span><br/><br/><span class="hl-3">const</span><span class="hl-1"> </span><span class="hl-8">Nodes</span><span class="hl-1"> = [{</span><br/><span class="hl-1">    </span><span class="hl-2">name:</span><span class="hl-1"> </span><span class="hl-5">&#39;owo&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-2">url:</span><span class="hl-1"> </span><span class="hl-5">&#39;localhost:2333&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-2">auth:</span><span class="hl-1"> </span><span class="hl-5">&#39;youshallnotpass&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-2">secure:</span><span class="hl-1"> </span><span class="hl-3">false</span><br/><span class="hl-1">}];</span><br/><span class="hl-3">const</span><span class="hl-1"> </span><span class="hl-8">client</span><span class="hl-1"> = </span><span class="hl-3">new</span><span class="hl-1"> </span><span class="hl-4">Client</span><span class="hl-1">({ </span><span class="hl-2">intents:</span><span class="hl-1"> [</span><span class="hl-8">FLAGS</span><span class="hl-1">.</span><span class="hl-8">GUILDS</span><span class="hl-1">, </span><span class="hl-8">FLAGS</span><span class="hl-1">.</span><span class="hl-8">GUILD_VOICE_STATES</span><span class="hl-1">, </span><span class="hl-8">FLAGS</span><span class="hl-1">.</span><span class="hl-8">GUILD_MESSAGES</span><span class="hl-1">] });</span><br/><span class="hl-3">const</span><span class="hl-1"> </span><span class="hl-8">kazagumo</span><span class="hl-1"> = </span><span class="hl-3">new</span><span class="hl-1"> </span><span class="hl-4">Kazagumo</span><span class="hl-1">({</span><br/><span class="hl-1">    </span><span class="hl-2">defaultSearchEngine:</span><span class="hl-1"> </span><span class="hl-5">&quot;youtube&quot;</span><span class="hl-1">, </span><br/><span class="hl-1">    </span><span class="hl-0">// MAKE SURE YOU HAVE THIS</span><br/><span class="hl-1">    </span><span class="hl-4">send</span><span class="hl-2">:</span><span class="hl-1"> (</span><span class="hl-2">guildId</span><span class="hl-1">, </span><span class="hl-2">payload</span><span class="hl-1">) </span><span class="hl-3">=&gt;</span><span class="hl-1"> {</span><br/><span class="hl-1">        </span><span class="hl-3">const</span><span class="hl-1"> </span><span class="hl-8">guild</span><span class="hl-1"> = </span><span class="hl-2">client</span><span class="hl-1">.</span><span class="hl-2">guilds</span><span class="hl-1">.</span><span class="hl-2">cache</span><span class="hl-1">.</span><span class="hl-4">get</span><span class="hl-1">(</span><span class="hl-2">guildId</span><span class="hl-1">);</span><br/><span class="hl-1">        </span><span class="hl-7">if</span><span class="hl-1"> (</span><span class="hl-2">guild</span><span class="hl-1">) </span><span class="hl-2">guild</span><span class="hl-1">.</span><span class="hl-2">shard</span><span class="hl-1">.</span><span class="hl-4">send</span><span class="hl-1">(</span><span class="hl-2">payload</span><span class="hl-1">);</span><br/><span class="hl-1">    }</span><br/><span class="hl-1">}, </span><span class="hl-3">new</span><span class="hl-1"> </span><span class="hl-2">Connectors</span><span class="hl-1">.</span><span class="hl-4">DiscordJS</span><span class="hl-1">(</span><span class="hl-2">client</span><span class="hl-1">), </span><span class="hl-2">Nodes</span><span class="hl-1">);</span><br/><br/><span class="hl-2">client</span><span class="hl-1">.</span><span class="hl-4">on</span><span class="hl-1">(</span><span class="hl-5">&quot;ready&quot;</span><span class="hl-1">, () </span><span class="hl-3">=&gt;</span><span class="hl-1"> </span><span class="hl-2">console</span><span class="hl-1">.</span><span class="hl-4">log</span><span class="hl-1">(</span><span class="hl-2">client</span><span class="hl-1">.</span><span class="hl-2">user</span><span class="hl-1">.</span><span class="hl-2">tag</span><span class="hl-1"> + </span><span class="hl-5">&quot; Ready!&quot;</span><span class="hl-1">));</span><br/><br/><span class="hl-2">kazagumo</span><span class="hl-1">.</span><span class="hl-2">shoukaku</span><span class="hl-1">.</span><span class="hl-4">on</span><span class="hl-1">(</span><span class="hl-5">&#39;ready&#39;</span><span class="hl-1">, (</span><span class="hl-2">name</span><span class="hl-1">) </span><span class="hl-3">=&gt;</span><span class="hl-1"> </span><span class="hl-2">console</span><span class="hl-1">.</span><span class="hl-4">log</span><span class="hl-1">(</span><span class="hl-5">`Lavalink </span><span class="hl-3">${</span><span class="hl-2">name</span><span class="hl-3">}</span><span class="hl-5">: Ready!`</span><span class="hl-1">));</span><br/><span class="hl-2">kazagumo</span><span class="hl-1">.</span><span class="hl-2">shoukaku</span><span class="hl-1">.</span><span class="hl-4">on</span><span class="hl-1">(</span><span class="hl-5">&#39;error&#39;</span><span class="hl-1">, (</span><span class="hl-2">name</span><span class="hl-1">, </span><span class="hl-2">error</span><span class="hl-1">) </span><span class="hl-3">=&gt;</span><span class="hl-1"> </span><span class="hl-2">console</span><span class="hl-1">.</span><span class="hl-4">error</span><span class="hl-1">(</span><span class="hl-5">`Lavalink </span><span class="hl-3">${</span><span class="hl-2">name</span><span class="hl-3">}</span><span class="hl-5">: Error Caught,`</span><span class="hl-1">, </span><span class="hl-2">error</span><span class="hl-1">));</span><br/><span class="hl-2">kazagumo</span><span class="hl-1">.</span><span class="hl-2">shoukaku</span><span class="hl-1">.</span><span class="hl-4">on</span><span class="hl-1">(</span><span class="hl-5">&#39;close&#39;</span><span class="hl-1">, (</span><span class="hl-2">name</span><span class="hl-1">, </span><span class="hl-2">code</span><span class="hl-1">, </span><span class="hl-2">reason</span><span class="hl-1">) </span><span class="hl-3">=&gt;</span><span class="hl-1"> </span><span class="hl-2">console</span><span class="hl-1">.</span><span class="hl-4">warn</span><span class="hl-1">(</span><span class="hl-5">`Lavalink </span><span class="hl-3">${</span><span class="hl-2">name</span><span class="hl-3">}</span><span class="hl-5">: Closed, Code </span><span class="hl-3">${</span><span class="hl-2">code</span><span class="hl-3">}</span><span class="hl-5">, Reason </span><span class="hl-3">${</span><span class="hl-2">reason</span><span class="hl-9"> </span><span class="hl-1">||</span><span class="hl-9"> </span><span class="hl-5">&#39;No reason&#39;</span><span class="hl-3">}</span><span class="hl-5">`</span><span class="hl-1">));</span><br/><span class="hl-2">kazagumo</span><span class="hl-1">.</span><span class="hl-2">shoukaku</span><span class="hl-1">.</span><span class="hl-4">on</span><span class="hl-1">(</span><span class="hl-5">&#39;disconnect&#39;</span><span class="hl-1">, (</span><span class="hl-2">name</span><span class="hl-1">, </span><span class="hl-2">players</span><span class="hl-1">, </span><span class="hl-2">moved</span><span class="hl-1">) </span><span class="hl-3">=&gt;</span><span class="hl-1"> {</span><br/><span class="hl-1">    </span><span class="hl-7">if</span><span class="hl-1"> (</span><span class="hl-2">moved</span><span class="hl-1">) </span><span class="hl-7">return</span><span class="hl-1">;</span><br/><span class="hl-1">    </span><span class="hl-2">players</span><span class="hl-1">.</span><span class="hl-4">map</span><span class="hl-1">(</span><span class="hl-2">player</span><span class="hl-1"> </span><span class="hl-3">=&gt;</span><span class="hl-1"> </span><span class="hl-2">player</span><span class="hl-1">.</span><span class="hl-2">connection</span><span class="hl-1">.</span><span class="hl-4">disconnect</span><span class="hl-1">())</span><br/><span class="hl-1">    </span><span class="hl-2">console</span><span class="hl-1">.</span><span class="hl-4">warn</span><span class="hl-1">(</span><span class="hl-5">`Lavalink </span><span class="hl-3">${</span><span class="hl-2">name</span><span class="hl-3">}</span><span class="hl-5">: Disconnected`</span><span class="hl-1">);</span><br/><span class="hl-1">});</span><br/><br/><span class="hl-2">kazagumo</span><span class="hl-1">.</span><span class="hl-4">on</span><span class="hl-1">(</span><span class="hl-5">&quot;playerStart&quot;</span><span class="hl-1">, (</span><span class="hl-2">player</span><span class="hl-1">, </span><span class="hl-2">track</span><span class="hl-1">) </span><span class="hl-3">=&gt;</span><span class="hl-1"> {</span><br/><span class="hl-1">    </span><span class="hl-2">client</span><span class="hl-1">.</span><span class="hl-2">channels</span><span class="hl-1">.</span><span class="hl-2">cache</span><span class="hl-1">.</span><span class="hl-4">get</span><span class="hl-1">(</span><span class="hl-2">player</span><span class="hl-1">.</span><span class="hl-2">textId</span><span class="hl-1">)?.</span><span class="hl-4">send</span><span class="hl-1">({ </span><span class="hl-2">content:</span><span class="hl-1"> </span><span class="hl-5">`Now playing **</span><span class="hl-3">${</span><span class="hl-2">track</span><span class="hl-9">.</span><span class="hl-2">title</span><span class="hl-3">}</span><span class="hl-5">** by **</span><span class="hl-3">${</span><span class="hl-2">track</span><span class="hl-9">.</span><span class="hl-2">author</span><span class="hl-3">}</span><span class="hl-5">**`</span><span class="hl-1"> })</span><br/><span class="hl-1">        .</span><span class="hl-4">then</span><span class="hl-1">(</span><span class="hl-2">x</span><span class="hl-1"> </span><span class="hl-3">=&gt;</span><span class="hl-1"> </span><span class="hl-2">player</span><span class="hl-1">.</span><span class="hl-2">data</span><span class="hl-1">.</span><span class="hl-4">set</span><span class="hl-1">(</span><span class="hl-5">&quot;message&quot;</span><span class="hl-1">, </span><span class="hl-2">x</span><span class="hl-1">));</span><br/><span class="hl-1">});</span><br/><br/><span class="hl-2">kazagumo</span><span class="hl-1">.</span><span class="hl-4">on</span><span class="hl-1">(</span><span class="hl-5">&quot;playerEnd&quot;</span><span class="hl-1">, (</span><span class="hl-2">player</span><span class="hl-1">) </span><span class="hl-3">=&gt;</span><span class="hl-1"> {</span><br/><span class="hl-1">    </span><span class="hl-2">player</span><span class="hl-1">.</span><span class="hl-2">data</span><span class="hl-1">.</span><span class="hl-4">get</span><span class="hl-1">(</span><span class="hl-5">&quot;message&quot;</span><span class="hl-1">)?.</span><span class="hl-4">edit</span><span class="hl-1">({ </span><span class="hl-2">content:</span><span class="hl-1"> </span><span class="hl-5">`Finished playing`</span><span class="hl-1"> });</span><br/><span class="hl-1">});</span><br/><br/><span class="hl-2">kazagumo</span><span class="hl-1">.</span><span class="hl-4">on</span><span class="hl-1">(</span><span class="hl-5">&quot;playerEmpty&quot;</span><span class="hl-1">, </span><span class="hl-2">player</span><span class="hl-1"> </span><span class="hl-3">=&gt;</span><span class="hl-1"> {</span><br/><span class="hl-1">    </span><span class="hl-2">client</span><span class="hl-1">.</span><span class="hl-2">channels</span><span class="hl-1">.</span><span class="hl-2">cache</span><span class="hl-1">.</span><span class="hl-4">get</span><span class="hl-1">(</span><span class="hl-2">player</span><span class="hl-1">.</span><span class="hl-2">textId</span><span class="hl-1">)?.</span><span class="hl-4">send</span><span class="hl-1">({ </span><span class="hl-2">content:</span><span class="hl-1"> </span><span class="hl-5">`Destroyed player due to inactivity.`</span><span class="hl-1"> })</span><br/><span class="hl-1">        .</span><span class="hl-4">then</span><span class="hl-1">(</span><span class="hl-2">x</span><span class="hl-1"> </span><span class="hl-3">=&gt;</span><span class="hl-1"> </span><span class="hl-2">player</span><span class="hl-1">.</span><span class="hl-2">data</span><span class="hl-1">.</span><span class="hl-4">set</span><span class="hl-1">(</span><span class="hl-5">&quot;message&quot;</span><span class="hl-1">, </span><span class="hl-2">x</span><span class="hl-1">));</span><br/><span class="hl-1">    </span><span class="hl-2">player</span><span class="hl-1">.</span><span class="hl-4">destroy</span><span class="hl-1">();</span><br/><span class="hl-1">});</span><br/><br/><span class="hl-2">client</span><span class="hl-1">.</span><span class="hl-4">on</span><span class="hl-1">(</span><span class="hl-5">&quot;messageCreate&quot;</span><span class="hl-1">, </span><span class="hl-3">async</span><span class="hl-1"> </span><span class="hl-2">msg</span><span class="hl-1"> </span><span class="hl-3">=&gt;</span><span class="hl-1"> {</span><br/><span class="hl-1">    </span><span class="hl-7">if</span><span class="hl-1"> (</span><span class="hl-2">msg</span><span class="hl-1">.</span><span class="hl-2">author</span><span class="hl-1">.</span><span class="hl-2">bot</span><span class="hl-1">) </span><span class="hl-7">return</span><span class="hl-1">;</span><br/><span class="hl-1">    </span><br/><span class="hl-1">    </span><span class="hl-7">if</span><span class="hl-1"> (</span><span class="hl-2">msg</span><span class="hl-1">.</span><span class="hl-2">content</span><span class="hl-1">.</span><span class="hl-4">startsWith</span><span class="hl-1">(</span><span class="hl-5">&quot;!play&quot;</span><span class="hl-1">)) {</span><br/><span class="hl-1">        </span><span class="hl-3">const</span><span class="hl-1"> </span><span class="hl-8">args</span><span class="hl-1"> = </span><span class="hl-2">msg</span><span class="hl-1">.</span><span class="hl-2">content</span><span class="hl-1">.</span><span class="hl-4">split</span><span class="hl-1">(</span><span class="hl-5">&quot; &quot;</span><span class="hl-1">);</span><br/><span class="hl-1">        </span><span class="hl-3">const</span><span class="hl-1"> </span><span class="hl-8">query</span><span class="hl-1"> = </span><span class="hl-2">args</span><span class="hl-1">.</span><span class="hl-4">slice</span><span class="hl-1">(</span><span class="hl-6">1</span><span class="hl-1">).</span><span class="hl-4">join</span><span class="hl-1">(</span><span class="hl-5">&quot; &quot;</span><span class="hl-1">);</span><br/><br/><span class="hl-1">        </span><span class="hl-3">const</span><span class="hl-1"> { </span><span class="hl-8">channel</span><span class="hl-1"> } = </span><span class="hl-2">msg</span><span class="hl-1">.</span><span class="hl-2">member</span><span class="hl-1">.</span><span class="hl-2">voice</span><span class="hl-1">;</span><br/><span class="hl-1">        </span><span class="hl-7">if</span><span class="hl-1"> (!</span><span class="hl-2">channel</span><span class="hl-1">) </span><span class="hl-7">return</span><span class="hl-1"> </span><span class="hl-2">msg</span><span class="hl-1">.</span><span class="hl-4">reply</span><span class="hl-1">(</span><span class="hl-5">&quot;You need to be in a voice channel to use this command!&quot;</span><span class="hl-1">);</span><br/><br/><span class="hl-1">        </span><span class="hl-3">let</span><span class="hl-1"> </span><span class="hl-2">player</span><span class="hl-1"> = </span><span class="hl-7">await</span><span class="hl-1"> </span><span class="hl-2">kazagumo</span><span class="hl-1">.</span><span class="hl-4">createPlayer</span><span class="hl-1">({</span><br/><span class="hl-1">            </span><span class="hl-2">guildId:</span><span class="hl-1"> </span><span class="hl-2">msg</span><span class="hl-1">.</span><span class="hl-2">guild</span><span class="hl-1">.</span><span class="hl-2">id</span><span class="hl-1">,</span><br/><span class="hl-1">            </span><span class="hl-2">textId:</span><span class="hl-1"> </span><span class="hl-2">msg</span><span class="hl-1">.</span><span class="hl-2">channel</span><span class="hl-1">.</span><span class="hl-2">id</span><span class="hl-1">,</span><br/><span class="hl-1">            </span><span class="hl-2">voiceId:</span><span class="hl-1"> </span><span class="hl-2">channel</span><span class="hl-1">.</span><span class="hl-2">id</span><br/><span class="hl-1">        })</span><br/><br/><span class="hl-1">        </span><span class="hl-3">let</span><span class="hl-1"> </span><span class="hl-2">result</span><span class="hl-1"> = </span><span class="hl-7">await</span><span class="hl-1"> </span><span class="hl-2">kazagumo</span><span class="hl-1">.</span><span class="hl-4">search</span><span class="hl-1">(</span><span class="hl-2">query</span><span class="hl-1">, { </span><span class="hl-2">requester:</span><span class="hl-1"> </span><span class="hl-2">msg</span><span class="hl-1">.</span><span class="hl-2">author</span><span class="hl-1"> });</span><br/><span class="hl-1">        </span><span class="hl-7">if</span><span class="hl-1"> (!</span><span class="hl-2">result</span><span class="hl-1">.</span><span class="hl-2">tracks</span><span class="hl-1">.</span><span class="hl-2">length</span><span class="hl-1">) </span><span class="hl-7">return</span><span class="hl-1"> </span><span class="hl-2">msg</span><span class="hl-1">.</span><span class="hl-4">reply</span><span class="hl-1">(</span><span class="hl-5">&quot;No results found!&quot;</span><span class="hl-1">);</span><br/><br/><span class="hl-1">        </span><span class="hl-7">if</span><span class="hl-1"> (</span><span class="hl-2">result</span><span class="hl-1">.</span><span class="hl-2">type</span><span class="hl-1"> === </span><span class="hl-5">&quot;PLAYLIST&quot;</span><span class="hl-1">) </span><span class="hl-7">for</span><span class="hl-1"> (</span><span class="hl-3">let</span><span class="hl-1"> </span><span class="hl-2">track</span><span class="hl-1"> </span><span class="hl-3">of</span><span class="hl-1"> </span><span class="hl-2">result</span><span class="hl-1">.</span><span class="hl-2">tracks</span><span class="hl-1">) </span><span class="hl-2">player</span><span class="hl-1">.</span><span class="hl-2">queue</span><span class="hl-1">.</span><span class="hl-4">add</span><span class="hl-1">(</span><span class="hl-2">track</span><span class="hl-1">);</span><br/><span class="hl-1">        </span><span class="hl-7">else</span><span class="hl-1"> </span><span class="hl-2">player</span><span class="hl-1">.</span><span class="hl-2">queue</span><span class="hl-1">.</span><span class="hl-4">add</span><span class="hl-1">(</span><span class="hl-2">result</span><span class="hl-1">.</span><span class="hl-2">tracks</span><span class="hl-1">[</span><span class="hl-6">0</span><span class="hl-1">]);</span><br/><br/><span class="hl-1">        </span><span class="hl-7">if</span><span class="hl-1"> (!</span><span class="hl-2">player</span><span class="hl-1">.</span><span class="hl-2">playing</span><span class="hl-1"> &amp;&amp; !</span><span class="hl-2">player</span><span class="hl-1">.</span><span class="hl-2">paused</span><span class="hl-1">) </span><span class="hl-2">player</span><span class="hl-1">.</span><span class="hl-4">play</span><span class="hl-1">();</span><br/><span class="hl-1">        </span><span class="hl-7">return</span><span class="hl-1"> </span><span class="hl-2">msg</span><span class="hl-1">.</span><span class="hl-4">reply</span><span class="hl-1">({ </span><span class="hl-2">content:</span><span class="hl-1"> </span><span class="hl-2">result</span><span class="hl-1">.</span><span class="hl-2">type</span><span class="hl-1"> === </span><span class="hl-5">&quot;PLAYLIST&quot;</span><span class="hl-1"> ? </span><span class="hl-5">`Queued </span><span class="hl-3">${</span><span class="hl-2">result</span><span class="hl-9">.</span><span class="hl-2">tracks</span><span class="hl-9">.</span><span class="hl-2">length</span><span class="hl-3">}</span><span class="hl-5"> from </span><span class="hl-3">${</span><span class="hl-2">result</span><span class="hl-9">.</span><span class="hl-2">playlistName</span><span class="hl-3">}</span><span class="hl-5">`</span><span class="hl-1"> : </span><span class="hl-5">`Queued </span><span class="hl-3">${</span><span class="hl-2">result</span><span class="hl-9">.</span><span class="hl-2">tracks</span><span class="hl-9">[</span><span class="hl-6">0</span><span class="hl-9">].</span><span class="hl-2">title</span><span class="hl-3">}</span><span class="hl-5">`</span><span class="hl-1"> });</span><br/><span class="hl-1">    }</span><br/><br/><span class="hl-1">    </span><span class="hl-7">if</span><span class="hl-1"> (</span><span class="hl-2">msg</span><span class="hl-1">.</span><span class="hl-2">content</span><span class="hl-1">.</span><span class="hl-4">startsWith</span><span class="hl-1">(</span><span class="hl-5">&quot;!forceplay&quot;</span><span class="hl-1">)) {</span><br/><span class="hl-1">        </span><span class="hl-3">let</span><span class="hl-1"> </span><span class="hl-2">player</span><span class="hl-1"> = </span><span class="hl-2">kazagumo</span><span class="hl-1">.</span><span class="hl-2">players</span><span class="hl-1">.</span><span class="hl-4">get</span><span class="hl-1">(</span><span class="hl-2">msg</span><span class="hl-1">.</span><span class="hl-2">guild</span><span class="hl-1">.</span><span class="hl-2">id</span><span class="hl-1">);</span><br/><span class="hl-1">        </span><span class="hl-7">if</span><span class="hl-1"> (!</span><span class="hl-2">player</span><span class="hl-1">) </span><span class="hl-7">return</span><span class="hl-1"> </span><span class="hl-2">msg</span><span class="hl-1">.</span><span class="hl-4">reply</span><span class="hl-1">(</span><span class="hl-5">&quot;No player found!&quot;</span><span class="hl-1">);</span><br/><span class="hl-1">        </span><span class="hl-3">const</span><span class="hl-1"> </span><span class="hl-8">args</span><span class="hl-1"> = </span><span class="hl-2">msg</span><span class="hl-1">.</span><span class="hl-2">content</span><span class="hl-1">.</span><span class="hl-4">split</span><span class="hl-1">(</span><span class="hl-5">&quot; &quot;</span><span class="hl-1">);</span><br/><span class="hl-1">        </span><span class="hl-3">const</span><span class="hl-1"> </span><span class="hl-8">query</span><span class="hl-1"> = </span><span class="hl-2">args</span><span class="hl-1">.</span><span class="hl-4">slice</span><span class="hl-1">(</span><span class="hl-6">1</span><span class="hl-1">).</span><span class="hl-4">join</span><span class="hl-1">(</span><span class="hl-5">&quot; &quot;</span><span class="hl-1">);</span><br/><span class="hl-1">        </span><span class="hl-3">let</span><span class="hl-1"> </span><span class="hl-2">result</span><span class="hl-1"> = </span><span class="hl-7">await</span><span class="hl-1"> </span><span class="hl-2">kazagumo</span><span class="hl-1">.</span><span class="hl-4">search</span><span class="hl-1">(</span><span class="hl-2">query</span><span class="hl-1">, { </span><span class="hl-2">requester:</span><span class="hl-1"> </span><span class="hl-2">msg</span><span class="hl-1">.</span><span class="hl-2">author</span><span class="hl-1"> });</span><br/><span class="hl-1">        </span><span class="hl-7">if</span><span class="hl-1"> (!</span><span class="hl-2">result</span><span class="hl-1">.</span><span class="hl-2">tracks</span><span class="hl-1">.</span><span class="hl-2">length</span><span class="hl-1">) </span><span class="hl-7">return</span><span class="hl-1"> </span><span class="hl-2">msg</span><span class="hl-1">.</span><span class="hl-4">reply</span><span class="hl-1">(</span><span class="hl-5">&quot;No results found!&quot;</span><span class="hl-1">);</span><br/><span class="hl-1">        </span><span class="hl-2">player</span><span class="hl-1">.</span><span class="hl-4">play</span><span class="hl-1">(</span><span class="hl-3">new</span><span class="hl-1"> </span><span class="hl-4">KazagumoTrack</span><span class="hl-1">(</span><span class="hl-2">result</span><span class="hl-1">.</span><span class="hl-2">tracks</span><span class="hl-1">[</span><span class="hl-6">0</span><span class="hl-1">].</span><span class="hl-4">getRaw</span><span class="hl-1">(), </span><span class="hl-2">msg</span><span class="hl-1">.</span><span class="hl-2">author</span><span class="hl-1">));</span><br/><span class="hl-1">        </span><span class="hl-7">return</span><span class="hl-1"> </span><span class="hl-2">msg</span><span class="hl-1">.</span><span class="hl-4">reply</span><span class="hl-1">({ </span><span class="hl-2">content:</span><span class="hl-1"> </span><span class="hl-5">`Forced playing **</span><span class="hl-3">${</span><span class="hl-2">result</span><span class="hl-9">.</span><span class="hl-2">tracks</span><span class="hl-9">[</span><span class="hl-6">0</span><span class="hl-9">].</span><span class="hl-2">title</span><span class="hl-3">}</span><span class="hl-5">** by **</span><span class="hl-3">${</span><span class="hl-2">result</span><span class="hl-9">.</span><span class="hl-2">tracks</span><span class="hl-9">[</span><span class="hl-6">0</span><span class="hl-9">].</span><span class="hl-2">author</span><span class="hl-3">}</span><span class="hl-5">**`</span><span class="hl-1"> });</span><br/><span class="hl-1">    }</span><br/><span class="hl-1">})</span><br/><br/><span class="hl-2">client</span><span class="hl-1">.</span><span class="hl-4">login</span><span class="hl-1">(</span><span class="hl-5">&#39;&#39;</span><span class="hl-1">);</span>
+    <pre><code class="language-javascript"><span class="hl-3">const</span><span class="hl-1"> {</span><span
+            class="hl-8">Client</span><span class="hl-1">, </span><span class="hl-8">GatewayIntentBits</span><span
+            class="hl-1">} = </span><span class="hl-4">require</span><span class="hl-1">(</span><span class="hl-5">&#39;discord.js&#39;</span><span
+            class="hl-1">);</span><br/><span class="hl-3">const</span><span class="hl-1"> {</span><span class="hl-8">Guilds</span><span
+            class="hl-1">, </span><span class="hl-8">GuildVoiceStates</span><span class="hl-1">, </span><span
+            class="hl-8">GuildMessages</span><span class="hl-1">, </span><span class="hl-8">MessageContent</span><span
+            class="hl-1">} = </span><span class="hl-2">GatewayIntentBits</span><span class="hl-1">;</span><br/><span
+            class="hl-3">const</span><span class="hl-1"> {</span><span class="hl-8">Connectors</span><span class="hl-1">} = </span><span
+            class="hl-4">require</span><span class="hl-1">(</span><span class="hl-5">&quot;shoukaku&quot;</span><span
+            class="hl-1">);</span><br/><span class="hl-3">const</span><span class="hl-1"> {</span><span class="hl-8">Kazagumo</span><span
+            class="hl-1">, </span><span class="hl-8">KazagumoTrack</span><span class="hl-1">} = </span><span
+            class="hl-4">require</span><span class="hl-1">(</span><span class="hl-5">&quot;../dist&quot;</span><span
+            class="hl-1">);</span><br/><br/><span class="hl-3">const</span><span class="hl-1"> </span><span
+            class="hl-8">Nodes</span><span class="hl-1"> = [{</span><br/><span class="hl-1">    </span><span
+            class="hl-2">name:</span><span class="hl-1"> </span><span class="hl-5">&#39;owo&#39;</span><span
+            class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-2">url:</span><span
+            class="hl-1"> </span><span class="hl-5">&#39;localhost:2333&#39;</span><span class="hl-1">,</span><br/><span
+            class="hl-1">    </span><span class="hl-2">auth:</span><span class="hl-1"> </span><span class="hl-5">&#39;youshallnotpass&#39;</span><span
+            class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-2">secure:</span><span
+            class="hl-1"> </span><span class="hl-3">false</span><br/><span class="hl-1">}];</span><br/><span
+            class="hl-3">const</span><span class="hl-1"> </span><span class="hl-8">client</span><span
+            class="hl-1"> = </span><span class="hl-3">new</span><span class="hl-1"> </span><span
+            class="hl-4">Client</span><span class="hl-1">({</span><span class="hl-2">intents:</span><span class="hl-1"> [</span><span
+            class="hl-2">Guilds</span><span class="hl-1">, </span><span class="hl-2">GuildVoiceStates</span><span
+            class="hl-1">, </span><span class="hl-2">GuildMessages</span><span class="hl-1">, </span><span class="hl-2">MessageContent</span><span
+            class="hl-1">]});</span><br/><span class="hl-3">const</span><span class="hl-1"> </span><span class="hl-8">kazagumo</span><span
+            class="hl-1"> = </span><span class="hl-3">new</span><span class="hl-1"> </span><span
+            class="hl-4">Kazagumo</span><span class="hl-1">({</span><br/><span class="hl-1">    </span><span
+            class="hl-2">defaultSearchEngine:</span><span class="hl-1"> </span><span
+            class="hl-5">&quot;youtube&quot;</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span
+            class="hl-0">// MAKE SURE YOU HAVE THIS</span><br/><span class="hl-1">    </span><span
+            class="hl-4">send</span><span class="hl-2">:</span><span class="hl-1"> (</span><span
+            class="hl-2">guildId</span><span class="hl-1">, </span><span class="hl-2">payload</span><span
+            class="hl-1">) </span><span class="hl-3">=&gt;</span><span class="hl-1"> {</span><br/><span
+            class="hl-1">        </span><span class="hl-3">const</span><span class="hl-1"> </span><span class="hl-8">guild</span><span
+            class="hl-1"> = </span><span class="hl-2">client</span><span class="hl-1">.</span><span
+            class="hl-2">guilds</span><span class="hl-1">.</span><span class="hl-2">cache</span><span
+            class="hl-1">.</span><span class="hl-4">get</span><span class="hl-1">(</span><span
+            class="hl-2">guildId</span><span class="hl-1">);</span><br/><span class="hl-1">        </span><span
+            class="hl-7">if</span><span class="hl-1"> (</span><span class="hl-2">guild</span><span
+            class="hl-1">) </span><span class="hl-2">guild</span><span class="hl-1">.</span><span
+            class="hl-2">shard</span><span class="hl-1">.</span><span class="hl-4">send</span><span
+            class="hl-1">(</span><span class="hl-2">payload</span><span class="hl-1">);</span><br/><span class="hl-1">    }</span><br/><span
+            class="hl-1">}, </span><span class="hl-3">new</span><span class="hl-1"> </span><span
+            class="hl-2">Connectors</span><span class="hl-1">.</span><span class="hl-4">DiscordJS</span><span
+            class="hl-1">(</span><span class="hl-2">client</span><span class="hl-1">), </span><span
+            class="hl-2">Nodes</span><span class="hl-1">);</span><br/><br/><span class="hl-2">client</span><span
+            class="hl-1">.</span><span class="hl-4">on</span><span class="hl-1">(</span><span class="hl-5">&quot;ready&quot;</span><span
+            class="hl-1">, () </span><span class="hl-3">=&gt;</span><span class="hl-1"> </span><span class="hl-2">console</span><span
+            class="hl-1">.</span><span class="hl-4">log</span><span class="hl-1">(</span><span
+            class="hl-2">client</span><span class="hl-1">.</span><span class="hl-2">user</span><span
+            class="hl-1">.</span><span class="hl-2">tag</span><span class="hl-1"> + </span><span class="hl-5">&quot; Ready!&quot;</span><span
+            class="hl-1">));</span><br/><br/><span class="hl-2">kazagumo</span><span class="hl-1">.</span><span
+            class="hl-2">shoukaku</span><span class="hl-1">.</span><span class="hl-4">on</span><span
+            class="hl-1">(</span><span class="hl-5">&#39;ready&#39;</span><span class="hl-1">, (</span><span
+            class="hl-2">name</span><span class="hl-1">) </span><span class="hl-3">=&gt;</span><span
+            class="hl-1"> </span><span class="hl-2">console</span><span class="hl-1">.</span><span
+            class="hl-4">log</span><span class="hl-1">(</span><span class="hl-5">`Lavalink </span><span
+            class="hl-3">${</span><span class="hl-2">name</span><span class="hl-3">}</span><span
+            class="hl-5">: Ready!`</span><span class="hl-1">));</span><br/><span class="hl-2">kazagumo</span><span
+            class="hl-1">.</span><span class="hl-2">shoukaku</span><span class="hl-1">.</span><span
+            class="hl-4">on</span><span class="hl-1">(</span><span class="hl-5">&#39;error&#39;</span><span
+            class="hl-1">, (</span><span class="hl-2">name</span><span class="hl-1">, </span><span
+            class="hl-2">error</span><span class="hl-1">) </span><span class="hl-3">=&gt;</span><span
+            class="hl-1"> </span><span class="hl-2">console</span><span class="hl-1">.</span><span
+            class="hl-4">error</span><span class="hl-1">(</span><span class="hl-5">`Lavalink </span><span class="hl-3">${</span><span
+            class="hl-2">name</span><span class="hl-3">}</span><span class="hl-5">: Error Caught,`</span><span
+            class="hl-1">, </span><span class="hl-2">error</span><span class="hl-1">));</span><br/><span class="hl-2">kazagumo</span><span
+            class="hl-1">.</span><span class="hl-2">shoukaku</span><span class="hl-1">.</span><span
+            class="hl-4">on</span><span class="hl-1">(</span><span class="hl-5">&#39;close&#39;</span><span
+            class="hl-1">, (</span><span class="hl-2">name</span><span class="hl-1">, </span><span
+            class="hl-2">code</span><span class="hl-1">, </span><span class="hl-2">reason</span><span
+            class="hl-1">) </span><span class="hl-3">=&gt;</span><span class="hl-1"> </span><span
+            class="hl-2">console</span><span class="hl-1">.</span><span class="hl-4">warn</span><span
+            class="hl-1">(</span><span class="hl-5">`Lavalink </span><span class="hl-3">${</span><span
+            class="hl-2">name</span><span class="hl-3">}</span><span class="hl-5">: Closed, Code </span><span
+            class="hl-3">${</span><span class="hl-2">code</span><span class="hl-3">}</span><span
+            class="hl-5">, Reason </span><span class="hl-3">${</span><span class="hl-2">reason</span><span
+            class="hl-9"> </span><span class="hl-1">||</span><span class="hl-9"> </span><span class="hl-5">&#39;No reason&#39;</span><span
+            class="hl-3">}</span><span class="hl-5">`</span><span class="hl-1">));</span><br/><span class="hl-2">kazagumo</span><span
+            class="hl-1">.</span><span class="hl-2">shoukaku</span><span class="hl-1">.</span><span
+            class="hl-4">on</span><span class="hl-1">(</span><span class="hl-5">&#39;disconnect&#39;</span><span
+            class="hl-1">, (</span><span class="hl-2">name</span><span class="hl-1">, </span><span
+            class="hl-2">players</span><span class="hl-1">, </span><span class="hl-2">moved</span><span
+            class="hl-1">) </span><span class="hl-3">=&gt;</span><span class="hl-1"> {</span><br/><span
+            class="hl-1">    </span><span class="hl-7">if</span><span class="hl-1"> (</span><span
+            class="hl-2">moved</span><span class="hl-1">) </span><span class="hl-7">return</span><span
+            class="hl-1">;</span><br/><span class="hl-1">    </span><span class="hl-2">players</span><span class="hl-1">.</span><span
+            class="hl-4">map</span><span class="hl-1">(</span><span class="hl-2">player</span><span
+            class="hl-1"> </span><span class="hl-3">=&gt;</span><span class="hl-1"> </span><span
+            class="hl-2">player</span><span class="hl-1">.</span><span class="hl-2">connection</span><span class="hl-1">.</span><span
+            class="hl-4">disconnect</span><span class="hl-1">())</span><br/><span class="hl-1">    </span><span
+            class="hl-2">console</span><span class="hl-1">.</span><span class="hl-4">warn</span><span
+            class="hl-1">(</span><span class="hl-5">`Lavalink </span><span class="hl-3">${</span><span
+            class="hl-2">name</span><span class="hl-3">}</span><span class="hl-5">: Disconnected`</span><span
+            class="hl-1">);</span><br/><span class="hl-1">});</span><br/><br/><span class="hl-2">kazagumo</span><span
+            class="hl-1">.</span><span class="hl-4">on</span><span class="hl-1">(</span><span class="hl-5">&quot;playerStart&quot;</span><span
+            class="hl-1">, (</span><span class="hl-2">player</span><span class="hl-1">, </span><span
+            class="hl-2">track</span><span class="hl-1">) </span><span class="hl-3">=&gt;</span><span
+            class="hl-1"> {</span><br/><span class="hl-1">    </span><span class="hl-2">client</span><span class="hl-1">.</span><span
+            class="hl-2">channels</span><span class="hl-1">.</span><span class="hl-2">cache</span><span
+            class="hl-1">.</span><span class="hl-4">get</span><span class="hl-1">(</span><span
+            class="hl-2">player</span><span class="hl-1">.</span><span class="hl-2">textId</span><span
+            class="hl-1">)?.</span><span class="hl-4">send</span><span class="hl-1">({</span><span
+            class="hl-2">content:</span><span class="hl-1"> </span><span class="hl-5">`Now playing **</span><span
+            class="hl-3">${</span><span class="hl-2">track</span><span class="hl-9">.</span><span
+            class="hl-2">title</span><span class="hl-3">}</span><span class="hl-5">** by **</span><span
+            class="hl-3">${</span><span class="hl-2">track</span><span class="hl-9">.</span><span
+            class="hl-2">author</span><span class="hl-3">}</span><span class="hl-5">**`</span><span
+            class="hl-1">})</span><br/><span class="hl-1">        .</span><span class="hl-4">then</span><span
+            class="hl-1">(</span><span class="hl-2">x</span><span class="hl-1"> </span><span
+            class="hl-3">=&gt;</span><span class="hl-1"> </span><span class="hl-2">player</span><span
+            class="hl-1">.</span><span class="hl-2">data</span><span class="hl-1">.</span><span
+            class="hl-4">set</span><span class="hl-1">(</span><span class="hl-5">&quot;message&quot;</span><span
+            class="hl-1">, </span><span class="hl-2">x</span><span class="hl-1">));</span><br/><span
+            class="hl-1">});</span><br/><br/><span class="hl-2">kazagumo</span><span class="hl-1">.</span><span
+            class="hl-4">on</span><span class="hl-1">(</span><span class="hl-5">&quot;playerEnd&quot;</span><span
+            class="hl-1">, (</span><span class="hl-2">player</span><span class="hl-1">) </span><span
+            class="hl-3">=&gt;</span><span class="hl-1"> {</span><br/><span class="hl-1">    </span><span class="hl-2">player</span><span
+            class="hl-1">.</span><span class="hl-2">data</span><span class="hl-1">.</span><span
+            class="hl-4">get</span><span class="hl-1">(</span><span class="hl-5">&quot;message&quot;</span><span
+            class="hl-1">)?.</span><span class="hl-4">edit</span><span class="hl-1">({</span><span
+            class="hl-2">content:</span><span class="hl-1"> </span><span class="hl-5">`Finished playing`</span><span
+            class="hl-1">});</span><br/><span class="hl-1">});</span><br/><br/><span class="hl-2">kazagumo</span><span
+            class="hl-1">.</span><span class="hl-4">on</span><span class="hl-1">(</span><span class="hl-5">&quot;playerEmpty&quot;</span><span
+            class="hl-1">, </span><span class="hl-2">player</span><span class="hl-1"> </span><span
+            class="hl-3">=&gt;</span><span class="hl-1"> {</span><br/><span class="hl-1">    </span><span class="hl-2">client</span><span
+            class="hl-1">.</span><span class="hl-2">channels</span><span class="hl-1">.</span><span
+            class="hl-2">cache</span><span class="hl-1">.</span><span class="hl-4">get</span><span class="hl-1">(</span><span
+            class="hl-2">player</span><span class="hl-1">.</span><span class="hl-2">textId</span><span
+            class="hl-1">)?.</span><span class="hl-4">send</span><span class="hl-1">({</span><span
+            class="hl-2">content:</span><span class="hl-1"> </span><span class="hl-5">`Destroyed player due to inactivity.`</span><span
+            class="hl-1">})</span><br/><span class="hl-1">        .</span><span class="hl-4">then</span><span
+            class="hl-1">(</span><span class="hl-2">x</span><span class="hl-1"> </span><span
+            class="hl-3">=&gt;</span><span class="hl-1"> </span><span class="hl-2">player</span><span
+            class="hl-1">.</span><span class="hl-2">data</span><span class="hl-1">.</span><span
+            class="hl-4">set</span><span class="hl-1">(</span><span class="hl-5">&quot;message&quot;</span><span
+            class="hl-1">, </span><span class="hl-2">x</span><span class="hl-1">));</span><br/><span
+            class="hl-1">    </span><span class="hl-2">player</span><span class="hl-1">.</span><span class="hl-4">destroy</span><span
+            class="hl-1">();</span><br/><span class="hl-1">});</span><br/><br/><span class="hl-2">client</span><span
+            class="hl-1">.</span><span class="hl-4">on</span><span class="hl-1">(</span><span class="hl-5">&quot;messageCreate&quot;</span><span
+            class="hl-1">, </span><span class="hl-3">async</span><span class="hl-1"> </span><span
+            class="hl-2">msg</span><span class="hl-1"> </span><span class="hl-3">=&gt;</span><span
+            class="hl-1"> {</span><br/><span class="hl-1">    </span><span class="hl-7">if</span><span
+            class="hl-1"> (</span><span class="hl-2">msg</span><span class="hl-1">.</span><span
+            class="hl-2">author</span><span class="hl-1">.</span><span class="hl-2">bot</span><span
+            class="hl-1">) </span><span class="hl-7">return</span><span class="hl-1">;</span><br/><br/><span
+            class="hl-1">    </span><span class="hl-7">if</span><span class="hl-1"> (</span><span
+            class="hl-2">msg</span><span class="hl-1">.</span><span class="hl-2">content</span><span
+            class="hl-1">.</span><span class="hl-4">startsWith</span><span class="hl-1">(</span><span class="hl-5">&quot;!play&quot;</span><span
+            class="hl-1">)) {</span><br/><span class="hl-1">        </span><span class="hl-3">const</span><span
+            class="hl-1"> </span><span class="hl-8">args</span><span class="hl-1"> = </span><span
+            class="hl-2">msg</span><span class="hl-1">.</span><span class="hl-2">content</span><span
+            class="hl-1">.</span><span class="hl-4">split</span><span class="hl-1">(</span><span class="hl-5">&quot; &quot;</span><span
+            class="hl-1">);</span><br/><span class="hl-1">        </span><span class="hl-3">const</span><span
+            class="hl-1"> </span><span class="hl-8">query</span><span class="hl-1"> = </span><span
+            class="hl-2">args</span><span class="hl-1">.</span><span class="hl-4">slice</span><span
+            class="hl-1">(</span><span class="hl-6">1</span><span class="hl-1">).</span><span
+            class="hl-4">join</span><span class="hl-1">(</span><span class="hl-5">&quot; &quot;</span><span
+            class="hl-1">);</span><br/><br/><span class="hl-1">        </span><span class="hl-3">const</span><span
+            class="hl-1"> {</span><span class="hl-8">channel</span><span class="hl-1">} = </span><span
+            class="hl-2">msg</span><span class="hl-1">.</span><span class="hl-2">member</span><span
+            class="hl-1">.</span><span class="hl-2">voice</span><span class="hl-1">;</span><br/><span
+            class="hl-1">        </span><span class="hl-7">if</span><span class="hl-1"> (!</span><span class="hl-2">channel</span><span
+            class="hl-1">) </span><span class="hl-7">return</span><span class="hl-1"> </span><span
+            class="hl-2">msg</span><span class="hl-1">.</span><span class="hl-4">reply</span><span class="hl-1">(</span><span
+            class="hl-5">&quot;You need to be in a voice channel to use this command!&quot;</span><span
+            class="hl-1">);</span><br/><br/><span class="hl-1">        </span><span class="hl-3">let</span><span
+            class="hl-1"> </span><span class="hl-2">player</span><span class="hl-1"> = </span><span
+            class="hl-7">await</span><span class="hl-1"> </span><span class="hl-2">kazagumo</span><span
+            class="hl-1">.</span><span class="hl-4">createPlayer</span><span class="hl-1">({</span><br/><span
+            class="hl-1">            </span><span class="hl-2">guildId:</span><span class="hl-1"> </span><span
+            class="hl-2">msg</span><span class="hl-1">.</span><span class="hl-2">guild</span><span class="hl-1">.</span><span
+            class="hl-2">id</span><span class="hl-1">,</span><br/><span class="hl-1">            </span><span
+            class="hl-2">textId:</span><span class="hl-1"> </span><span class="hl-2">msg</span><span
+            class="hl-1">.</span><span class="hl-2">channel</span><span class="hl-1">.</span><span
+            class="hl-2">id</span><span class="hl-1">,</span><br/><span class="hl-1">            </span><span
+            class="hl-2">voiceId:</span><span class="hl-1"> </span><span class="hl-2">channel</span><span
+            class="hl-1">.</span><span class="hl-2">id</span><span class="hl-1">,</span><br/><span
+            class="hl-1">            </span><span class="hl-2">volume:</span><span class="hl-1"> </span><span
+            class="hl-6">40</span><br/><span class="hl-1">        })</span><br/><br/><span
+            class="hl-1">        </span><span class="hl-3">let</span><span class="hl-1"> </span><span class="hl-2">result</span><span
+            class="hl-1"> = </span><span class="hl-7">await</span><span class="hl-1"> </span><span
+            class="hl-2">kazagumo</span><span class="hl-1">.</span><span class="hl-4">search</span><span
+            class="hl-1">(</span><span class="hl-2">query</span><span class="hl-1">, {</span><span class="hl-2">requester:</span><span
+            class="hl-1"> </span><span class="hl-2">msg</span><span class="hl-1">.</span><span
+            class="hl-2">author</span><span class="hl-1">});</span><br/><span class="hl-1">        </span><span
+            class="hl-7">if</span><span class="hl-1"> (!</span><span class="hl-2">result</span><span
+            class="hl-1">.</span><span class="hl-2">tracks</span><span class="hl-1">.</span><span
+            class="hl-2">length</span><span class="hl-1">) </span><span class="hl-7">return</span><span
+            class="hl-1"> </span><span class="hl-2">msg</span><span class="hl-1">.</span><span class="hl-4">reply</span><span
+            class="hl-1">(</span><span class="hl-5">&quot;No results found!&quot;</span><span
+            class="hl-1">);</span><br/><br/><span class="hl-1">        </span><span class="hl-7">if</span><span
+            class="hl-1"> (</span><span class="hl-2">result</span><span class="hl-1">.</span><span
+            class="hl-2">type</span><span class="hl-1"> === </span><span class="hl-5">&quot;PLAYLIST&quot;</span><span
+            class="hl-1">) </span><span class="hl-7">for</span><span class="hl-1"> (</span><span class="hl-3">let</span><span
+            class="hl-1"> </span><span class="hl-2">track</span><span class="hl-1"> </span><span
+            class="hl-3">of</span><span class="hl-1"> </span><span class="hl-2">result</span><span class="hl-1">.</span><span
+            class="hl-2">tracks</span><span class="hl-1">) </span><span class="hl-2">player</span><span
+            class="hl-1">.</span><span class="hl-2">queue</span><span class="hl-1">.</span><span class="hl-4">add</span><span
+            class="hl-1">(</span><span class="hl-2">track</span><span class="hl-1">);</span><br/><span
+            class="hl-1">        </span><span class="hl-7">else</span><span class="hl-1"> </span><span class="hl-2">player</span><span
+            class="hl-1">.</span><span class="hl-2">queue</span><span class="hl-1">.</span><span class="hl-4">add</span><span
+            class="hl-1">(</span><span class="hl-2">result</span><span class="hl-1">.</span><span
+            class="hl-2">tracks</span><span class="hl-1">[</span><span class="hl-6">0</span><span
+            class="hl-1">]);</span><br/><br/><span class="hl-1">        </span><span class="hl-7">if</span><span
+            class="hl-1"> (!</span><span class="hl-2">player</span><span class="hl-1">.</span><span
+            class="hl-2">playing</span><span class="hl-1"> &amp;&amp; !</span><span class="hl-2">player</span><span
+            class="hl-1">.</span><span class="hl-2">paused</span><span class="hl-1">) </span><span
+            class="hl-2">player</span><span class="hl-1">.</span><span class="hl-4">play</span><span
+            class="hl-1">();</span><br/><span class="hl-1">        </span><span class="hl-7">return</span><span
+            class="hl-1"> </span><span class="hl-2">msg</span><span class="hl-1">.</span><span class="hl-4">reply</span><span
+            class="hl-1">({</span><span class="hl-2">content:</span><span class="hl-1"> </span><span
+            class="hl-2">result</span><span class="hl-1">.</span><span class="hl-2">type</span><span
+            class="hl-1"> === </span><span class="hl-5">&quot;PLAYLIST&quot;</span><span class="hl-1"> ? </span><span
+            class="hl-5">`Queued </span><span class="hl-3">${</span><span class="hl-2">result</span><span
+            class="hl-9">.</span><span class="hl-2">tracks</span><span class="hl-9">.</span><span
+            class="hl-2">length</span><span class="hl-3">}</span><span class="hl-5"> from </span><span
+            class="hl-3">${</span><span class="hl-2">result</span><span class="hl-9">.</span><span class="hl-2">playlistName</span><span
+            class="hl-3">}</span><span class="hl-5">`</span><span class="hl-1"> : </span><span
+            class="hl-5">`Queued </span><span class="hl-3">${</span><span class="hl-2">result</span><span
+            class="hl-9">.</span><span class="hl-2">tracks</span><span class="hl-9">[</span><span
+            class="hl-6">0</span><span class="hl-9">].</span><span class="hl-2">title</span><span
+            class="hl-3">}</span><span class="hl-5">`</span><span class="hl-1">});</span><br/><span
+            class="hl-1">    }</span><br/><br/><span class="hl-1">    </span><span class="hl-7">if</span><span
+            class="hl-1"> (</span><span class="hl-2">msg</span><span class="hl-1">.</span><span
+            class="hl-2">content</span><span class="hl-1">.</span><span class="hl-4">startsWith</span><span
+            class="hl-1">(</span><span class="hl-5">&quot;!forceplay&quot;</span><span
+            class="hl-1">)) {</span><br/><span class="hl-1">        </span><span class="hl-3">let</span><span
+            class="hl-1"> </span><span class="hl-2">player</span><span class="hl-1"> = </span><span class="hl-2">kazagumo</span><span
+            class="hl-1">.</span><span class="hl-2">players</span><span class="hl-1">.</span><span
+            class="hl-4">get</span><span class="hl-1">(</span><span class="hl-2">msg</span><span
+            class="hl-1">.</span><span class="hl-2">guild</span><span class="hl-1">.</span><span
+            class="hl-2">id</span><span class="hl-1">);</span><br/><span class="hl-1">        </span><span class="hl-7">if</span><span
+            class="hl-1"> (!</span><span class="hl-2">player</span><span class="hl-1">) </span><span
+            class="hl-7">return</span><span class="hl-1"> </span><span class="hl-2">msg</span><span
+            class="hl-1">.</span><span class="hl-4">reply</span><span class="hl-1">(</span><span class="hl-5">&quot;No player found!&quot;</span><span
+            class="hl-1">);</span><br/><span class="hl-1">        </span><span class="hl-3">const</span><span
+            class="hl-1"> </span><span class="hl-8">args</span><span class="hl-1"> = </span><span
+            class="hl-2">msg</span><span class="hl-1">.</span><span class="hl-2">content</span><span
+            class="hl-1">.</span><span class="hl-4">split</span><span class="hl-1">(</span><span class="hl-5">&quot; &quot;</span><span
+            class="hl-1">);</span><br/><span class="hl-1">        </span><span class="hl-3">const</span><span
+            class="hl-1"> </span><span class="hl-8">query</span><span class="hl-1"> = </span><span
+            class="hl-2">args</span><span class="hl-1">.</span><span class="hl-4">slice</span><span
+            class="hl-1">(</span><span class="hl-6">1</span><span class="hl-1">).</span><span
+            class="hl-4">join</span><span class="hl-1">(</span><span class="hl-5">&quot; &quot;</span><span
+            class="hl-1">);</span><br/><span class="hl-1">        </span><span class="hl-3">let</span><span
+            class="hl-1"> </span><span class="hl-2">result</span><span class="hl-1"> = </span><span
+            class="hl-7">await</span><span class="hl-1"> </span><span class="hl-2">kazagumo</span><span
+            class="hl-1">.</span><span class="hl-4">search</span><span class="hl-1">(</span><span
+            class="hl-2">query</span><span class="hl-1">, {</span><span class="hl-2">requester:</span><span
+            class="hl-1"> </span><span class="hl-2">msg</span><span class="hl-1">.</span><span
+            class="hl-2">author</span><span class="hl-1">});</span><br/><span class="hl-1">        </span><span
+            class="hl-7">if</span><span class="hl-1"> (!</span><span class="hl-2">result</span><span
+            class="hl-1">.</span><span class="hl-2">tracks</span><span class="hl-1">.</span><span
+            class="hl-2">length</span><span class="hl-1">) </span><span class="hl-7">return</span><span
+            class="hl-1"> </span><span class="hl-2">msg</span><span class="hl-1">.</span><span class="hl-4">reply</span><span
+            class="hl-1">(</span><span class="hl-5">&quot;No results found!&quot;</span><span
+            class="hl-1">);</span><br/><span class="hl-1">        </span><span class="hl-2">player</span><span
+            class="hl-1">.</span><span class="hl-4">play</span><span class="hl-1">(</span><span
+            class="hl-3">new</span><span class="hl-1"> </span><span class="hl-4">KazagumoTrack</span><span class="hl-1">(</span><span
+            class="hl-2">result</span><span class="hl-1">.</span><span class="hl-2">tracks</span><span
+            class="hl-1">[</span><span class="hl-6">0</span><span class="hl-1">].</span><span class="hl-4">getRaw</span><span
+            class="hl-1">(), </span><span class="hl-2">msg</span><span class="hl-1">.</span><span
+            class="hl-2">author</span><span class="hl-1">));</span><br/><span class="hl-1">        </span><span
+            class="hl-7">return</span><span class="hl-1"> </span><span class="hl-2">msg</span><span
+            class="hl-1">.</span><span class="hl-4">reply</span><span class="hl-1">({</span><span
+            class="hl-2">content:</span><span class="hl-1"> </span><span class="hl-5">`Forced playing **</span><span
+            class="hl-3">${</span><span class="hl-2">result</span><span class="hl-9">.</span><span
+            class="hl-2">tracks</span><span class="hl-9">[</span><span class="hl-6">0</span><span class="hl-9">].</span><span
+            class="hl-2">title</span><span class="hl-3">}</span><span class="hl-5">** by **</span><span
+            class="hl-3">${</span><span class="hl-2">result</span><span class="hl-9">.</span><span
+            class="hl-2">tracks</span><span class="hl-9">[</span><span class="hl-6">0</span><span class="hl-9">].</span><span
+            class="hl-2">author</span><span class="hl-3">}</span><span class="hl-5">**`</span><span
+            class="hl-1">});</span><br/><span class="hl-1">    }</span><br/><span
+            class="hl-1">})</span><br/><br/><br/><span class="hl-2">client</span><span class="hl-1">.</span><span
+            class="hl-4">login</span><span class="hl-1">(</span><span class="hl-5">&#39;&#39;</span><span class="hl-1">);</span>
 </code></pre>
 
 <a href="#known-issue" id="known-issue" style="color: inherit; text-decoration: none;">
@@ -140,6 +426,9 @@
 <li class="tsd-kind-module"><a href="modules/Managers_Supports_KazagumoTrack.html">Managers/<wbr/>Supports/<wbr/>Kazagumo<wbr/>Track</a></li>
 <li class="tsd-kind-module"><a href="modules/Modules_Interfaces.html">Modules/<wbr/>Interfaces</a></li>
 <li class="tsd-kind-module"><a href="modules/Modules_Plugins.html">Modules/<wbr/>Plugins</a></li>
+    <li class="tsd-kind-module"><a href="modules/Modules_Utils.html">Modules/
+        <wbr/>
+        Utils</a></li>
 <li class="tsd-kind-module"><a href="modules/Plugins_PlayerMoved.html">Plugins/<wbr/>Player<wbr/>Moved</a></li></ul></li></ul></div></details></nav></div></div>
 <div class="container tsd-generator">
 <p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></div>
