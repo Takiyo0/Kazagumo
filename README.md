@@ -122,6 +122,7 @@ client.on("ready", () => console.log(client.user.tag + " Ready!"));
 kazagumo.shoukaku.on('ready', (name) => console.log(`Lavalink ${name}: Ready!`));
 kazagumo.shoukaku.on('error', (name, error) => console.error(`Lavalink ${name}: Error Caught,`, error));
 kazagumo.shoukaku.on('close', (name, code, reason) => console.warn(`Lavalink ${name}: Closed, Code ${code}, Reason ${reason || 'No reason'}`));
+kazagumo.shoukaku.on('debug', (name, info) => console.debug(`Lavalink ${name}: Debug,` info));
 kazagumo.shoukaku.on('disconnect', (name, players, moved) => {
     if (moved) return;
     players.map(player => player.connection.disconnect())
