@@ -61,7 +61,6 @@ export class KazagumoTrack {
     this.isStream = raw.info.isStream;
     this.author = raw.info.author;
     this.length = raw.info.length;
-    this.position = raw.info.position;
     this.thumbnail = raw.info.thumbnail;
     this.realUri = SupportedSources.includes(this.sourceName) ? this.uri : null;
 

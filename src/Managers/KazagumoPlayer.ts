@@ -162,6 +162,13 @@ export class KazagumoPlayer {
   }
 
   /**
+   * Get player position
+   */
+  public get position(): number {
+    return this.shoukaku.position;
+  }
+
+  /**
    * Get filters
    */
   public get filters(): Filters {
