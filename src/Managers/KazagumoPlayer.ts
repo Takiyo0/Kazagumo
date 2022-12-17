@@ -320,23 +320,24 @@ export class KazagumoPlayer {
   }
 
   /**
-   * 
+   *
    */
   public seek(position: number): KazagumoPlayer {
     if (this.state === PlayerState.DESTROYED) throw new KazagumoError(1, 'Player is already destroyed');
-    if (!this.queue.current) throw new KazagumoError(1, 'Player has no current track in it\'s queue');
-    if (!this.queue.current.isSeekable) throw new KazagumoError(1, 'The current track isn\'t seekable');
+    if (!this.queue.current) throw new KazagumoError(1, "Player has no current track in it's queue");
+    if (!this.queue.current.isSeekable) throw new KazagumoError(1, "The current track isn't seekable");
 
     position = Number(position);
 
     if (isNaN(position)) throw new KazagumoError(1, 'position must be a number');
-    if (position < 0 || position > (this.queue.current.length ?? 0)) position = Math.max(Math.min(position, (this.queue.current.length ?? 0)), 0);
+    if (position < 0 || position > (this.queue.current.length ?? 0))
+      position = Math.max(Math.min(position, this.queue.current.length ?? 0), 0);
 
     this.queue.current.position = position;
     this.send({
       op: 'seek',
       guildId: this.guildId,
-      position
+      position,
     });
 
     return this;
