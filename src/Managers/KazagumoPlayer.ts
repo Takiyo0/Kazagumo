@@ -162,6 +162,13 @@ export class KazagumoPlayer {
   }
 
   /**
+   * Get player position
+   */
+  public get position(): number {
+    return this.shoukaku.position;
+  }
+
+  /**
    * Get filters
    */
   public get filters(): Filters {
@@ -308,6 +315,30 @@ export class KazagumoPlayer {
     if (this.state === PlayerState.DESTROYED) throw new KazagumoError(1, 'Player is already destroyed');
 
     this.shoukaku.stopTrack();
+
+    return this;
+  }
+
+  /**
+   * 
+   */
+  public seek(position: number): KazagumoPlayer {
+    if (this.state === PlayerState.DESTROYED) throw new KazagumoError(1, 'Player is already destroyed');
+    if (!this.queue.current) throw new KazagumoError(1, 'Player has no current track in it\'s queue');
+    if (!this.queue.current.isSeekable) throw new KazagumoError(1, 'The current track isn\'t seekable');
+
+    position = Number(position);
+
+    if (isNaN(position)) throw new KazagumoError(1, 'position must be a number');
+    //@ts-ignore
+    if (position < 0 || position > this.queue.current.length) position = Math.max(Math.min(position, this.queue.current.length), 0);
+
+    this.queue.current.position = position;
+    this.send({
+      op: 'seek',
+      guildId: this.guildId,
+      position
+    });
 
     return this;
   }
