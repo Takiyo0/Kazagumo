@@ -35,15 +35,15 @@ export class KazagumoPlayer {
    */
   public shoukaku: Player;
   /**
-   * The guild Id of the player
+   * The guild ID of the player
    */
   public readonly guildId: Snowflake;
   /**
-   * The voice channel Id of the player
+   * The voice channel ID of the player
    */
   public voiceId: Snowflake | null;
   /**
-   * The text channel Id of the player
+   * The text channel ID of the player
    */
   public textId: Snowflake;
   /**
@@ -201,7 +201,7 @@ export class KazagumoPlayer {
 
   /**
    * Set text channel
-   * @param textId Text channel Id
+   * @param textId Text channel ID
    * @returns KazagumoPlayer
    */
   public setTextChannel(textId: Snowflake): KazagumoPlayer {
@@ -214,7 +214,7 @@ export class KazagumoPlayer {
 
   /**
    * Set voice channel and move the player to the voice channel
-   * @param voiceId Voice channel Id
+   * @param voiceId Voice channel ID
    * @returns KazagumoPlayer
    */
   public setVoiceChannel(voiceId: Snowflake): KazagumoPlayer {
@@ -330,8 +330,7 @@ export class KazagumoPlayer {
     position = Number(position);
 
     if (isNaN(position)) throw new KazagumoError(1, 'position must be a number');
-    //@ts-ignore
-    if (position < 0 || position > this.queue.current.length) position = Math.max(Math.min(position, this.queue.current.length), 0);
+    if (position < 0 || position > (this.queue.current.length ?? 0)) position = Math.max(Math.min(position, (this.queue.current.length ?? 0)), 0);
 
     this.queue.current.position = position;
     this.send({
