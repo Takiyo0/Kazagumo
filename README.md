@@ -26,9 +26,9 @@ Pls read the docs before asking 🙏🙏🙏 There is a useful search feature th
 
 ## Metadata
 
-> version: 2.3.1   
+> version: 2.3.2   
 > pre-release: false  
-> Last build: 12-17-2022 18:55
+> Last build: 01-12-2023 20:08
 
 ## Plugins
 - Official [spotify plugin](https://npmjs.com/package/kazagumo-spotify)
@@ -122,7 +122,7 @@ client.on("ready", () => console.log(client.user.tag + " Ready!"));
 kazagumo.shoukaku.on('ready', (name) => console.log(`Lavalink ${name}: Ready!`));
 kazagumo.shoukaku.on('error', (name, error) => console.error(`Lavalink ${name}: Error Caught,`, error));
 kazagumo.shoukaku.on('close', (name, code, reason) => console.warn(`Lavalink ${name}: Closed, Code ${code}, Reason ${reason || 'No reason'}`));
-kazagumo.shoukaku.on('debug', (name, info) => console.debug(`Lavalink ${name}: Debug,` info));
+kazagumo.shoukaku.on('debug', (name, info) => console.debug(`Lavalink ${name}: Debug,`, info));
 kazagumo.shoukaku.on('disconnect', (name, players, moved) => {
     if (moved) return;
     players.map(player => player.connection.disconnect())
