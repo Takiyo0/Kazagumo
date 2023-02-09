@@ -266,19 +266,19 @@ export class Kazagumo extends EventEmitter {
     if (!node) throw new KazagumoError(3, 'No node is available');
 
     const source = (SourceIDs as any)[
-      (options?.engine && ['youtube', 'youtube_music', 'soundcloud'].includes(options.engine)
+      (options?.engine && ['youtube', 'youtube_music', 'soundcloud', 'spsearch'].includes(options.engine)
         ? options.engine
         : null) ||
         (!!this.KazagumoOptions.defaultSearchEngine &&
-        ['youtube', 'youtube_music', 'soundcloud'].includes(this.KazagumoOptions.defaultSearchEngine!)
+        ['youtube', 'youtube_music', 'soundcloud', 'spsearch'].includes(this.KazagumoOptions.defaultSearchEngine!)
           ? this.KazagumoOptions.defaultSearchEngine
           : null) ||
-        'youtube'
+        'spsearch'
     ];
 
     const isUrl = /^https?:\/\/.*/.test(query);
 
-    const result = await node.rest.resolve(!isUrl ? `${source}search:${query}` : query).catch((_) => null);
+    const result = await node.rest.resolve(!isUrl ? `spsearch:${query}` : query).catch((_) => null);
     if (!result) return this.buildSearch(undefined, [], 'SEARCH');
     this.emit(Events.Debug, `Searched ${query}; Track results: ${result.tracks.length}`);
 
