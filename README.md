@@ -33,6 +33,8 @@ Pls read the docs before asking 🙏🙏🙏 There is a useful search feature th
 ## Plugins
 - Official [spotify plugin](https://npmjs.com/package/kazagumo-spotify)
 > npm i kazagumo-spotify
+- Stone-Deezer [deezer plugin](https://www.npmjs.com/package/stone-deezer)
+> npm i stone-deezer
 
 ## Lavalink installation
 
