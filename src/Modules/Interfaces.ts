@@ -1,7 +1,7 @@
 import { Kazagumo } from '../Kazagumo';
 import { KazagumoPlayer } from '../Index';
 import { KazagumoTrack } from '../Managers/Supports/KazagumoTrack';
-import { Constructor } from 'shoukaku/dist/src/Utils';
+import { Utils } from 'shoukaku';
 import { Snowflake } from 'discord.js';
 
 export interface KazagumoOptions {
@@ -17,7 +17,7 @@ export interface KazagumoOptions {
   defaultYoutubeThumbnail?: YoutubeThumbnail;
   /** Extend some of the Structures */
   extends?: {
-    player?: Constructor<KazagumoPlayer>;
+    player?: Utils.Constructor<KazagumoPlayer>;
   };
   /** Send to guild's shard */
   send: (guildId: Snowflake, payload: Payload) => void;
@@ -100,7 +100,22 @@ export interface RawTrack {
   };
 }
 
-export const Events = {
+export const Events: {
+  PlayerDestroy: 'playerDestroy';
+  PlayerCreate: 'playerCreate';
+  PlayerStart: 'playerStart';
+  PlayerEnd: 'playerEnd';
+  PlayerEmpty: 'playerEmpty';
+  PlayerClosed: 'playerClosed';
+  PlayerUpdate: 'playerUpdate';
+  PlayerException: 'playerException';
+  PlayerError: 'playerError';
+  PlayerResumed: 'playerResumed';
+  PlayerStuck: 'playerStuck';
+  PlayerResolveError: 'playerResolveError';
+  PlayerMoved: 'playerMoved';
+  Debug: 'debug';
+} = {
   // Player events
   PlayerDestroy: 'playerDestroy',
   PlayerCreate: 'playerCreate',

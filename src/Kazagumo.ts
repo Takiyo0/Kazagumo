@@ -21,8 +21,8 @@ import {
   TrackExceptionEvent,
   TrackStuckEvent,
   WebSocketClosedEvent,
+  Connector,
 } from 'shoukaku';
-import { Connector } from 'shoukaku/dist/src/connectors/Connector';
 
 import { KazagumoPlayer } from './Managers/KazagumoPlayer';
 import { KazagumoTrack } from './Managers/Supports/KazagumoTrack';
