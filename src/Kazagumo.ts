@@ -64,15 +64,15 @@ export class Kazagumo extends EventEmitter {
 
     this.players = new Map<string, KazagumoPlayer>();
   }
-  public on<K extends keyof KazagumoEvents>(event: K, listener: (...args: Array<KazagumoEvents[K]>) => void): this {
+  public on<K extends keyof KazagumoEvents>(event: K, listener: (...args: KazagumoEvents[K][]) => void): this {
     super.on(event as string, (...args) => listener(...args));
     return this;
   }
-  public once<K extends keyof KazagumoEvents>(event: K, listener: (...args: Array<KazagumoEvents[K]>) => void): this {
+  public once<K extends keyof KazagumoEvents>(event: K, listener: (...args: KazagumoEvents[K][]) => void): this {
     super.once(event as string, (...args) => listener(...args));
     return this;
   }
-  public off<K extends keyof KazagumoEvents>(event: K, listener: (...args: Array<KazagumoEvents[K]>) => void): this {
+  public off<K extends keyof KazagumoEvents>(event: K, listener: (...args: KazagumoEvents[K][]) => void): this {
     super.off(event as string, (...args) => listener(...args));
     return this;
   }
