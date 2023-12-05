@@ -100,7 +100,7 @@ export interface RawTrack {
   };
 }
 
-export interface KazagumoEvents {
+export interface KazagumoEvents  {
   playerDestroy: [player: KazagumoPlayer];
   playerCreate: [player: KazagumoPlayer];
   playerStart: [player: KazagumoPlayer, track: KazagumoTrack];
