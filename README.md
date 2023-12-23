@@ -1,7 +1,7 @@
 # Kazagumo
 #### A [Shoukaku](https://github.com/Deivu/Shoukaku) wrapper with built in queue system 
 
-![AppVeyor](https://img.shields.io/appveyor/build/Takiyo0/kazagumo) ![Downloads](https://img.shields.io/npm/dm/kazagumo) ![npm](https://img.shields.io/npm/v/kazagumo) ![Code Quality](https://api.codiga.io/project/33922/score/svg) ![Code Rating](https://api.codiga.io/project/33922/status/svg) ![GitHub contributors](https://img.shields.io/github/contributors/Takiyo0/Kazagumo) ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/Takiyo0/Kazagumo) ![GitHub last commit](https://img.shields.io/github/last-commit/Takiyo0/Kazagumo) ![NPM](https://img.shields.io/npm/l/kazagumo)  
+![AppVeyor](https://img.shields.io/appveyor/build/Takiyo0/kazagumo) ![Downloads](https://img.shields.io/npm/dm/kazagumo) ![npm](https://img.shields.io/npm/v/kazagumo) ![GitHub contributors](https://img.shields.io/github/contributors/Takiyo0/Kazagumo) ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/Takiyo0/Kazagumo) ![GitHub last commit](https://img.shields.io/github/last-commit/Takiyo0/Kazagumo) ![NPM](https://img.shields.io/npm/l/kazagumo)  
 
 ![Kazagumo](https://i.imgur.com/jfVSvHj.png)
 > Kazagumo © Azur Lane
@@ -11,9 +11,8 @@
 ✓ Built-in queue system  
 ✓ Easy to use  
 ✓ Plugin system  
-✓ Uses shoukaku v3   
+✓ Uses shoukaku v4 + capable of Lavalink v4   
 ✓ Stable _🙏_   
-✓ 💖 cute shipgirl
 
 ## Documentation
 Pls read the docs before asking 🙏🙏🙏 There is a useful search feature there
@@ -26,9 +25,9 @@ Pls read the docs before asking 🙏🙏🙏 There is a useful search feature th
 
 ## Metadata
 
-> version: 2.3.2   
-> pre-release: false  
-> Last build: 01-12-2023 20:08
+> version: 3.0.0-alpha   
+> pre-release: true  
+> Last build: 23-12-2023 11.22 AM
 
 ## Plugins
 - Official [spotify plugin](https://npmjs.com/package/kazagumo-spotify)
@@ -78,6 +77,17 @@ Pls read the docs before asking 🙏🙏🙏 There is a useful search feature th
 // Skip the current song
 - this.player.players.get("69696969696969").stopTrack() // Stoptrack basically skip on shoukaku
 + this.player.players.get("69696969696969").skip() // skip on kazagumo. easier to find :v
+```
+
+## Migration from v2 to v3
+```diff
+- playerResumed event
++ queueUpdate event
+- KazagumoPlayer#getPrevious function
+* previous object to an array
+* `uri` property on track is now optional
+* add NEARLY and RECONNECTING to State
++ VoiceState enum
 ```
 
 ## Support

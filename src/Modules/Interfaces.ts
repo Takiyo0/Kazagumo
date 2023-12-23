@@ -1,8 +1,9 @@
 import { Kazagumo } from '../Kazagumo';
 import { KazagumoPlayer } from '../Index';
 import { KazagumoTrack } from '../Managers/Supports/KazagumoTrack';
-import { Constructor } from 'shoukaku/dist/src/Utils';
+import { Constructor } from './Utils';
 import { Snowflake } from 'discord.js';
+import { Track } from 'shoukaku';
 
 export interface KazagumoOptions {
   /** Default search engine if no engine was provided. Default to youtube */
@@ -88,7 +89,7 @@ export interface RawTrack {
   track: string;
   info: {
     title: string;
-    uri: string;
+    uri?: string;
     identifier: string;
     sourceName: string;
     isSeekable: boolean;
@@ -98,6 +99,7 @@ export interface RawTrack {
     position?: number;
     thumbnail?: string;
   };
+  _raw: Track;
 }
 
 export const Events = {
@@ -115,6 +117,7 @@ export const Events = {
   PlayerStuck: 'playerStuck',
   PlayerResolveError: 'playerResolveError',
   PlayerMoved: 'playerMoved',
+  QueueUpdate: 'queueUpdate',
 
   // Kazagumo events
   Debug: 'debug',
@@ -166,7 +169,9 @@ export interface PlayOptions {
 
 export enum State {
   CONNECTING,
+  NEARLY,
   CONNECTED,
+  RECONNECTING,
   DISCONNECTING,
   DISCONNECTED,
 }
@@ -199,4 +204,11 @@ export class KazagumoError extends Error {
     this.code = code;
     this.message = message;
   }
+}
+
+export enum VoiceState {
+  SESSION_READY,
+  SESSION_ID_MISSING,
+  SESSION_ENDPOINT_MISSING,
+  SESSION_FAILED_UPDATE,
 }
