@@ -33,6 +33,15 @@ Pls read the docs before asking 🙏🙏🙏 There is a useful search feature th
 ## Plugins
 - Official [spotify plugin](https://npmjs.com/package/kazagumo-spotify)
 > npm i kazagumo-spotify
+
+- Additional [apple plugin](https://www.npmjs.com/package/kazagumo-apple)
+> npm i kazagumo-apple
+- Additional [filter plugin](https://www.npmjs.com/package/kazagumo-apple) (v2.3.x only, v2.4.x not tested)
+> npm i kazagumo-filter
+- Additional [nicovideo.jp plugin](https://www.npmjs.com/package/kazagumo-nico) (v2.3.x only, v2.4.x not tested)
+> npm i kazagumo-nico
+- Additional [deezer plugin](https://www.npmjs.com/package/kazagumo-deezer) (v2.3.x only, v2.4.x not tested)
+> npm i kazagumo-deezer
 - Stone-Deezer [deezer plugin](https://www.npmjs.com/package/stone-deezer)
 > npm i stone-deezer
 
