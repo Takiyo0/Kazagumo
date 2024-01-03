@@ -1,6 +1,7 @@
 import { EventEmitter } from 'events';
 import {
   CreatePlayerOptions,
+  KazagumoEvents,
   Events,
   KazagumoError,
   KazagumoOptions as KazagumoOptionsOwO,
@@ -28,6 +29,7 @@ import {
   TrackStuckEvent,
   VoiceChannelOptions,
   WebSocketClosedEvent,
+  Connector,
 } from 'shoukaku';
 
 import { KazagumoPlayer } from './Managers/KazagumoPlayer';
@@ -35,6 +37,7 @@ import { KazagumoTrack } from './Managers/Supports/KazagumoTrack';
 import { Snowflake } from 'discord.js';
 import { KazagumoQueue } from './Managers/Supports/KazagumoQueue';
 
+<<<<<<< HEAD
 export declare interface Kazagumo {
   /* tslint:disable:unified-signatures */
   /**
@@ -169,12 +172,15 @@ export declare interface Kazagumo {
   off(event: 'playerUpdate', listener: (data: unknown) => void): this;
   off(event: 'queueUpdate', listener: (player: KazagumoPlayer, queue: KazagumoQueue) => void): this;
 }
+=======
+// Add other methods related to your base class
+>>>>>>> d922640e8783173857860358218030a5bfde0fcf
 
 export class Kazagumo extends EventEmitter {
   /** Shoukaku instance */
   public shoukaku: Shoukaku;
   /** Kazagumo players */
-  public readonly players: Map<string, KazagumoPlayer> = new Map();
+  public readonly players: Map<string, KazagumoPlayer>;
 
   /**
    * Initialize a Kazagumo instance.
@@ -203,6 +209,7 @@ export class Kazagumo extends EventEmitter {
 
     this.players = new Map<string, KazagumoPlayer>();
   }
+<<<<<<< HEAD
 
   // Modified version of Shoukaku#joinVoiceChannel
   // Credit to @deivu
@@ -254,6 +261,23 @@ export class Kazagumo extends EventEmitter {
     }
   }
 
+=======
+  public on<K extends keyof KazagumoEvents>(event: K, listener: (...args: KazagumoEvents[K]) => void): this {
+    super.on(event as string, (...args: any) => listener(...args));
+    return this;
+  }
+  public once<K extends keyof KazagumoEvents>(event: K, listener: (...args: KazagumoEvents[K]) => void): this {
+    super.once(event as string, (...args: any) => listener(...args));
+    return this;
+  }
+  public off<K extends keyof KazagumoEvents>(event: K, listener: (...args: KazagumoEvents[K]) => void): this {
+    super.off(event as string, (...args: any) => listener(...args));
+    return this;
+  }
+  public emit<K extends keyof KazagumoEvents>(event: K, ...data: KazagumoEvents[K]): boolean {
+    return super.emit(event as string, ...data);
+  }
+>>>>>>> d922640e8783173857860358218030a5bfde0fcf
   /**
    * Create a player.
    * @param options CreatePlayerOptions
@@ -373,6 +397,7 @@ export class Kazagumo extends EventEmitter {
     const isUrl = /^https?:\/\/.*/.test(query);
 
     const result = await node.rest.resolve(!isUrl ? `${source}search:${query}` : query).catch((_) => null);
+<<<<<<< HEAD
     if (!result || result.loadType === LoadType.EMPTY) return this.buildSearch(undefined, [], 'SEARCH');
 
     let loadType: SearchResultTypes;
@@ -409,6 +434,13 @@ export class Kazagumo extends EventEmitter {
       }
     }
     this.emit(Events.Debug, `Searched ${query}; Track results: ${normalizedData.tracks.length}`);
+=======
+    if (!result) return this.buildSearch(undefined, [], SearchResultTypes.Search);
+    this.emit(Events.Debug, `Searched ${query}; Track results: ${result.tracks.length}`);
+
+    let loadType = (isUrl ? 'TRACK' : 'SEARCH') as SearchResultTypes;
+    if (result.playlistInfo.name) loadType = SearchResultTypes.Playlist;
+>>>>>>> d922640e8783173857860358218030a5bfde0fcf
 
     return this.buildSearch(
       normalizedData.playlistName ?? undefined,
@@ -425,7 +457,7 @@ export class Kazagumo extends EventEmitter {
     return {
       playlistName,
       tracks,
-      type: type ?? 'SEARCH',
+      type: type ?? SearchResultTypes.Search,
     };
   }
 }

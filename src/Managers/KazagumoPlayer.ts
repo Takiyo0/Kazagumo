@@ -1,22 +1,26 @@
 import { Kazagumo } from '../Kazagumo';
 import { KazagumoQueue } from './Supports/KazagumoQueue';
 import {
-  Player,
-  Node,
-  WebSocketClosedEvent,
-  TrackExceptionEvent,
-  PlayerUpdate,
-  TrackStuckEvent,
   FilterOptions,
+  Node,
+  Player,
+  PlayerUpdate,
+  TrackExceptionEvent,
+  TrackStuckEvent,
+  WebSocketClosedEvent,
 } from 'shoukaku';
 import {
+  Events,
   KazagumoError,
   KazagumoPlayerOptions,
-  PlayerState,
-  Events,
-  PlayOptions,
   KazagumoSearchOptions,
   KazagumoSearchResult,
+<<<<<<< HEAD
+  PlayerState,
+  PlayOptions,
+=======
+  KazagumoEvents,
+>>>>>>> d922640e8783173857860358218030a5bfde0fcf
 } from '../Modules/Interfaces';
 import { KazagumoTrack } from './Supports/KazagumoTrack';
 import { Snowflake } from 'discord.js';
@@ -45,7 +49,7 @@ export class KazagumoPlayer {
   /**
    * The text channel ID of the player
    */
-  public textId: Snowflake;
+  public textId?: Snowflake;
   /**
    * Player's queue
    */
@@ -104,6 +108,7 @@ export class KazagumoPlayer {
       : kazagumo.search.bind(kazagumo);
 
     this.shoukaku.on('start', () => {
+      if (!this.queue.current) return;
       this.playing = true;
       this.emit(Events.PlayerStart, this, this.queue.current);
     });
@@ -426,6 +431,7 @@ export class KazagumoPlayer {
     this.disconnect();
     this.state = PlayerState.DESTROYING;
     this.shoukaku.clean();
+    await this.kazagumo.shoukaku.leaveVoiceChannel(this.guildId);
     await this.shoukaku.destroy();
     this.shoukaku.removeAllListeners();
     this.kazagumo.players.delete(this.guildId);
@@ -437,7 +443,7 @@ export class KazagumoPlayer {
     return this;
   }
 
-  private emit(event: string, ...args: any): void {
+  private emit<K extends keyof KazagumoEvents>(event: K, ...args: KazagumoEvents[K]): void {
     this.kazagumo.emit(event, ...args);
   }
 }

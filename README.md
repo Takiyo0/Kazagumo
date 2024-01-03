@@ -25,13 +25,28 @@ Pls read the docs before asking 🙏🙏🙏 There is a useful search feature th
 
 ## Metadata
 
-> version: 3.0.0-alpha   
+<<<<<<< HEAD
+> version: 3.0.0-rc2   
 > pre-release: true  
-> Last build: 23-12-2023 11.22 AM
+> Last build: 3-1-2024 9.23 PM
+=======
+> version: 2.4.0   
+> pre-release: false  
+> Last build: 23-12-2023 11.43 AM
+>>>>>>> d922640e8783173857860358218030a5bfde0fcf
 
 ## Plugins
 - Official [spotify plugin](https://npmjs.com/package/kazagumo-spotify)
 > npm i kazagumo-spotify
+
+- Additional [apple plugin](https://www.npmjs.com/package/kazagumo-apple)
+> npm i kazagumo-apple
+- Additional [filter plugin](https://www.npmjs.com/package/kazagumo-apple) (v2.3.x only, v2.4.x not tested)
+> npm i kazagumo-filter
+- Additional [nicovideo.jp plugin](https://www.npmjs.com/package/kazagumo-nico) (v2.3.x only, v2.4.x not tested)
+> npm i kazagumo-nico
+- Additional [deezer plugin](https://www.npmjs.com/package/kazagumo-deezer) (v2.3.x only, v2.4.x not tested)
+> npm i kazagumo-deezer
 - Stone-Deezer [deezer plugin](https://www.npmjs.com/package/stone-deezer)
 > npm i stone-deezer
 

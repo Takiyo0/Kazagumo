@@ -1,6 +1,10 @@
 {
   "name": "kazagumo",
-  "version": "3.0.0-rc1",
+<<<<<<< HEAD
+  "version": "3.0.0-rc2",
+=======
+  "version": "2.4.0",
+>>>>>>> d922640e8783173857860358218030a5bfde0fcf
   "description": "A shoukaku wrapper with built-in queue support.",
   "main": "dist/Index.js",
   "types": "dist/Index.d.ts",
