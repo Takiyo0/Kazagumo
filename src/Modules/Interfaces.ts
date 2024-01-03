@@ -1,11 +1,7 @@
 import { Kazagumo } from '../Kazagumo';
 import { KazagumoPlayer } from '../Index';
 import { KazagumoTrack } from '../Managers/Supports/KazagumoTrack';
-<<<<<<< HEAD
 import { Constructor } from './Utils';
-=======
-import { PlayerUpdate, TrackExceptionEvent, TrackStuckEvent, Utils, WebSocketClosedEvent } from 'shoukaku';
->>>>>>> d922640e8783173857860358218030a5bfde0fcf
 import { Snowflake } from 'discord.js';
 import { Track } from 'shoukaku';
 
@@ -22,7 +18,7 @@ export interface KazagumoOptions {
   defaultYoutubeThumbnail?: YoutubeThumbnail;
   /** Extend some of the Structures */
   extends?: {
-    player?: Utils.Constructor<KazagumoPlayer>;
+    player?: Constructor<KazagumoPlayer>;
   };
   /** Send to guild's shard */
   send: (guildId: Snowflake, payload: Payload) => void;
@@ -106,7 +102,6 @@ export interface RawTrack {
   _raw: Track;
 }
 
-<<<<<<< HEAD
 export const Events = {
   // Player events
   PlayerDestroy: 'playerDestroy',
@@ -128,50 +123,12 @@ export const Events = {
   Debug: 'debug',
 };
 
-=======
-export interface KazagumoEvents {
-  playerDestroy: [player: KazagumoPlayer];
-  playerCreate: [player: KazagumoPlayer];
-  playerStart: [player: KazagumoPlayer, track: KazagumoTrack];
-  playerEnd: [player: KazagumoPlayer, track?: KazagumoTrack | null];
-  playerEmpty: [player: KazagumoPlayer];
-  playerClosed: [player: KazagumoPlayer, data: WebSocketClosedEvent];
-  playerUpdate: [player: KazagumoPlayer, data: PlayerUpdate];
-  playerException: [player: KazagumoPlayer, data: TrackExceptionEvent];
-  playerResumed: [player: KazagumoPlayer];
-  playerStuck: [player: KazagumoPlayer, data: TrackStuckEvent];
-  playerResolveError: [player: KazagumoPlayer, track: KazagumoTrack, message?: string];
-  playerMoved: [player: KazagumoPlayer, state: PlayerMovedState, channels: PlayerMovedChannels];
-  debug: [message: string];
-}
-export enum Events {
-  PlayerDestroy = 'playerDestroy',
-  PlayerCreate = 'playerCreate',
-  PlayerStart = 'playerStart',
-  PlayerEnd = 'playerEnd',
-  PlayerEmpty = 'playerEmpty',
-  PlayerClosed = 'playerClosed',
-  PlayerUpdate = 'playerUpdate',
-  PlayerException = 'playerException',
-  PlayerError = 'playerError',
-  PlayerResumed = 'playerResumed',
-  PlayerStuck = 'playerStuck',
-  PlayerResolveError = 'playerResolveError',
-  PlayerMoved = 'playerMoved',
-  Debug = 'debug',
-}
->>>>>>> d922640e8783173857860358218030a5bfde0fcf
 export interface PlayerMovedChannels {
   oldChannelId?: string | null;
   newChannelId?: string | null;
 }
 
-export enum PlayerMovedState {
-  Unknown = 'UNKNOWN',
-  Joined = 'JOINED',
-  Left = 'LEFT',
-  Moved = 'MOVED',
-}
+export type PlayerMovedState = 'UNKNOWN' | 'JOINED' | 'LEFT' | 'MOVED';
 
 export interface KazagumoSearchOptions {
   requester: unknown;
@@ -185,11 +142,7 @@ export interface KazagumoSearchResult {
   tracks: KazagumoTrack[];
 }
 
-export enum SearchResultTypes {
-  Playlist = 'PLAYLIST',
-  Track = 'TRACK',
-  Search = 'SEARCH',
-}
+export type SearchResultTypes = 'PLAYLIST' | 'TRACK' | 'SEARCH';
 
 export const SupportedSources = [
   'bandcamp',
