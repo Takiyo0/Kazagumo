@@ -1,5 +1,5 @@
 import { Kazagumo, Events } from '../Index';
-import { KazagumoPlugin as Plugin } from '../Modules/Interfaces';
+import { PlayerMovedState, KazagumoPlugin as Plugin } from '../Modules/Interfaces';
 
 export class KazagumoPlugin extends Plugin {
   /**
@@ -42,12 +42,12 @@ export class KazagumoPlugin extends Plugin {
     const player = this.kazagumo.players.get(guildId);
     if (!player) return;
 
-    let state = 'UNKNOWN';
-    if (!oldChannelId && newChannelId) state = 'JOINED';
-    else if (oldChannelId && !newChannelId) state = 'LEFT';
-    else if (oldChannelId && newChannelId && oldChannelId !== newChannelId) state = 'MOVED';
+    let state: PlayerMovedState = PlayerMovedState.Unknown;
+    if (!oldChannelId && newChannelId) state = PlayerMovedState.Joined;
+    else if (oldChannelId && !newChannelId) state = PlayerMovedState.Left;
+    else if (oldChannelId && newChannelId && oldChannelId !== newChannelId) state = PlayerMovedState.Moved;
 
-    if (state === 'UNKNOWN') return;
+    if (state === PlayerMovedState.Unknown) return;
 
     this.kazagumo.emit(Events.PlayerMoved, player, state, { oldChannelId, newChannelId });
   }

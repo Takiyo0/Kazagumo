@@ -15,8 +15,12 @@ import {
   KazagumoPlayerOptions,
   KazagumoSearchOptions,
   KazagumoSearchResult,
+<<<<<<< HEAD
   PlayerState,
   PlayOptions,
+=======
+  KazagumoEvents,
+>>>>>>> d922640e8783173857860358218030a5bfde0fcf
 } from '../Modules/Interfaces';
 import { KazagumoTrack } from './Supports/KazagumoTrack';
 import { Snowflake } from 'discord.js';
@@ -104,6 +108,7 @@ export class KazagumoPlayer {
       : kazagumo.search.bind(kazagumo);
 
     this.shoukaku.on('start', () => {
+      if (!this.queue.current) return;
       this.playing = true;
       this.emit(Events.PlayerStart, this, this.queue.current);
     });
@@ -438,7 +443,7 @@ export class KazagumoPlayer {
     return this;
   }
 
-  private emit(event: string, ...args: any): void {
+  private emit<K extends keyof KazagumoEvents>(event: K, ...args: KazagumoEvents[K]): void {
     this.kazagumo.emit(event, ...args);
   }
 }
