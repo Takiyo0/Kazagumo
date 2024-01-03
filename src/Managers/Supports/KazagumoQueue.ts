@@ -37,9 +37,7 @@ export class KazagumoQueue extends Array<KazagumoTrack> {
    * @returns KazagumoQueue
    */
   public add(track: KazagumoTrack | KazagumoTrack[]): KazagumoQueue {
-    if (Array.isArray(track) && track.some((t) => !(t instanceof KazagumoTrack)))
-      throw new KazagumoError(1, 'Track must be an instance of KazagumoTrack');
-    if (!Array.isArray(track) && !(track instanceof KazagumoTrack)) track = [track];
+    if (!Array.isArray(track)) track = [track];
 
     if (!this.current) {
       if (Array.isArray(track)) this.current = track.shift();

@@ -49,7 +49,7 @@ export const SourceIDs = {
 export interface KazagumoPlayerOptions {
   guildId: Snowflake;
   voiceId: Snowflake;
-  textId: Snowflake;
+  textId?: Snowflake;
   deaf: boolean;
   volume: number;
   /** Whether the node for searching track should be the same as the node for playing track. Default: true */
@@ -68,7 +68,7 @@ export interface CreatePlayerOptions {
   /** The player's voice ID */
   voiceId: Snowflake;
   /** The player's text ID */
-  textId: Snowflake;
+  textId?: Snowflake;
   /** Whether the bot should deafen */
   deaf?: boolean;
   /** Whether the bot should mute */
