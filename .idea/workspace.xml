@@ -4,25 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="816b50fb-a693-4f75-a2db-53d14f492eab" name="Changes" comment="use 3.0.0-rc1 instead">
-      <change afterPath="$PROJECT_DIR$/.idea/discord.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_12_4_2023_9_29_PM_[Changes]/shelved.patch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_12_4_2023_9_29_PM__Changes_.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/enums/Modules_Interfaces.Events.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/enums/Modules_Interfaces.PlayerMovedState.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/enums/Modules_Interfaces.SearchResultTypes.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/interfaces/Modules_Interfaces.KazagumoEvents.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.github/ISSUE_TEMPLATE/bug_report.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.github/ISSUE_TEMPLATE/feature_request.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.github/workflows/codeql-analysis.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.github/workflows/node.js.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.github/workflows/npm-publish-github-packages.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Kazagumo.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Kazagumo.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+    <list default="true" id="816b50fb-a693-4f75-a2db-53d14f492eab" name="Changes" comment="release v3">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_12_4_2023_9_29_PM_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_12_4_2023_9_29_PM__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/assets/search.js" beforeDir="false" afterPath="$PROJECT_DIR$/docs/assets/search.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/classes/Kazagumo.Kazagumo.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/classes/Kazagumo.Kazagumo.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/classes/Managers_KazagumoPlayer.KazagumoPlayer.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/classes/Managers_KazagumoPlayer.KazagumoPlayer.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/classes/Managers_Supports_KazagumoQueue.KazagumoQueue.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/classes/Managers_Supports_KazagumoQueue.KazagumoQueue.html" afterDir="false" />
@@ -33,6 +19,7 @@
       <change beforePath="$PROJECT_DIR$/docs/classes/Plugins_PlayerMoved.KazagumoPlugin.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/classes/Plugins_PlayerMoved.KazagumoPlugin.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/enums/Modules_Interfaces.PlayerState.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/enums/Modules_Interfaces.PlayerState.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/enums/Modules_Interfaces.State.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/enums/Modules_Interfaces.State.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/enums/Modules_Interfaces.VoiceState.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/enums/Modules_Interfaces.VoiceState.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/functions/Modules_Interfaces.escapeRegExp.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/functions/Modules_Interfaces.escapeRegExp.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/interfaces/Modules_Interfaces.CreatePlayerOptions.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/interfaces/Modules_Interfaces.CreatePlayerOptions.html" afterDir="false" />
@@ -54,19 +41,17 @@
       <change beforePath="$PROJECT_DIR$/docs/modules/Modules_Plugins.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/modules/Modules_Plugins.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/modules/Modules_Utils.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/modules/Modules_Utils.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/modules/Plugins_PlayerMoved.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/modules/Plugins_PlayerMoved.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/types/Modules_Interfaces.PlayerMovedState.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/types/Modules_Interfaces.PlayerMovedState.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/types/Modules_Interfaces.SearchEngines.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/types/Modules_Interfaces.SearchEngines.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/types/Modules_Interfaces.SearchResultTypes.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/types/Modules_Interfaces.SearchResultTypes.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/types/Modules_Interfaces.YoutubeThumbnail.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/types/Modules_Interfaces.YoutubeThumbnail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/types/Modules_Utils.Constructor.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/types/Modules_Utils.Constructor.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/variables/Index.version.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/variables/Index.version.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/variables/Modules_Interfaces.Events.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/variables/Modules_Interfaces.Events.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/variables/Modules_Interfaces.SourceIDs.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/variables/Modules_Interfaces.SourceIDs.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/variables/Modules_Interfaces.SupportedSources.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/variables/Modules_Interfaces.SupportedSources.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/variables/Modules_Plugins.default.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/variables/Modules_Plugins.default.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Kazagumo.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Kazagumo.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Managers/KazagumoPlayer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Managers/KazagumoPlayer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modules/Interfaces.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/Interfaces.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Plugins/PlayerMoved.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Plugins/PlayerMoved.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,10 +82,11 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;Node.js.index.js.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Merging RainyXeon-main&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;v3&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/takiy/OneDrive/Documents/project/Kazagumo&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
@@ -108,11 +94,15 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\takiy\\AppData\\Local\\Programs\\WebStorm 2\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external&quot;,
+    &quot;npm.build:full.executor&quot;: &quot;Run&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\takiy\\OneDrive\\Documents\\project\\Kazagumo\\node_modules\\typescript\\lib&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager">
+  <component name="RunManager" selected="npm.build:full">
+    <configuration name="index.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/test/index.js" working-dir="$PROJECT_DIR$/test">
+      <method v="2" />
+    </configuration>
     <configuration name="build:full" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -126,6 +116,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="npm.build:full" />
+        <item itemvalue="Node.js.index.js" />
       </list>
     </recent_temporary>
   </component>
@@ -138,7 +129,30 @@
       <option name="presentableId" value="Default" />
       <updated>1701699669100</updated>
       <workItem from="1701699670414" duration="702000" />
+      <workItem from="1704329612480" duration="599000" />
+      <workItem from="1704374055904" duration="1691000" />
+      <workItem from="1704535589480" duration="599000" />
+      <workItem from="1704552142621" duration="599000" />
+      <workItem from="1704595248951" duration="118000" />
+      <workItem from="1704595742734" duration="697000" />
     </task>
+    <task id="LOCAL-00001" summary="release 3.0.0-rc2">
+      <option name="closed" value="true" />
+      <created>1704292352369</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1704292352369</updated>
+    </task>
+    <task id="LOCAL-00002" summary="release 3.0.0-rc2 1">
+      <option name="closed" value="true" />
+      <created>1704292410001</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1704292410001</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -146,6 +160,9 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="use 3.0.0-rc1 instead" />
-    <option name="LAST_COMMIT_MESSAGE" value="use 3.0.0-rc1 instead" />
+    <MESSAGE value="release 3.0.0-rc2" />
+    <MESSAGE value="release 3.0.0-rc2 1" />
+    <MESSAGE value="release v3" />
+    <option name="LAST_COMMIT_MESSAGE" value="release v3" />
   </component>
 </project>
