@@ -1,7 +1,11 @@
 import { KazagumoTrack } from './KazagumoTrack';
-import { KazagumoError } from '../../Modules/Interfaces';
+import { Events, KazagumoError } from '../../Modules/Interfaces';
+import { KazagumoPlayer } from '../KazagumoPlayer';
 
 export class KazagumoQueue extends Array<KazagumoTrack> {
+  constructor(private readonly kazagumoPlayer: KazagumoPlayer) {
+    super();
+  }
   /** Get the size of queue */
   public get size() {
     return this.length;
@@ -24,8 +28,8 @@ export class KazagumoQueue extends Array<KazagumoTrack> {
 
   /** Current playing track */
   public current: KazagumoTrack | undefined | null = null;
-  /** Previous playing track */
-  public previous: KazagumoTrack | undefined | null = null;
+  /** Previous playing tracks */
+  public previous: KazagumoTrack[] = [];
 
   /**
    * Add track(s) to the queue
@@ -33,9 +37,7 @@ export class KazagumoQueue extends Array<KazagumoTrack> {
    * @returns KazagumoQueue
    */
   public add(track: KazagumoTrack | KazagumoTrack[]): KazagumoQueue {
-    if (Array.isArray(track) && track.some((t) => !(t instanceof KazagumoTrack)))
-      throw new KazagumoError(1, 'Track must be an instance of KazagumoTrack');
-    if (!Array.isArray(track) && !(track instanceof KazagumoTrack)) track = [track];
+    if (!Array.isArray(track)) track = [track];
 
     if (!this.current) {
       if (Array.isArray(track)) this.current = track.shift();
@@ -47,7 +49,7 @@ export class KazagumoQueue extends Array<KazagumoTrack> {
 
     if (Array.isArray(track)) for (const t of track) this.push(t);
     else this.push(track);
-    // ; Array.isArray(track) ? this.push(...track) : this.push(track);
+    this.emitChanges();
     return this;
   }
 
@@ -60,6 +62,7 @@ export class KazagumoQueue extends Array<KazagumoTrack> {
     if (position < 0 || position >= this.length)
       throw new KazagumoError(1, 'Position must be between 0 and ' + (this.length - 1));
     this.splice(position, 1);
+    this.emitChanges();
     return this;
   }
 
@@ -69,12 +72,18 @@ export class KazagumoQueue extends Array<KazagumoTrack> {
       const j = Math.floor(Math.random() * (i + 1));
       [this[i], this[j]] = [this[j], this[i]];
     }
+    this.emitChanges();
     return this;
   }
 
   /** Clear the queue */
   public clear(): KazagumoQueue {
     this.splice(0, this.length);
+    this.emitChanges();
     return this;
+  }
+
+  private emitChanges(): void {
+    this.kazagumoPlayer.shoukaku.emit(Events.QueueUpdate, this.kazagumoPlayer, this);
   }
 }

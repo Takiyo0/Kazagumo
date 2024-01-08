@@ -7,6 +7,7 @@ import {
   escapeRegExp,
   ResolveOptions,
   Events,
+  SearchEngines,
 } from '../../Modules/Interfaces';
 import { Track } from 'shoukaku';
 import { KazagumoPlayer } from '../KazagumoPlayer';
@@ -29,7 +30,7 @@ export class KazagumoTrack {
   /** Track's title */
   public title: string;
   /** Track's URI */
-  public uri: string;
+  public uri?: string;
   /** Track's identifier */
   public identifier: string;
   /** Whether the track is seekable */
@@ -45,14 +46,17 @@ export class KazagumoTrack {
   /** Track's thumbnail, if available */
   public thumbnail: string | undefined;
   /** The YouTube/soundcloud URI for spotify and other unsupported source */
-  public realUri: string | null;
+  public realUri?: string;
 
   public resolvedBySource: boolean = false;
 
-  constructor(raw: RawTrack, requester: unknown) {
+  constructor(
+    private readonly raw: Track,
+    requester: unknown,
+  ) {
     this.kazagumo = undefined;
 
-    this.track = raw.track;
+    this.track = raw.encoded;
     this.sourceName = raw.info.sourceName;
     this.title = raw.info.title;
     this.uri = raw.info.uri;
@@ -61,8 +65,8 @@ export class KazagumoTrack {
     this.isStream = raw.info.isStream;
     this.author = raw.info.author;
     this.length = raw.info.length;
-    this.thumbnail = raw.info.thumbnail;
-    this.realUri = SupportedSources.includes(this.sourceName) ? this.uri : null;
+    this.thumbnail = raw.info.artworkUrl;
+    this.realUri = SupportedSources.includes(this.sourceName) ? this.uri : undefined;
 
     this.requester = requester;
 
@@ -89,6 +93,7 @@ export class KazagumoTrack {
         position: this.position,
         thumbnail: this.thumbnail,
       },
+      _raw: this.raw,
     };
   }
 
@@ -152,7 +157,7 @@ export class KazagumoTrack {
     const result = await this.getTrack(options?.player ?? null);
     if (!result) throw new KazagumoError(2, 'No results found');
 
-    this.track = result.track;
+    this.track = result.encoded;
     this.realUri = result.info.uri;
     this.length = result.info.length;
 
@@ -174,20 +179,20 @@ export class KazagumoTrack {
     const defaultSearchEngine = this.kazagumo.KazagumoOptions.defaultSearchEngine;
     const source = (SourceIDs as any)[defaultSearchEngine || 'youtube'] || 'yt';
     const query = [this.author, this.title].filter((x) => !!x).join(' - ');
-    const node = this.kazagumo.getLeastUsedNode();
+    const node = await this.kazagumo.getLeastUsedNode();
 
     if (!node) throw new KazagumoError(1, 'No nodes available');
 
     const result = player
       ? await player?.search(`${source}:${query}`)
-      : await node.rest.resolve(`${source}search:${query}`);
+      : await this.kazagumo.search(query, { engine: defaultSearchEngine, requester: this.requester });
     if (!result || !result.tracks.length) throw new KazagumoError(2, 'No results found');
 
-    result.tracks = result.tracks.map((x) => KazagumoUtils.convertKazagumoTrackToTrack(x));
+    const rawTracks = result.tracks.map((x) => x.getRaw()._raw);
 
     if (this.author) {
       const author = [this.author, `${this.author} - Topic`];
-      const officialTrack = result.tracks.find(
+      const officialTrack = rawTracks.find(
         (track) =>
           author.some((name) => new RegExp(`^${escapeRegExp(name)}$`, 'i').test(track.info.author)) ||
           new RegExp(`^${escapeRegExp(this.title)}$`, 'i').test(track.info.title),
@@ -195,7 +200,7 @@ export class KazagumoTrack {
       if (officialTrack) return officialTrack;
     }
     if (this.length) {
-      const sameDuration = result.tracks.find(
+      const sameDuration = rawTracks.find(
         (track) =>
           track.info.length >= (this.length ? this.length : 0) - 2000 &&
           track.info.length <= (this.length ? this.length : 0) + 2000,
@@ -203,6 +208,6 @@ export class KazagumoTrack {
       if (sameDuration) return sameDuration;
     }
 
-    return result.tracks[0];
+    return rawTracks[0];
   }
 }

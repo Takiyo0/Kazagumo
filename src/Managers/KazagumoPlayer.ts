@@ -1,23 +1,22 @@
 import { Kazagumo } from '../Kazagumo';
 import { KazagumoQueue } from './Supports/KazagumoQueue';
 import {
-  Player,
+  FilterOptions,
   Node,
-  WebSocketClosedEvent,
-  TrackExceptionEvent,
+  Player,
   PlayerUpdate,
-  Filters,
+  TrackExceptionEvent,
   TrackStuckEvent,
+  WebSocketClosedEvent,
 } from 'shoukaku';
 import {
+  Events,
   KazagumoError,
   KazagumoPlayerOptions,
-  PlayerState,
-  Events,
-  PlayOptions,
   KazagumoSearchOptions,
   KazagumoSearchResult,
-  KazagumoEvents,
+  PlayerState,
+  PlayOptions,
 } from '../Modules/Interfaces';
 import { KazagumoTrack } from './Supports/KazagumoTrack';
 import { Snowflake } from 'discord.js';
@@ -46,7 +45,7 @@ export class KazagumoPlayer {
   /**
    * The text channel ID of the player
    */
-  public textId: Snowflake;
+  public textId?: Snowflake;
   /**
    * Player's queue
    */
@@ -95,7 +94,7 @@ export class KazagumoPlayer {
     this.guildId = options.guildId;
     this.voiceId = options.voiceId;
     this.textId = options.textId;
-    this.queue = new KazagumoQueue();
+    this.queue = new KazagumoQueue(this);
 
     if (options.volume !== 100) this.setVolume(options.volume);
 
@@ -105,7 +104,6 @@ export class KazagumoPlayer {
       : kazagumo.search.bind(kazagumo);
 
     this.shoukaku.on('start', () => {
-      if (!this.queue.current) return;
       this.playing = true;
       this.emit(Events.PlayerStart, this, this.queue.current);
     });
@@ -115,9 +113,9 @@ export class KazagumoPlayer {
       if (this.state === PlayerState.DESTROYING || this.state === PlayerState.DESTROYED)
         return this.emit(Events.Debug, `Player ${this.guildId} destroyed from end event`);
 
-      if (data.reason === 'REPLACED') return this.emit(Events.PlayerEnd, this);
-      if (['LOAD_FAILED', 'CLEAN_UP'].includes(data.reason)) {
-        this.queue.previous = this.queue.current;
+      if (data.reason === 'replaced') return this.emit(Events.PlayerEnd, this);
+      if (['loadFailed', 'cleanup'].includes(data.reason)) {
+        if (this.queue.current) this.queue.previous.push(this.queue.current);
         this.playing = false;
         if (!this.queue.length) return this.emit(Events.PlayerEmpty, this);
         this.emit(Events.PlayerEnd, this, this.queue.current);
@@ -128,7 +126,7 @@ export class KazagumoPlayer {
       if (this.loop === 'track' && this.queue.current) this.queue.unshift(this.queue.current);
       if (this.loop === 'queue' && this.queue.current) this.queue.push(this.queue.current);
 
-      this.queue.previous = this.queue.current;
+      if (this.queue.current) this.queue.previous.push(this.queue.current);
       const currentSong = this.queue.current;
       this.queue.current = null;
 
@@ -160,7 +158,7 @@ export class KazagumoPlayer {
    * Get volume
    */
   public get volume(): number {
-    return this.shoukaku.filters.volume;
+    return this.shoukaku.filters.volume || 1;
   }
 
   /**
@@ -173,16 +171,12 @@ export class KazagumoPlayer {
   /**
    * Get filters
    */
-  public get filters(): Filters {
+  public get filters(): FilterOptions {
     return this.shoukaku.filters;
   }
 
   private get node(): Node {
     return this.shoukaku.node;
-  }
-
-  private send(...args: any): void {
-    this.node.queue.add(...args);
   }
 
   /**
@@ -237,6 +231,15 @@ export class KazagumoPlayer {
     this.emit(Events.Debug, `Player ${this.guildId} moved to voice channel ${voiceId}`);
 
     return this;
+  }
+
+  /**
+   * Get the previous track from the queue
+   * @param splice Whether to remove the track from the previous list or not
+   */
+  public getPrevious(splice: boolean = false): KazagumoTrack[] {
+    if (splice) return this.queue.previous.splice(0, this.queue.previous.length);
+    return this.queue.previous;
   }
 
   /**
@@ -322,9 +325,11 @@ export class KazagumoPlayer {
   }
 
   /**
-   *
+   * Seek to a position
+   * @param position Position in seconds
+   * @returns KazagumoPlayer
    */
-  public seek(position: number): KazagumoPlayer {
+  public async seek(position: number): Promise<KazagumoPlayer> {
     if (this.state === PlayerState.DESTROYED) throw new KazagumoError(1, 'Player is already destroyed');
     if (!this.queue.current) throw new KazagumoError(1, "Player has no current track in it's queue");
     if (!this.queue.current.isSeekable) throw new KazagumoError(1, "The current track isn't seekable");
@@ -336,11 +341,7 @@ export class KazagumoPlayer {
       position = Math.max(Math.min(position, this.queue.current.length ?? 0), 0);
 
     this.queue.current.position = position;
-    this.send({
-      op: 'seek',
-      guildId: this.guildId,
-      position,
-    });
+    await this.shoukaku.seekTo(position);
 
     return this;
   }
@@ -350,17 +351,11 @@ export class KazagumoPlayer {
    * @param volume Volume
    * @returns KazagumoPlayer
    */
-  public setVolume(volume: number): KazagumoPlayer {
+  public async setVolume(volume: number): Promise<KazagumoPlayer> {
     if (this.state === PlayerState.DESTROYED) throw new KazagumoError(1, 'Player is already destroyed');
     if (isNaN(volume)) throw new KazagumoError(1, 'volume must be a number');
 
-    this.shoukaku.filters.volume = volume / 100;
-
-    this.send({
-      op: 'volume',
-      guildId: this.guildId,
-      volume: this.shoukaku.filters.volume * 100,
-    });
+    await this.shoukaku.setFilterVolume(volume / 100);
 
     return this;
   }
@@ -424,13 +419,15 @@ export class KazagumoPlayer {
    * Destroy the player
    * @returns KazagumoPlayer
    */
-  destroy(): KazagumoPlayer {
+  async destroy(): Promise<KazagumoPlayer> {
     if (this.state === PlayerState.DESTROYING || this.state === PlayerState.DESTROYED)
       throw new KazagumoError(1, 'Player is already destroyed');
 
     this.disconnect();
     this.state = PlayerState.DESTROYING;
-    this.shoukaku.connection.disconnect();
+    this.shoukaku.clean();
+    await this.kazagumo.shoukaku.leaveVoiceChannel(this.guildId);
+    await this.shoukaku.destroy();
     this.shoukaku.removeAllListeners();
     this.kazagumo.players.delete(this.guildId);
     this.state = PlayerState.DESTROYED;
@@ -441,7 +438,7 @@ export class KazagumoPlayer {
     return this;
   }
 
-  private emit<K extends keyof KazagumoEvents>(event: K, ...args: KazagumoEvents[K]): void {
+  private emit(event: string, ...args: any): void {
     this.kazagumo.emit(event, ...args);
   }
 }
