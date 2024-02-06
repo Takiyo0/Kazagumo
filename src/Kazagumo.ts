@@ -330,8 +330,6 @@ export class Kazagumo extends EventEmitter {
     const nodes: Node[] = [...this.shoukaku.nodes.values()];
 
     const onlineNodes = nodes.filter((node) => node.state === State.CONNECTED);
-    // tslint:disable-next-line:no-console
-    console.log(nodes.map((x) => x.state));
     if (!onlineNodes.length) throw new KazagumoError(2, 'No nodes are online');
 
     const temp = await Promise.all(
