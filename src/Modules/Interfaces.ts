@@ -1,5 +1,5 @@
 import { Kazagumo } from '../Kazagumo';
-import { KazagumoPlayer } from '../Index';
+import { KazagumoPlayer, KazagumoQueue } from '../Index';
 import { KazagumoTrack } from '../Managers/Supports/KazagumoTrack';
 import { Constructor } from './Utils';
 import { Snowflake } from 'discord.js';
@@ -54,6 +54,9 @@ export interface KazagumoPlayerOptions {
   volume: number;
   /** Whether the node for searching track should be the same as the node for playing track. Default: true */
   searchWithSameNode?: boolean;
+  extends?: {
+    queue?: Constructor<KazagumoQueue>;
+  }
 }
 
 export interface ResolveOptions {

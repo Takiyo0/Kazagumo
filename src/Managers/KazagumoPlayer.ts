@@ -94,7 +94,7 @@ export class KazagumoPlayer {
     this.guildId = options.guildId;
     this.voiceId = options.voiceId;
     this.textId = options.textId;
-    this.queue = new KazagumoQueue(this);
+    this.queue = new (this.options.extends?.queue ?? KazagumoQueue)(this);
 
     if (options.volume !== 100) this.setVolume(options.volume);
 
