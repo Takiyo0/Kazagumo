@@ -218,7 +218,9 @@ export class Kazagumo extends EventEmitter {
     ) {
       this.shoukaku.connections.get(newPlayerOptions.guildId)!.disconnect();
       // tslint:disable-next-line:no-console
-      console.log('[KazagumoError; l220 Kazagumo.ts] -> Connection exist but player not found. Destroying connection...');
+      console.log(
+        '[KazagumoError; l220 Kazagumo.ts] -> Connection exist but player not found. Destroying connection...',
+      );
     }
 
     const connection = new Connection(this.shoukaku, newPlayerOptions);
