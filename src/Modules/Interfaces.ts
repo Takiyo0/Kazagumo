@@ -56,7 +56,7 @@ export interface KazagumoPlayerOptions {
   searchWithSameNode?: boolean;
   extends?: {
     queue?: Constructor<KazagumoQueue>;
-  }
+  };
 }
 
 export interface ResolveOptions {
