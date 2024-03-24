@@ -71,6 +71,10 @@ export class KazagumoPlayer {
    */
   public search: (query: string, options?: KazagumoSearchOptions) => Promise<KazagumoSearchResult>;
   /**
+   * Player's volume in percentage (default 100%)
+   */
+  public volume: number = 100;
+  /**
    * Player's custom data
    */
   public readonly data: Map<string, any> = new Map();
@@ -94,7 +98,7 @@ export class KazagumoPlayer {
     this.guildId = options.guildId;
     this.voiceId = options.voiceId;
     this.textId = options.textId;
-    this.queue = new KazagumoQueue(this);
+    this.queue = new (this.options.extends?.queue ?? KazagumoQueue)(this);
 
     if (options.volume !== 100) this.setVolume(options.volume);
 
@@ -154,12 +158,12 @@ export class KazagumoPlayer {
     this.shoukaku.on('resumed', () => this.emit(Events.PlayerResumed, this));
   }
 
-  /**
-   * Get volume
-   */
-  public get volume(): number {
-    return this.shoukaku.filters.volume || 1;
-  }
+  // /**
+  //  * Get volume
+  //  */
+  // public get volume(): number {
+  //   return this.shoukaku.filters.volume || 1;
+  // }
 
   /**
    * Get player position
@@ -347,7 +351,7 @@ export class KazagumoPlayer {
   }
 
   /**
-   * Set the volume
+   * Set the volume in percentage (default 100%)
    * @param volume Volume
    * @returns KazagumoPlayer
    */
@@ -355,7 +359,14 @@ export class KazagumoPlayer {
     if (this.state === PlayerState.DESTROYED) throw new KazagumoError(1, 'Player is already destroyed');
     if (isNaN(volume)) throw new KazagumoError(1, 'volume must be a number');
 
-    await this.shoukaku.setFilterVolume(volume / 100);
+    await this.node.rest.updatePlayer({
+      guildId: this.guildId,
+      playerOptions: {
+        volume,
+      },
+    });
+
+    this.volume = volume;
 
     return this;
   }
