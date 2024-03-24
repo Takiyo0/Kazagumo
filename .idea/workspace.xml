@@ -4,54 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="816b50fb-a693-4f75-a2db-53d14f492eab" name="Changes" comment="release v3">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_12_4_2023_9_29_PM_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_12_4_2023_9_29_PM__Changes_.xml" beforeDir="false" />
+    <list default="true" id="816b50fb-a693-4f75-a2db-53d14f492eab" name="Changes" comment="prevent crash when an existing connection exists">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/classes/Kazagumo.Kazagumo.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/classes/Kazagumo.Kazagumo.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/classes/Managers_KazagumoPlayer.KazagumoPlayer.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/classes/Managers_KazagumoPlayer.KazagumoPlayer.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/classes/Managers_Supports_KazagumoQueue.KazagumoQueue.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/classes/Managers_Supports_KazagumoQueue.KazagumoQueue.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/classes/Managers_Supports_KazagumoTrack.KazagumoTrack.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/classes/Managers_Supports_KazagumoTrack.KazagumoTrack.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/classes/Modules_Interfaces.KazagumoError.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/classes/Modules_Interfaces.KazagumoError.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/classes/Modules_Interfaces.KazagumoPlugin.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/classes/Modules_Interfaces.KazagumoPlugin.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/classes/Modules_Utils.KazagumoUtils.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/classes/Modules_Utils.KazagumoUtils.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/classes/Plugins_PlayerMoved.KazagumoPlugin.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/classes/Plugins_PlayerMoved.KazagumoPlugin.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/enums/Modules_Interfaces.PlayerState.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/enums/Modules_Interfaces.PlayerState.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/enums/Modules_Interfaces.State.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/enums/Modules_Interfaces.State.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/enums/Modules_Interfaces.VoiceState.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/enums/Modules_Interfaces.VoiceState.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/functions/Modules_Interfaces.escapeRegExp.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/functions/Modules_Interfaces.escapeRegExp.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/interfaces/Modules_Interfaces.CreatePlayerOptions.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/interfaces/Modules_Interfaces.CreatePlayerOptions.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/interfaces/Modules_Interfaces.KazagumoOptions.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/interfaces/Modules_Interfaces.KazagumoOptions.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/interfaces/Modules_Interfaces.KazagumoPlayerOptions.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/interfaces/Modules_Interfaces.KazagumoPlayerOptions.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/interfaces/Modules_Interfaces.KazagumoSearchOptions.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/interfaces/Modules_Interfaces.KazagumoSearchOptions.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/interfaces/Modules_Interfaces.KazagumoSearchResult.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/interfaces/Modules_Interfaces.KazagumoSearchResult.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/interfaces/Modules_Interfaces.Payload.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/interfaces/Modules_Interfaces.Payload.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/interfaces/Modules_Interfaces.PlayOptions.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/interfaces/Modules_Interfaces.PlayOptions.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/interfaces/Modules_Interfaces.PlayerMovedChannels.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/interfaces/Modules_Interfaces.PlayerMovedChannels.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/interfaces/Modules_Interfaces.RawTrack.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/interfaces/Modules_Interfaces.RawTrack.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/interfaces/Modules_Interfaces.ResolveOptions.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/interfaces/Modules_Interfaces.ResolveOptions.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/modules/Index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/modules/Index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/modules/Kazagumo.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/modules/Kazagumo.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/modules/Managers_KazagumoPlayer.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/modules/Managers_KazagumoPlayer.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/modules/Managers_Supports_KazagumoQueue.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/modules/Managers_Supports_KazagumoQueue.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/modules/Managers_Supports_KazagumoTrack.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/modules/Managers_Supports_KazagumoTrack.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/modules/Modules_Interfaces.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/modules/Modules_Interfaces.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/modules/Modules_Plugins.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/modules/Modules_Plugins.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/modules/Modules_Utils.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/modules/Modules_Utils.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/modules/Plugins_PlayerMoved.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/modules/Plugins_PlayerMoved.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/types/Modules_Interfaces.PlayerMovedState.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/types/Modules_Interfaces.PlayerMovedState.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/types/Modules_Interfaces.SearchEngines.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/types/Modules_Interfaces.SearchEngines.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/types/Modules_Interfaces.SearchResultTypes.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/types/Modules_Interfaces.SearchResultTypes.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/types/Modules_Interfaces.YoutubeThumbnail.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/types/Modules_Interfaces.YoutubeThumbnail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/types/Modules_Utils.Constructor.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/types/Modules_Utils.Constructor.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/variables/Index.version.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/variables/Index.version.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/variables/Modules_Interfaces.Events.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/variables/Modules_Interfaces.Events.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/variables/Modules_Interfaces.SourceIDs.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/variables/Modules_Interfaces.SourceIDs.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/variables/Modules_Interfaces.SupportedSources.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/variables/Modules_Interfaces.SupportedSources.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/variables/Modules_Plugins.default.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/variables/Modules_Plugins.default.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Managers/KazagumoPlayer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Managers/KazagumoPlayer.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,7 +16,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="v3" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -80,27 +35,38 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Node.js.index.js.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;v3&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/takiy/OneDrive/Documents/project/Kazagumo&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;npm.build:full.executor&quot;: &quot;Run&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\takiy\\OneDrive\\Documents\\project\\Kazagumo\\node_modules\\typescript\\lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Node.js.index.js.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "next-update-3.0.2",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/takiy/OneDrive/Documents/project/Kazagumo",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "npm.build.executor": "Run",
+    "npm.build:full.executor": "Run",
+    "ts.external.directory.path": "C:\\Users\\takiy\\OneDrive\\Documents\\project\\Kazagumo\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="npm.build:full">
     <configuration name="index.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/test/index.js" working-dir="$PROJECT_DIR$/test">
+      <method v="2" />
+    </configuration>
+    <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="build" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
       <method v="2" />
     </configuration>
     <configuration name="build:full" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
@@ -115,6 +81,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.build:full" />
+        <item itemvalue="npm.build" />
+        <item itemvalue="Node.js.index.js" />
         <item itemvalue="npm.build:full" />
         <item itemvalue="Node.js.index.js" />
       </list>
@@ -135,6 +104,7 @@
       <workItem from="1704552142621" duration="599000" />
       <workItem from="1704595248951" duration="118000" />
       <workItem from="1704595742734" duration="697000" />
+      <workItem from="1711288852464" duration="1671000" />
     </task>
     <task id="LOCAL-00001" summary="release 3.0.0-rc2">
       <option name="closed" value="true" />
@@ -152,17 +122,37 @@
       <option name="project" value="LOCAL" />
       <updated>1704292410001</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="prevent crash when an existing connection exists">
+      <option name="closed" value="true" />
+      <created>1711289327686</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1711289327686</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="use 3.0.0-rc1 instead" />
     <MESSAGE value="release 3.0.0-rc2" />
     <MESSAGE value="release 3.0.0-rc2 1" />
     <MESSAGE value="release v3" />
-    <option name="LAST_COMMIT_MESSAGE" value="release v3" />
+    <MESSAGE value="prevent crash when an existing connection exists" />
+    <option name="LAST_COMMIT_MESSAGE" value="prevent crash when an existing connection exists" />
   </component>
 </project>
