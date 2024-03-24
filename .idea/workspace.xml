@@ -4,14 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="816b50fb-a693-4f75-a2db-53d14f492eab" name="Changes" comment="prevent crash when an existing connection exists">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Managers/KazagumoPlayer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Managers/KazagumoPlayer.ts" afterDir="false" />
-    </list>
+    <list default="true" id="816b50fb-a693-4f75-a2db-53d14f492eab" name="Changes" comment=".idea" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager">
+    <option name="groupingKeys">
+      <option value="directory" />
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -104,7 +106,7 @@
       <workItem from="1704552142621" duration="599000" />
       <workItem from="1704595248951" duration="118000" />
       <workItem from="1704595742734" duration="697000" />
-      <workItem from="1711288852464" duration="1671000" />
+      <workItem from="1711288852464" duration="1890000" />
     </task>
     <task id="LOCAL-00001" summary="release 3.0.0-rc2">
       <option name="closed" value="true" />
@@ -130,7 +132,47 @@
       <option name="project" value="LOCAL" />
       <updated>1711289327686</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="prevent crash when an existing connection exists">
+      <option name="closed" value="true" />
+      <created>1711290803053</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1711290803053</updated>
+    </task>
+    <task id="LOCAL-00005" summary="typings">
+      <option name="closed" value="true" />
+      <created>1711290827184</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1711290827184</updated>
+    </task>
+    <task id="LOCAL-00006" summary="fix volume using filter. now uses global volume for faster transition">
+      <option name="closed" value="true" />
+      <created>1711290855810</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1711290855810</updated>
+    </task>
+    <task id="LOCAL-00007" summary="update docs">
+      <option name="closed" value="true" />
+      <created>1711290862375</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1711290862375</updated>
+    </task>
+    <task id="LOCAL-00008" summary=".idea">
+      <option name="closed" value="true" />
+      <created>1711290912366</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1711290912366</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -153,6 +195,10 @@
     <MESSAGE value="release 3.0.0-rc2 1" />
     <MESSAGE value="release v3" />
     <MESSAGE value="prevent crash when an existing connection exists" />
-    <option name="LAST_COMMIT_MESSAGE" value="prevent crash when an existing connection exists" />
+    <MESSAGE value="typings" />
+    <MESSAGE value="fix volume using filter. now uses global volume for faster transition" />
+    <MESSAGE value="update docs" />
+    <MESSAGE value=".idea" />
+    <option name="LAST_COMMIT_MESSAGE" value=".idea" />
   </component>
 </project>
