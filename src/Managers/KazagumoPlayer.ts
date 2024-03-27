@@ -239,11 +239,11 @@ export class KazagumoPlayer {
 
   /**
    * Get the previous track from the queue
-   * @param splice Whether to remove the track from the previous list or not
+   * @param remove Whether to remove the track from the previous list or not
    */
-  public getPrevious(splice: boolean = false): KazagumoTrack[] {
-    if (splice) return this.queue.previous.splice(0, this.queue.previous.length);
-    return this.queue.previous;
+  public getPrevious(remove: boolean = false): KazagumoTrack | undefined {
+    if (remove) return this.queue.previous.shift();
+    return this.queue.previous[0];
   }
 
   /**
