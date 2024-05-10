@@ -175,14 +175,14 @@ export class KazagumoTrack {
     if (!this.kazagumo) throw new Error('Kazagumo is not set');
 
     const defaultSearchEngine = this.kazagumo.KazagumoOptions.defaultSearchEngine;
-    const source = (SourceIDs as any)[defaultSearchEngine || 'youtube'] || 'yt';
+    const source = ((SourceIDs as any)[defaultSearchEngine || 'youtube'] || 'yt') + ':';
     const query = [this.author, this.title].filter((x) => !!x).join(' - ');
     const node = await this.kazagumo.getLeastUsedNode();
 
     if (!node) throw new KazagumoError(1, 'No nodes available');
 
     const result = player
-      ? await player?.search(`${source}:${query}`)
+      ? await player.search(query, { source, requester: this.requester })
       : await this.kazagumo.search(query, { engine: defaultSearchEngine, requester: this.requester });
     if (!result || !result.tracks.length) throw new KazagumoError(2, 'No results found');
 
