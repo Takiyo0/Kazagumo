@@ -162,6 +162,7 @@ export const SupportedSources = [
   'twitch',
   'vimeo',
   'youtube',
+  'spotify',
 ];
 
 export interface PlayOptions {

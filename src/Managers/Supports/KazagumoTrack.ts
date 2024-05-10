@@ -1,17 +1,15 @@
 import { Kazagumo } from '../../Kazagumo';
 import {
-  RawTrack,
-  SupportedSources,
-  SourceIDs,
-  KazagumoError,
   escapeRegExp,
-  ResolveOptions,
   Events,
-  SearchEngines,
+  KazagumoError,
+  RawTrack,
+  ResolveOptions,
+  SourceIDs,
+  SupportedSources,
 } from '../../Modules/Interfaces';
 import { Track } from 'shoukaku';
 import { KazagumoPlayer } from '../KazagumoPlayer';
-import { KazagumoUtils } from '../../Modules/Utils';
 
 export class KazagumoTrack {
   /**
