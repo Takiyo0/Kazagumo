@@ -25,7 +25,7 @@ Pls read the docs before asking 🙏🙏🙏 There is a useful search feature th
 
 ## Metadata
 
-> version: 3.0.2  
+> version: 3.0.3  
 > pre-release: false  
 > Last build: 3-24-2024 21.36 PM
 
@@ -63,12 +63,15 @@ Pls read the docs before asking 🙏🙏🙏 There is a useful search feature th
 + this.player.createPlayer(...) // Kazagumo
     
 // Add a track to the queue. MUST BE A kazagumoTrack, you can get from <KazagumoPlayer>.search()
-+ this.player.players.get("69696969696969").queue.add(kazagumoTrack) // Kazagumo
++ this.player.players.get("69696969696969").queue.add(kazagumoTrack) // Kazagumo       
 
 // Play a track
 - this.player.players.get("69696969696969").playTrack(shoukakuTrack) // Shoukaku
 + this.player.players.get("69696969696969").play() // Kazagumo, take the first song on queue
 + this.player.players.get("69696969696969").play(kazagumoTrack) // Kazagumo, will unshift current song and forceplay this song
+        
+// Play previous song
++ this.player.players.get("69696969696969").play(this.player.players.get("69696969696969").getPrevious()) // Kazagumo, make sure it's not undefined first        
 
 // Pauses or resumes the player. Control from kazagumoPlayer instead of shoukakuPlayer
 - this.player.players.get("69696969696969").setPaused(true) // Shoukaku
@@ -200,6 +203,15 @@ client.on("messageCreate", async msg => {
         if (!result.tracks.length) return msg.reply("No results found!");
         player.play(new KazagumoTrack(result.tracks[0].getRaw(), msg.author));
         return msg.reply({content: `Forced playing **${result.tracks[0].title}** by **${result.tracks[0].author}**`});
+    }
+
+    if (msg.content.startsWith("!previous")) {
+        let player = kazagumo.players.get(msg.guild.id);
+        if (!player) return msg.reply("No player found!");
+        const previous = player.getPrevious(); // we get the previous track without removing it first
+        if (!previous) return msg.reply("No previous track found!");
+        await player.play(player.getPrevious(true)); // now we remove the previous track and play it
+        return msg.reply("Previous!");
     }
 })
 
