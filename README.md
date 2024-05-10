@@ -25,14 +25,14 @@ Pls read the docs before asking 🙏🙏🙏 There is a useful search feature th
 
 ## Metadata
 
-> version: 3.0.3  
+> version: 3.0.4  
 > pre-release: false  
-> Last build: 3-24-2024 21.36 PM
+> Last build: 5-10-2024 20.51 PM
 
 ## Plugins
 - Official [spotify plugin](https://npmjs.com/package/kazagumo-spotify)
 > npm i kazagumo-spotify
-- Additional [apple plugin](https://www.npmjs.com/package/kazagumo-apple)
+  - Additional [apple plugin](https://www.npmjs.com/package/kazagumo-apple)
 > npm i kazagumo-apple
 - Additional [filter plugin](https://www.npmjs.com/package/kazagumo-filter)
 > npm i kazagumo-filter
@@ -146,9 +146,12 @@ kazagumo.shoukaku.on('ready', (name) => console.log(`Lavalink ${name}: Ready!`))
 kazagumo.shoukaku.on('error', (name, error) => console.error(`Lavalink ${name}: Error Caught,`, error));
 kazagumo.shoukaku.on('close', (name, code, reason) => console.warn(`Lavalink ${name}: Closed, Code ${code}, Reason ${reason || 'No reason'}`));
 kazagumo.shoukaku.on('debug', (name, info) => console.debug(`Lavalink ${name}: Debug,`, info));
-kazagumo.shoukaku.on('disconnect', (name, players, moved) => {
-    if (moved) return;
-    players.map(player => player.connection.disconnect())
+kazagumo.shoukaku.on('disconnect', (name, count) => {
+    const players = [...kazagumo.shoukaku.players.values()].filter(p => p.node.name === name);
+    players.map(player => {
+        kazagumo.destroyPlayer(player.guildId);
+        player.destroy();
+    });
     console.warn(`Lavalink ${name}: Disconnected`);
 });
 
