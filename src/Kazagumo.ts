@@ -128,45 +128,71 @@ export declare interface Kazagumo {
   on(event: 'queueUpdate', listener: (player: KazagumoPlayer, queue: KazagumoQueue) => void): this;
 
   once(event: 'playerStart', listener: (player: KazagumoPlayer, track: KazagumoTrack) => void): this;
+
   once(
     event: 'playerResolveError',
     listener: (player: KazagumoPlayer, track: KazagumoTrack, message?: string) => void,
   ): this;
+
   once(event: 'playerDestroy', listener: (player: KazagumoPlayer) => void): this;
+
   once(event: 'playerCreate', listener: (player: KazagumoPlayer) => void): this;
+
   once(event: 'playerEnd', listener: (player: KazagumoPlayer) => void): this;
+
   once(event: 'playerEmpty', listener: (player: KazagumoPlayer) => void): this;
+
   once(event: 'playerClosed', listener: (player: KazagumoPlayer, data: WebSocketClosedEvent) => void): this;
+
   once(event: 'playerStuck', listener: (player: KazagumoPlayer, data: TrackStuckEvent) => void): this;
+
   once(event: 'playerResumed', listener: (player: KazagumoPlayer) => void): this;
+
   once(
     event: 'playerMoved',
     listener: (player: KazagumoPlayer, state: PlayerMovedState, channels: PlayerMovedChannels) => void,
   ): this;
+
   once(event: 'playerException', listener: (player: KazagumoPlayer, data: TrackExceptionEvent) => void): this;
+
   once(event: 'playerUpdate', listener: (player: KazagumoPlayer, data: PlayerUpdate) => void): this;
+
   once(event: 'playerUpdate', listener: (data: unknown) => void): this;
+
   once(event: 'queueUpdate', listener: (player: KazagumoPlayer, queue: KazagumoQueue) => void): this;
 
   off(event: 'playerStart', listener: (player: KazagumoPlayer, track: KazagumoTrack) => void): this;
+
   off(
     event: 'playerResolveError',
     listener: (player: KazagumoPlayer, track: KazagumoTrack, message?: string) => void,
   ): this;
+
   off(event: 'playerDestroy', listener: (player: KazagumoPlayer) => void): this;
+
   off(event: 'playerCreate', listener: (player: KazagumoPlayer) => void): this;
+
   off(event: 'playerEnd', listener: (player: KazagumoPlayer) => void): this;
+
   off(event: 'playerEmpty', listener: (player: KazagumoPlayer) => void): this;
+
   off(event: 'playerClosed', listener: (player: KazagumoPlayer, data: WebSocketClosedEvent) => void): this;
+
   off(event: 'playerStuck', listener: (player: KazagumoPlayer, data: TrackStuckEvent) => void): this;
+
   off(event: 'playerResumed', listener: (player: KazagumoPlayer) => void): this;
+
   off(
     event: 'playerMoved',
     listener: (player: KazagumoPlayer, state: PlayerMovedState, channels: PlayerMovedChannels) => void,
   ): this;
+
   off(event: 'playerException', listener: (player: KazagumoPlayer, data: TrackExceptionEvent) => void): this;
+
   off(event: 'playerUpdate', listener: (player: KazagumoPlayer, data: PlayerUpdate) => void): this;
+
   off(event: 'playerUpdate', listener: (data: unknown) => void): this;
+
   off(event: 'queueUpdate', listener: (player: KazagumoPlayer, queue: KazagumoQueue) => void): this;
 }
 
@@ -372,8 +398,9 @@ export class Kazagumo extends EventEmitter {
     ];
 
     const isUrl = /^https?:\/\/.*/.test(query);
+    const customSource = options?.source ?? this.KazagumoOptions.defaultSource ?? `${source}search:`;
 
-    const result = await node.rest.resolve(!isUrl ? `${source}search:${query}` : query).catch((_) => null);
+    const result = await node.rest.resolve(!isUrl ? `${customSource}${query}` : query).catch((_) => null);
     if (!result || result.loadType === LoadType.EMPTY) return this.buildSearch(undefined, [], 'SEARCH');
 
     let loadType: SearchResultTypes;

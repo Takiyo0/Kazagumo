@@ -6,8 +6,10 @@ import { Snowflake } from 'discord.js';
 import { Track } from 'shoukaku';
 
 export interface KazagumoOptions {
-  /** Default search engine if no engine was provided. Default to youtube */
+  /** Default search engine if no engine was provided. Default to youtube. If defaultSource is provided, this will be ignored */
   defaultSearchEngine: SearchEngines;
+  /** Default source if no source was provided. Default to defaultSearchEngine */
+  defaultSource?: string;
   /** Kazagumo plugins */
   plugins?: KazagumoPlugin[];
   /** Source that will be forced to resolve when playing it */
@@ -135,6 +137,7 @@ export type PlayerMovedState = 'UNKNOWN' | 'JOINED' | 'LEFT' | 'MOVED';
 
 export interface KazagumoSearchOptions {
   requester: unknown;
+  source?: string;
   engine?: SearchEngines;
   nodeName?: string;
 }
@@ -202,6 +205,7 @@ export class KazagumoPlugin {
 export class KazagumoError extends Error {
   public code: number;
   public message: string;
+
   public constructor(code: number, message: string) {
     super(message);
     this.code = code;
