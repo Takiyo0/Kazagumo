@@ -230,7 +230,7 @@ client.login('');
     import { KazagumoTrack } from "kazagumo"; // ES6; don't laugh if it's wrong
 
     let track = result.tracks[0] // the spotify track
-    let convertedTrack = new KazagumoTrack(track.getRaw(), track.author);
+    let convertedTrack = new KazagumoTrack(track.getRaw()._raw, track.author);
     player.play(convertedTrack);
 ```
 
