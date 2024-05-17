@@ -25,9 +25,9 @@ Pls read the docs before asking 🙏🙏🙏 There is a useful search feature th
 
 ## Metadata
 
-> version: 3.0.4  
+> version: 3.0.5  
 > pre-release: false  
-> Last build: 5-10-2024 20.51 PM
+> Last build: 5-17-2024 20.25 PM
 
 ## Plugins
 - Official [spotify plugin](https://npmjs.com/package/kazagumo-spotify)
