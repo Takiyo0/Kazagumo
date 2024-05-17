@@ -175,7 +175,7 @@ export class KazagumoTrack {
     if (!this.kazagumo) throw new Error('Kazagumo is not set');
 
     const defaultSearchEngine = this.kazagumo.KazagumoOptions.defaultSearchEngine;
-    const source = ((SourceIDs as any)[defaultSearchEngine || 'youtube'] || 'yt') + ':';
+    const source = ((SourceIDs as any)[defaultSearchEngine || 'youtube'] || 'yt') + 'search:';
     const query = [this.author, this.title].filter((x) => !!x).join(' - ');
     const node = await this.kazagumo.getLeastUsedNode();
 
