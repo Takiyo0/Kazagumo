@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="816b50fb-a693-4f75-a2db-53d14f492eab" name="Changes" comment="fix &quot;known issue&quot; section in readme being wrong about typings">
+    <list default="true" id="816b50fb-a693-4f75-a2db-53d14f492eab" name="Changes" comment="release 3.0.4">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/assets/search.js" beforeDir="false" afterPath="$PROJECT_DIR$/docs/assets/search.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/classes/Kazagumo.Kazagumo.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/classes/Kazagumo.Kazagumo.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/classes/Managers_KazagumoPlayer.KazagumoPlayer.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/classes/Managers_KazagumoPlayer.KazagumoPlayer.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/classes/Managers_Supports_KazagumoQueue.KazagumoQueue.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/classes/Managers_Supports_KazagumoQueue.KazagumoQueue.html" afterDir="false" />
@@ -52,6 +52,7 @@
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Kazagumo.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Kazagumo.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Managers/KazagumoPlayer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Managers/KazagumoPlayer.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Managers/Supports/KazagumoTrack.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Managers/Supports/KazagumoTrack.ts" afterDir="false" />
     </list>
@@ -73,18 +74,18 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "Takiyo0"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Takiyo0&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/Takiyo0/Kazagumo.git",
-    "accountId": "330cd637-6b1e-49a2-9490-10a2417bb8ba"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Takiyo0/Kazagumo.git&quot;,
+    &quot;accountId&quot;: &quot;330cd637-6b1e-49a2-9490-10a2417bb8ba&quot;
   }
-}]]></component>
+}</component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -178,6 +179,7 @@
       <workItem from="1711288852464" duration="2234000" />
       <workItem from="1711468260589" duration="66000" />
       <workItem from="1711538284301" duration="1521000" />
+      <workItem from="1715947468777" duration="4763000" />
     </task>
     <task id="LOCAL-00001" summary="release 3.0.0-rc2">
       <option name="closed" value="true" />
@@ -283,7 +285,31 @@
       <option name="project" value="LOCAL" />
       <updated>1715350305580</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="move source to parameter. but i can't seem to make it work????">
+      <option name="closed" value="true" />
+      <created>1715352347385</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1715352347385</updated>
+    </task>
+    <task id="LOCAL-00015" summary="update docs">
+      <option name="closed" value="true" />
+      <created>1715352387542</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1715352387542</updated>
+    </task>
+    <task id="LOCAL-00016" summary="release 3.0.4">
+      <option name="closed" value="true" />
+      <created>1715352425360</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1715352425360</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -308,13 +334,15 @@
     <MESSAGE value="prevent crash when an existing connection exists" />
     <MESSAGE value="typings" />
     <MESSAGE value="fix volume using filter. now uses global volume for faster transition" />
-    <MESSAGE value="update docs" />
     <MESSAGE value=".idea" />
     <MESSAGE value="release 3.0.2" />
     <MESSAGE value="add defaultSource to KazagumoOptions and source to KazagumoSearchOptions" />
     <MESSAGE value="add spotify to SupportedSources for better search algorithm. Use latest kazagumo-spotify" />
     <MESSAGE value="update readme wrong shoukaku's disconnect event" />
     <MESSAGE value="fix &quot;known issue&quot; section in readme being wrong about typings" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix &quot;known issue&quot; section in readme being wrong about typings" />
+    <MESSAGE value="move source to parameter. but i can't seem to make it work????" />
+    <MESSAGE value="update docs" />
+    <MESSAGE value="release 3.0.4" />
+    <option name="LAST_COMMIT_MESSAGE" value="release 3.0.4" />
   </component>
 </project>
