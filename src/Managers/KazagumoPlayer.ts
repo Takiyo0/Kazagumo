@@ -5,6 +5,7 @@ import {
   Node,
   Player,
   PlayerUpdate,
+  TrackEndEvent,
   TrackExceptionEvent,
   TrackStuckEvent,
   WebSocketClosedEvent,
@@ -107,55 +108,72 @@ export class KazagumoPlayer {
           kazagumo.search.bind(kazagumo)(query, opt ? { ...opt, nodeName: this.shoukaku.node.name } : undefined)
       : kazagumo.search.bind(kazagumo);
 
-    this.shoukaku.on('start', () => {
-      this.playing = true;
-      this.emit(Events.PlayerStart, this, this.queue.current);
-    });
+    this.shoukaku.on('start', () => this.onShoukakuStart());
+    this.shoukaku.on('end', (data: TrackEndEvent) => this.onShoukakuEnd(data));
+    this.shoukaku.on('closed', (data: WebSocketClosedEvent) => this.onShoukakuClosed(data));
+    this.shoukaku.on('exception', (data: TrackExceptionEvent) => this.onShoukakuException(data));
 
-    this.shoukaku.on('end', (data) => {
-      // This event emits STOPPED reason when destroying, so return to prevent double emit
-      if (this.state === PlayerState.DESTROYING || this.state === PlayerState.DESTROYED)
-        return this.emit(Events.Debug, `Player ${this.guildId} destroyed from end event`);
+    this.shoukaku.on('update', (data: PlayerUpdate) => this.onShoukakuUpdate(data));
+    this.shoukaku.on('stuck', (data: TrackStuckEvent) => this.onShoukakuStuck(data));
+    this.shoukaku.on('resumed', () => this.onShoukakuResumed());
+  }
 
-      if (data.reason === 'replaced') return this.emit(Events.PlayerEnd, this);
-      if (['loadFailed', 'cleanup'].includes(data.reason)) {
-        if (this.queue.current) this.queue.previous.push(this.queue.current);
-        this.playing = false;
-        if (!this.queue.length) return this.emit(Events.PlayerEmpty, this);
-        this.emit(Events.PlayerEnd, this, this.queue.current);
-        this.queue.current = null;
-        return this.play();
-      }
+  public onShoukakuResumed() {
+    this.emit(Events.PlayerResumed, this);
+  }
 
-      if (this.loop === 'track' && this.queue.current) this.queue.unshift(this.queue.current);
-      if (this.loop === 'queue' && this.queue.current) this.queue.push(this.queue.current);
+  public onShoukakuStuck(data: TrackStuckEvent) {
+    this.emit(Events.PlayerStuck, this, data);
+  }
 
+  public onShoukakuUpdate(data: PlayerUpdate) {
+    this.emit(Events.PlayerUpdate, this, data);
+  };
+
+  public onShoukakuStart() {
+    this.playing = true;
+    this.emit(Events.PlayerStart, this, this.queue.current);
+  }
+
+  public onShoukakuException(data: TrackExceptionEvent){
+    this.playing = false;
+    this.emit(Events.PlayerException, this, data);
+  }
+
+  public onShoukakuClosed(data: WebSocketClosedEvent) {
+    this.playing = false;
+    this.emit(Events.PlayerClosed, this, data);
+  }
+
+  public onShoukakuEnd(data: TrackEndEvent) {
+    // This event emits STOPPED reason when destroying, so return to prevent double emit
+    if (this.state === PlayerState.DESTROYING || this.state === PlayerState.DESTROYED)
+      return this.emit(Events.Debug, `Player ${this.guildId} destroyed from end event`);
+
+    if (data.reason === 'replaced') return this.emit(Events.PlayerEnd, this);
+    if (['loadFailed', 'cleanup'].includes(data.reason)) {
       if (this.queue.current) this.queue.previous.push(this.queue.current);
-      const currentSong = this.queue.current;
+      this.playing = false;
+      if (!this.queue.length) return this.emit(Events.PlayerEmpty, this);
+      this.emit(Events.PlayerEnd, this, this.queue.current);
       this.queue.current = null;
-
-      if (this.queue.length) this.emit(Events.PlayerEnd, this, currentSong);
-      else {
-        this.playing = false;
-        return this.emit(Events.PlayerEmpty, this);
-      }
-
       return this.play();
-    });
+    }
 
-    this.shoukaku.on('closed', (data: WebSocketClosedEvent) => {
+    if (this.loop === 'track' && this.queue.current) this.queue.unshift(this.queue.current);
+    if (this.loop === 'queue' && this.queue.current) this.queue.push(this.queue.current);
+
+    if (this.queue.current) this.queue.previous.push(this.queue.current);
+    const currentSong = this.queue.current;
+    this.queue.current = null;
+
+    if (this.queue.length) this.emit(Events.PlayerEnd, this, currentSong);
+    else {
       this.playing = false;
-      this.emit(Events.PlayerClosed, this, data);
-    });
+      return this.emit(Events.PlayerEmpty, this);
+    }
 
-    this.shoukaku.on('exception', (data: TrackExceptionEvent) => {
-      this.playing = false;
-      this.emit(Events.PlayerException, this, data);
-    });
-
-    this.shoukaku.on('update', (data: PlayerUpdate) => this.emit(Events.PlayerUpdate, this, data));
-    this.shoukaku.on('stuck', (data: TrackStuckEvent) => this.emit(Events.PlayerStuck, this, data));
-    this.shoukaku.on('resumed', () => this.emit(Events.PlayerResumed, this));
+    return this.play();
   }
 
   // /**
