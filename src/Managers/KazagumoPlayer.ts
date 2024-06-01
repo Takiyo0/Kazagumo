@@ -311,7 +311,7 @@ export class KazagumoPlayer {
     if (options) playOptions.options = { ...options, noReplace: false };
     else playOptions.options = { noReplace: false };
 
-    this.shoukaku.playTrack(playOptions);
+    await this.shoukaku.playTrack(playOptions);
 
     return this;
   }
@@ -320,10 +320,10 @@ export class KazagumoPlayer {
    * Skip the current track
    * @returns KazagumoPlayer
    */
-  public skip(): KazagumoPlayer {
+  public async skip(): Promise<KazagumoPlayer> {
     if (this.state === PlayerState.DESTROYED) throw new KazagumoError(1, 'Player is already destroyed');
 
-    this.shoukaku.stopTrack();
+    await this.shoukaku.stopTrack();
 
     return this;
   }
