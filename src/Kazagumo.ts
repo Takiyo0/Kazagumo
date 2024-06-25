@@ -127,6 +127,7 @@ export declare interface Kazagumo {
   on<K extends keyof KazagumoEvents>(event: K, listener: (...args: KazagumoEvents[K]) => void): this;
   once<K extends keyof KazagumoEvents>(event: K, listener: (...args: KazagumoEvents[K]) => void): this;
   off<K extends keyof KazagumoEvents>(event: K, listener: (...args: KazagumoEvents[K]) => void): this;
+  emit(event: string | symbol, ...args: any[]): boolean;
 }
 
 export class Kazagumo extends EventEmitter {
