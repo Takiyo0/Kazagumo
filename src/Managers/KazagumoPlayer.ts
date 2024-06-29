@@ -19,7 +19,6 @@ import {
   PlayOptions,
 } from '../Modules/Interfaces';
 import { KazagumoTrack } from './Supports/KazagumoTrack';
-import { Snowflake } from 'discord.js';
 
 export class KazagumoPlayer {
   /**
@@ -37,15 +36,15 @@ export class KazagumoPlayer {
   /**
    * The guild ID of the player
    */
-  public readonly guildId: Snowflake;
+  public readonly guildId: string;
   /**
    * The voice channel ID of the player
    */
-  public voiceId: Snowflake | null;
+  public voiceId: string | null;
   /**
    * The text channel ID of the player
    */
-  public textId?: Snowflake;
+  public textId?: string;
   /**
    * Player's queue
    */
@@ -204,7 +203,7 @@ export class KazagumoPlayer {
    * @param textId Text channel ID
    * @returns KazagumoPlayer
    */
-  public setTextChannel(textId: Snowflake): KazagumoPlayer {
+  public setTextChannel(textId: string): KazagumoPlayer {
     if (this.state === PlayerState.DESTROYED) throw new KazagumoError(1, 'Player is already destroyed');
 
     this.textId = textId;
@@ -217,7 +216,7 @@ export class KazagumoPlayer {
    * @param voiceId Voice channel ID
    * @returns KazagumoPlayer
    */
-  public setVoiceChannel(voiceId: Snowflake): KazagumoPlayer {
+  public setVoiceChannel(voiceId: string): KazagumoPlayer {
     if (this.state === PlayerState.DESTROYED) throw new KazagumoError(1, 'Player is already destroyed');
     this.state = PlayerState.CONNECTING;
 
