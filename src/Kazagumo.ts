@@ -111,8 +111,8 @@ export interface KazagumoEvents {
    * Emitted for science purpose.
    * @event Kazagumo#playerUpdate
    */
-  //maybe this should be changed
-  //'playerUpdate': [data: unknown];
+  // maybe this should be changed
+  // 'playerUpdate': [data: unknown];
 
   /**
    * Emitted when a queue updated (track added, changed, etc).
