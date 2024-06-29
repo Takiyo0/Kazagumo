@@ -32,7 +32,6 @@ import {
 
 import { KazagumoPlayer } from './Managers/KazagumoPlayer';
 import { KazagumoTrack } from './Managers/Supports/KazagumoTrack';
-import { Snowflake } from 'discord.js';
 import { KazagumoQueue } from './Managers/Supports/KazagumoQueue';
 
 export interface KazagumoEvents {
@@ -269,7 +268,7 @@ export class Kazagumo extends EventEmitter {
    * @param guildId Guild ID
    * @returns KazagumoPlayer | undefined
    */
-  public getPlayer<T extends KazagumoPlayer>(guildId: Snowflake): (T | KazagumoPlayer) | undefined {
+  public getPlayer<T extends KazagumoPlayer>(guildId: string): (T | KazagumoPlayer) | undefined {
     return this.players.get(guildId);
   }
 
@@ -278,7 +277,7 @@ export class Kazagumo extends EventEmitter {
    * @param guildId Guild ID
    * @returns void
    */
-  public destroyPlayer<T extends KazagumoPlayer>(guildId: Snowflake): void {
+  public destroyPlayer<T extends KazagumoPlayer>(guildId: string): void {
     const player = this.getPlayer<T>(guildId);
     if (!player) return;
     player.destroy();
