@@ -4,9 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="816b50fb-a693-4f75-a2db-53d14f492eab" name="Changes" comment="release 3.0.4">
+    <list default="true" id="816b50fb-a693-4f75-a2db-53d14f492eab" name="Changes" comment="remove unnecessary '' on kazagumoEvents interface">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/assets/highlight.css" beforeDir="false" afterPath="$PROJECT_DIR$/docs/assets/highlight.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/assets/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/docs/assets/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/assets/navigation.js" beforeDir="false" afterPath="$PROJECT_DIR$/docs/assets/navigation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/assets/search.js" beforeDir="false" afterPath="$PROJECT_DIR$/docs/assets/search.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/assets/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/docs/assets/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/classes/Kazagumo.Kazagumo.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/classes/Kazagumo.Kazagumo.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/classes/Managers_KazagumoPlayer.KazagumoPlayer.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/classes/Managers_KazagumoPlayer.KazagumoPlayer.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/classes/Managers_Supports_KazagumoQueue.KazagumoQueue.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/classes/Managers_Supports_KazagumoQueue.KazagumoQueue.html" afterDir="false" />
@@ -52,9 +57,13 @@
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Kazagumo.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Kazagumo.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Managers/KazagumoPlayer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Managers/KazagumoPlayer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Managers/Supports/KazagumoQueue.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Managers/Supports/KazagumoQueue.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Managers/Supports/KazagumoTrack.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Managers/Supports/KazagumoTrack.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/Interfaces.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/Interfaces.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/Plugins.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/Plugins.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Modules/Utils.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/Utils.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Plugins/PlayerMoved.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Plugins/PlayerMoved.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,6 +82,7 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -80,14 +90,39 @@
     &quot;assignee&quot;: &quot;Takiyo0&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/Takiyo0/Kazagumo.git&quot;,
-    &quot;accountId&quot;: &quot;330cd637-6b1e-49a2-9490-10a2417bb8ba&quot;
-  }
-}</component>
+  <component name="GitHubPullRequestState"><![CDATA[{
+  "prStates": [
+    {
+      "id": {
+        "id": "PR_kwDOGG2Pl851wmRr",
+        "number": 59
+      },
+      "lastSeen": 1721302633938
+    }
+  ]
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/Takiyo0/Kazagumo.git",
+    "accountId": "a4c60380-dbfc-4787-a9d4-3049cf3d78be"
+  },
+  "recentNewPullRequestHead": {
+    "server": {
+      "useHttp": false,
+      "host": "github.com",
+      "port": null,
+      "suffix": null
+    },
+    "owner": "Takiyo0",
+    "repository": "Kazagumo"
+  },
+  "editorReviewEnabled": false
+}]]></component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
+  </component>
+  <component name="PackageJsonUpdateNotifier">
+    <dismissed value="$PROJECT_DIR$/package.json" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 2
@@ -106,7 +141,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "3.0.4",
+    "git-widget-placeholder": "#59 on v3.1.0",
     "ignore.virus.scanning.warn.message": "true",
     "last_opened_file_path": "C:/Users/takiy/OneDrive/Documents/project/Kazagumo",
     "node.js.detected.package.eslint": "true",
@@ -116,7 +151,7 @@
     "nodejs_package_manager_path": "npm",
     "npm.build.executor": "Run",
     "npm.build:full.executor": "Run",
-    "ts.external.directory.path": "C:\\Users\\takiy\\OneDrive\\Documents\\project\\Kazagumo\\node_modules\\typescript\\lib",
+    "ts.external.directory.path": "C:\\Users\\takiyo\\Documents\\projects\\Kazagumo\\node_modules\\typescript\\lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -146,8 +181,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.build:full" />
         <item itemvalue="Node.js.index.js" />
+        <item itemvalue="npm.build:full" />
         <item itemvalue="npm.build" />
         <item itemvalue="npm.build:full" />
         <item itemvalue="Node.js.index.js" />
@@ -157,7 +192,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-1d06a55b98c1-91d5c284f522-JavaScript-WS-241.15989.105" />
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-WS-241.18034.50" />
       </set>
     </attachedChunks>
   </component>
@@ -180,6 +215,8 @@
       <workItem from="1711468260589" duration="66000" />
       <workItem from="1711538284301" duration="1521000" />
       <workItem from="1715947468777" duration="4763000" />
+      <workItem from="1721295817690" duration="937000" />
+      <workItem from="1721296998897" duration="8250000" />
     </task>
     <task id="LOCAL-00001" summary="release 3.0.0-rc2">
       <option name="closed" value="true" />
@@ -309,7 +346,23 @@
       <option name="project" value="LOCAL" />
       <updated>1715352425360</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="fix previous track's position is reversed">
+      <option name="closed" value="true" />
+      <created>1721302715912</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1721302715912</updated>
+    </task>
+    <task id="LOCAL-00018" summary="remove unnecessary '' on kazagumoEvents interface">
+      <option name="closed" value="true" />
+      <created>1721302811566</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1721302811566</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -343,6 +396,8 @@
     <MESSAGE value="move source to parameter. but i can't seem to make it work????" />
     <MESSAGE value="update docs" />
     <MESSAGE value="release 3.0.4" />
-    <option name="LAST_COMMIT_MESSAGE" value="release 3.0.4" />
+    <MESSAGE value="fix previous track's position is reversed" />
+    <MESSAGE value="remove unnecessary '' on kazagumoEvents interface" />
+    <option name="LAST_COMMIT_MESSAGE" value="remove unnecessary '' on kazagumoEvents interface" />
   </component>
 </project>
