@@ -39,73 +39,73 @@ export interface KazagumoEvents {
    * Emitted when a track is going to play.
    * @event Kazagumo#playerStart
    */
-  'playerStart': [player: KazagumoPlayer, track: KazagumoTrack];
+  playerStart: [player: KazagumoPlayer, track: KazagumoTrack];
 
   /**
    * Emitted when an error occured while resolving track.
    * @event Kazagumo#playerResolveError
    */
-  'playerResolveError': [player: KazagumoPlayer, track: KazagumoTrack, message?: string];
+  playerResolveError: [player: KazagumoPlayer, track: KazagumoTrack, message?: string];
 
   /**
    * Emitted when a player got destroyed.
    * @event Kazagumo#playerDestroy
    */
-  'playerDestroy': [player: KazagumoPlayer];
+  playerDestroy: [player: KazagumoPlayer];
 
   /**
    * Emitted when a player created.
    * @event Kazagumo#playerCreate
    */
-  'playerCreate': [player: KazagumoPlayer];
+  playerCreate: [player: KazagumoPlayer];
 
   /**
    * Emitted when a track ended.
    * @event Kazagumo#playerEnd
    */
-  'playerEnd': [player: KazagumoPlayer];
+  playerEnd: [player: KazagumoPlayer];
 
   /**
    * Emitted when a player got empty.
    * @event Kazagumo#playerEmpty
    */
-  'playerEmpty': [player: KazagumoPlayer];
+  playerEmpty: [player: KazagumoPlayer];
 
   /**
    * Emitted when a player got closed.
    * @event Kazagumo#playerClosed
    */
-  'playerClosed': [player: KazagumoPlayer, data: WebSocketClosedEvent];
+  playerClosed: [player: KazagumoPlayer, data: WebSocketClosedEvent];
 
   /**
    * Emitted when a player got stuck.
    * @event Kazagumo#playerStuck
    */
-  'playerStuck': [player: KazagumoPlayer, data: TrackStuckEvent];
+  playerStuck: [player: KazagumoPlayer, data: TrackStuckEvent];
 
   /**
    * Emitted when a player got resumed.
    * @event Kazagumo#playerResumed
    */
-  'playerResumed': [player: KazagumoPlayer];
+  playerResumed: [player: KazagumoPlayer];
 
   /**
    * Emitted only when you use playerMoved plugin and when the bot moved, joined, or left voice channel.
    * @event Kazagumo#playerMoved
    */
-  'playerMoved': [player: KazagumoPlayer, state: PlayerMovedState, channels: PlayerMovedChannels];
+  playerMoved: [player: KazagumoPlayer, state: PlayerMovedState, channels: PlayerMovedChannels];
 
   /**
    * Emitted when an exception occured.
    * @event Kazagumo#playerException
    */
-  'playerException': [player: KazagumoPlayer, data: TrackExceptionEvent];
+  playerException: [player: KazagumoPlayer, data: TrackExceptionEvent];
 
   /**
    * Emitted when a player updated.
    * @event Kazagumo#playerUpdate
    */
-  'playerUpdate': [player: KazagumoPlayer, data: PlayerUpdate];
+  playerUpdate: [player: KazagumoPlayer, data: PlayerUpdate];
 
   /**
    * Emitted for science purpose.
@@ -118,8 +118,7 @@ export interface KazagumoEvents {
    * Emitted when a queue updated (track added, changed, etc).
    * @event Kazagumo#queueUpdate
    */
-  'queueUpdate': [player: KazagumoPlayer, queue: KazagumoQueue];
-
+  queueUpdate: [player: KazagumoPlayer, queue: KazagumoQueue];
 }
 
 export declare interface Kazagumo {
@@ -323,11 +322,11 @@ export class Kazagumo extends EventEmitter {
       (options?.engine && ['youtube', 'youtube_music', 'soundcloud'].includes(options.engine)
         ? options.engine
         : null) ||
-      (!!this.KazagumoOptions.defaultSearchEngine &&
+        (!!this.KazagumoOptions.defaultSearchEngine &&
         ['youtube', 'youtube_music', 'soundcloud'].includes(this.KazagumoOptions.defaultSearchEngine!)
-        ? this.KazagumoOptions.defaultSearchEngine
-        : null) ||
-      'youtube'
+          ? this.KazagumoOptions.defaultSearchEngine
+          : null) ||
+        'youtube'
     ];
 
     const isUrl = /^https?:\/\/.*/.test(query);
