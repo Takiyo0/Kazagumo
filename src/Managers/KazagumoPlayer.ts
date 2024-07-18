@@ -118,7 +118,13 @@ export class KazagumoPlayer {
 
       if (data.reason === 'replaced') return this.emit(Events.PlayerEnd, this);
       if (['loadFailed', 'cleanup'].includes(data.reason)) {
-        if (this.queue.current) [this.queue.current].concat(this.queue.previous);
+        if (
+          this.queue.current &&
+          !this.queue.previous.find(
+            (x) => x.identifier === this.queue.current?.identifier && x.title === this.queue.current?.title,
+          )
+        )
+          this.queue.previous = [this.queue.current].concat(this.queue.previous);
         this.playing = false;
         if (!this.queue.length) return this.emit(Events.PlayerEmpty, this);
         this.emit(Events.PlayerEnd, this, this.queue.current);
@@ -129,7 +135,13 @@ export class KazagumoPlayer {
       if (this.loop === 'track' && this.queue.current) this.queue.unshift(this.queue.current);
       if (this.loop === 'queue' && this.queue.current) this.queue.push(this.queue.current);
 
-      if (this.queue.current) [this.queue.current].concat(this.queue.previous);
+      if (
+        this.queue.current &&
+        !this.queue.previous.find(
+          (x) => x.identifier === this.queue.current?.identifier && x.title === this.queue.current?.title,
+        )
+      )
+        this.queue.previous = [this.queue.current].concat(this.queue.previous);
       const currentSong = this.queue.current;
       this.queue.current = null;
 
