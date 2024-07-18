@@ -89,7 +89,7 @@ export class KazagumoTrack {
         isStream: this.isStream,
         length: this.length,
         position: this.position,
-        thumbnail: this.thumbnail,
+        artworkUrl: this.thumbnail,
       },
       _raw: this.raw,
     };

@@ -101,7 +101,7 @@ export interface RawTrack {
     author?: string;
     length?: number;
     position?: number;
-    thumbnail?: string;
+    artworkUrl?: string;
   };
   _raw: Track;
 }
