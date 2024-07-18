@@ -11,7 +11,7 @@
     "email": "takiyotakahashi@gmail.com"
   },
   "engines": {
-    "node": ">=16.5.0 <=20"
+    "node": ">=16.5.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
