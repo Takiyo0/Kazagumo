@@ -11,4 +11,4 @@ export * from './Kazagumo';
 export { KazagumoTrack, KazagumoQueue, KazagumoPlayer, Plugins };
 export * from './Modules/Interfaces';
 
-export const version = '3.0.5';
+export const version = '3.1.0';
