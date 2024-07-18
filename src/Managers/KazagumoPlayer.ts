@@ -19,7 +19,6 @@ import {
   PlayOptions,
 } from '../Modules/Interfaces';
 import { KazagumoTrack } from './Supports/KazagumoTrack';
-import { Snowflake } from 'discord.js';
 
 export class KazagumoPlayer {
   /**
@@ -37,15 +36,15 @@ export class KazagumoPlayer {
   /**
    * The guild ID of the player
    */
-  public readonly guildId: Snowflake;
+  public readonly guildId: string;
   /**
    * The voice channel ID of the player
    */
-  public voiceId: Snowflake | null;
+  public voiceId: string | null;
   /**
    * The text channel ID of the player
    */
-  public textId?: Snowflake;
+  public textId?: string;
   /**
    * Player's queue
    */
@@ -119,7 +118,13 @@ export class KazagumoPlayer {
 
       if (data.reason === 'replaced') return this.emit(Events.PlayerEnd, this);
       if (['loadFailed', 'cleanup'].includes(data.reason)) {
-        if (this.queue.current) this.queue.previous.push(this.queue.current);
+        if (
+          this.queue.current &&
+          !this.queue.previous.find(
+            (x) => x.identifier === this.queue.current?.identifier && x.title === this.queue.current?.title,
+          )
+        )
+          this.queue.previous = [this.queue.current].concat(this.queue.previous);
         this.playing = false;
         if (!this.queue.length) return this.emit(Events.PlayerEmpty, this);
         this.emit(Events.PlayerEnd, this, this.queue.current);
@@ -130,7 +135,13 @@ export class KazagumoPlayer {
       if (this.loop === 'track' && this.queue.current) this.queue.unshift(this.queue.current);
       if (this.loop === 'queue' && this.queue.current) this.queue.push(this.queue.current);
 
-      if (this.queue.current) this.queue.previous.push(this.queue.current);
+      if (
+        this.queue.current &&
+        !this.queue.previous.find(
+          (x) => x.identifier === this.queue.current?.identifier && x.title === this.queue.current?.title,
+        )
+      )
+        this.queue.previous = [this.queue.current].concat(this.queue.previous);
       const currentSong = this.queue.current;
       this.queue.current = null;
 
@@ -204,7 +215,7 @@ export class KazagumoPlayer {
    * @param textId Text channel ID
    * @returns KazagumoPlayer
    */
-  public setTextChannel(textId: Snowflake): KazagumoPlayer {
+  public setTextChannel(textId: string): KazagumoPlayer {
     if (this.state === PlayerState.DESTROYED) throw new KazagumoError(1, 'Player is already destroyed');
 
     this.textId = textId;
@@ -217,7 +228,7 @@ export class KazagumoPlayer {
    * @param voiceId Voice channel ID
    * @returns KazagumoPlayer
    */
-  public setVoiceChannel(voiceId: Snowflake): KazagumoPlayer {
+  public setVoiceChannel(voiceId: string): KazagumoPlayer {
     if (this.state === PlayerState.DESTROYED) throw new KazagumoError(1, 'Player is already destroyed');
     this.state = PlayerState.CONNECTING;
 
@@ -239,7 +250,7 @@ export class KazagumoPlayer {
 
   /**
    * Get the previous track from the queue
-   * @param remove Whether to remove the track from the previous list or not
+   * @param remove Whether to remove the track from the previous list or not. Best to set to true if you want to play it
    */
   public getPrevious(remove: boolean = false): KazagumoTrack | undefined {
     if (remove) return this.queue.previous.shift();

@@ -4,57 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="816b50fb-a693-4f75-a2db-53d14f492eab" name="Changes" comment="release 3.0.4">
+    <list default="true" id="816b50fb-a693-4f75-a2db-53d14f492eab" name="Changes" comment="release v3.1.0">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/classes/Kazagumo.Kazagumo.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/classes/Kazagumo.Kazagumo.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/classes/Managers_KazagumoPlayer.KazagumoPlayer.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/classes/Managers_KazagumoPlayer.KazagumoPlayer.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/classes/Managers_Supports_KazagumoQueue.KazagumoQueue.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/classes/Managers_Supports_KazagumoQueue.KazagumoQueue.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/classes/Managers_Supports_KazagumoTrack.KazagumoTrack.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/classes/Managers_Supports_KazagumoTrack.KazagumoTrack.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/classes/Modules_Interfaces.KazagumoError.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/classes/Modules_Interfaces.KazagumoError.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/classes/Modules_Interfaces.KazagumoPlugin.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/classes/Modules_Interfaces.KazagumoPlugin.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/classes/Modules_Utils.KazagumoUtils.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/classes/Modules_Utils.KazagumoUtils.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/classes/Plugins_PlayerMoved.KazagumoPlugin.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/classes/Plugins_PlayerMoved.KazagumoPlugin.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/enums/Modules_Interfaces.PlayerState.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/enums/Modules_Interfaces.PlayerState.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/enums/Modules_Interfaces.State.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/enums/Modules_Interfaces.State.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/enums/Modules_Interfaces.VoiceState.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/enums/Modules_Interfaces.VoiceState.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/functions/Modules_Interfaces.escapeRegExp.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/functions/Modules_Interfaces.escapeRegExp.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/interfaces/Modules_Interfaces.CreatePlayerOptions.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/interfaces/Modules_Interfaces.CreatePlayerOptions.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/interfaces/Modules_Interfaces.KazagumoOptions.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/interfaces/Modules_Interfaces.KazagumoOptions.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/interfaces/Modules_Interfaces.KazagumoPlayerOptions.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/interfaces/Modules_Interfaces.KazagumoPlayerOptions.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/interfaces/Modules_Interfaces.KazagumoSearchOptions.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/interfaces/Modules_Interfaces.KazagumoSearchOptions.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/interfaces/Modules_Interfaces.KazagumoSearchResult.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/interfaces/Modules_Interfaces.KazagumoSearchResult.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/interfaces/Modules_Interfaces.Payload.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/interfaces/Modules_Interfaces.Payload.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/interfaces/Modules_Interfaces.PlayOptions.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/interfaces/Modules_Interfaces.PlayOptions.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/interfaces/Modules_Interfaces.PlayerMovedChannels.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/interfaces/Modules_Interfaces.PlayerMovedChannels.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/interfaces/Modules_Interfaces.RawTrack.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/interfaces/Modules_Interfaces.RawTrack.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/interfaces/Modules_Interfaces.ResolveOptions.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/interfaces/Modules_Interfaces.ResolveOptions.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/modules/Index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/modules/Index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/modules/Kazagumo.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/modules/Kazagumo.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/modules/Managers_KazagumoPlayer.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/modules/Managers_KazagumoPlayer.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/modules/Managers_Supports_KazagumoQueue.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/modules/Managers_Supports_KazagumoQueue.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/modules/Managers_Supports_KazagumoTrack.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/modules/Managers_Supports_KazagumoTrack.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/modules/Modules_Interfaces.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/modules/Modules_Interfaces.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/modules/Modules_Plugins.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/modules/Modules_Plugins.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/modules/Modules_Utils.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/modules/Modules_Utils.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/modules/Plugins_PlayerMoved.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/modules/Plugins_PlayerMoved.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/types/Modules_Interfaces.PlayerMovedState.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/types/Modules_Interfaces.PlayerMovedState.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/types/Modules_Interfaces.SearchEngines.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/types/Modules_Interfaces.SearchEngines.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/types/Modules_Interfaces.SearchResultTypes.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/types/Modules_Interfaces.SearchResultTypes.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/types/Modules_Interfaces.YoutubeThumbnail.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/types/Modules_Interfaces.YoutubeThumbnail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/types/Modules_Utils.Constructor.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/types/Modules_Utils.Constructor.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/variables/Index.version.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/variables/Index.version.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/variables/Modules_Interfaces.Events.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/variables/Modules_Interfaces.Events.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/variables/Modules_Interfaces.SourceIDs.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/variables/Modules_Interfaces.SourceIDs.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/variables/Modules_Interfaces.SupportedSources.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/variables/Modules_Interfaces.SupportedSources.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/variables/Modules_Plugins.default.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/variables/Modules_Plugins.default.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Kazagumo.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Kazagumo.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Managers/KazagumoPlayer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Managers/KazagumoPlayer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Managers/Supports/KazagumoTrack.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Managers/Supports/KazagumoTrack.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,6 +24,7 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -80,14 +32,39 @@
     &quot;assignee&quot;: &quot;Takiyo0&quot;
   }
 }</component>
+  <component name="GitHubPullRequestState">{
+  &quot;prStates&quot;: [
+    {
+      &quot;id&quot;: {
+        &quot;id&quot;: &quot;PR_kwDOGG2Pl851wmRr&quot;,
+        &quot;number&quot;: 59
+      },
+      &quot;lastSeen&quot;: 1721302633938
+    }
+  ]
+}</component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/Takiyo0/Kazagumo.git&quot;,
-    &quot;accountId&quot;: &quot;330cd637-6b1e-49a2-9490-10a2417bb8ba&quot;
-  }
+    &quot;accountId&quot;: &quot;a4c60380-dbfc-4787-a9d4-3049cf3d78be&quot;
+  },
+  &quot;recentNewPullRequestHead&quot;: {
+    &quot;server&quot;: {
+      &quot;useHttp&quot;: false,
+      &quot;host&quot;: &quot;github.com&quot;,
+      &quot;port&quot;: null,
+      &quot;suffix&quot;: null
+    },
+    &quot;owner&quot;: &quot;Takiyo0&quot;,
+    &quot;repository&quot;: &quot;Kazagumo&quot;
+  },
+  &quot;editorReviewEnabled&quot;: false
 }</component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
+  </component>
+  <component name="PackageJsonUpdateNotifier">
+    <dismissed value="$PROJECT_DIR$/package.json" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 2
@@ -100,26 +77,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Node.js.index.js.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "3.0.4",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/takiy/OneDrive/Documents/project/Kazagumo",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "npm.build.executor": "Run",
-    "npm.build:full.executor": "Run",
-    "ts.external.directory.path": "C:\\Users\\takiy\\OneDrive\\Documents\\project\\Kazagumo\\node_modules\\typescript\\lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Node.js.index.js.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;#59 on v3.1.0&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/takiy/OneDrive/Documents/project/Kazagumo&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;npm.build.executor&quot;: &quot;Run&quot;,
+    &quot;npm.build:full.executor&quot;: &quot;Run&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\takiyo\\Documents\\projects\\Kazagumo\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="npm.build:full">
     <configuration name="index.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/test/index.js" working-dir="$PROJECT_DIR$/test">
       <method v="2" />
@@ -146,8 +123,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.build:full" />
         <item itemvalue="Node.js.index.js" />
+        <item itemvalue="npm.build:full" />
         <item itemvalue="npm.build" />
         <item itemvalue="npm.build:full" />
         <item itemvalue="Node.js.index.js" />
@@ -157,7 +134,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-1d06a55b98c1-91d5c284f522-JavaScript-WS-241.15989.105" />
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-WS-241.18034.50" />
       </set>
     </attachedChunks>
   </component>
@@ -180,6 +157,9 @@
       <workItem from="1711468260589" duration="66000" />
       <workItem from="1711538284301" duration="1521000" />
       <workItem from="1715947468777" duration="4763000" />
+      <workItem from="1721295817690" duration="937000" />
+      <workItem from="1721296998897" duration="8928000" />
+      <workItem from="1721308632587" duration="992000" />
     </task>
     <task id="LOCAL-00001" summary="release 3.0.0-rc2">
       <option name="closed" value="true" />
@@ -309,7 +289,79 @@
       <option name="project" value="LOCAL" />
       <updated>1715352425360</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="fix previous track's position is reversed">
+      <option name="closed" value="true" />
+      <created>1721302715912</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1721302715912</updated>
+    </task>
+    <task id="LOCAL-00018" summary="remove unnecessary '' on kazagumoEvents interface">
+      <option name="closed" value="true" />
+      <created>1721302811566</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1721302811566</updated>
+    </task>
+    <task id="LOCAL-00019" summary="fix dumb mistake">
+      <option name="closed" value="true" />
+      <created>1721307682984</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1721307682984</updated>
+    </task>
+    <task id="LOCAL-00020" summary="add the current playing track back to queue if previous with true &quot;remove&quot; called">
+      <option name="closed" value="true" />
+      <created>1721307718805</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1721307718805</updated>
+    </task>
+    <task id="LOCAL-00021" summary="modify some dev dependencies">
+      <option name="closed" value="true" />
+      <created>1721307781098</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1721307781098</updated>
+    </task>
+    <task id="LOCAL-00022" summary="fix unsupported node error when installing on node &gt;20">
+      <option name="closed" value="true" />
+      <created>1721307808398</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1721307808398</updated>
+    </task>
+    <task id="LOCAL-00023" summary="update docs">
+      <option name="closed" value="true" />
+      <created>1721307816957</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1721307816957</updated>
+    </task>
+    <task id="LOCAL-00024" summary="update docs 2">
+      <option name="closed" value="true" />
+      <created>1721307833661</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1721307833661</updated>
+    </task>
+    <task id="LOCAL-00025" summary="release v3.1.0">
+      <option name="closed" value="true" />
+      <created>1721307919999</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1721307919999</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -341,8 +393,16 @@
     <MESSAGE value="update readme wrong shoukaku's disconnect event" />
     <MESSAGE value="fix &quot;known issue&quot; section in readme being wrong about typings" />
     <MESSAGE value="move source to parameter. but i can't seem to make it work????" />
-    <MESSAGE value="update docs" />
     <MESSAGE value="release 3.0.4" />
-    <option name="LAST_COMMIT_MESSAGE" value="release 3.0.4" />
+    <MESSAGE value="fix previous track's position is reversed" />
+    <MESSAGE value="remove unnecessary '' on kazagumoEvents interface" />
+    <MESSAGE value="fix dumb mistake" />
+    <MESSAGE value="add the current playing track back to queue if previous with true &quot;remove&quot; called" />
+    <MESSAGE value="modify some dev dependencies" />
+    <MESSAGE value="fix unsupported node error when installing on node &gt;20" />
+    <MESSAGE value="update docs" />
+    <MESSAGE value="update docs 2" />
+    <MESSAGE value="release v3.1.0" />
+    <option name="LAST_COMMIT_MESSAGE" value="release v3.1.0" />
   </component>
 </project>
