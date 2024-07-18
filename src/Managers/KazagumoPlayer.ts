@@ -250,15 +250,10 @@ export class KazagumoPlayer {
 
   /**
    * Get the previous track from the queue
-   * @param remove Whether to remove the track from the previous list or not. Must be true if you want to play it
+   * @param remove Whether to remove the track from the previous list or not. Best to set to true if you want to play it
    */
   public getPrevious(remove: boolean = false): KazagumoTrack | undefined {
-    if (remove) {
-      const target = this.queue.previous.shift();
-      if (!target) return target;
-      this.queue.unshift(target);
-      return target;
-    }
+    if (remove) return this.queue.previous.shift();
     return this.queue.previous[0];
   }
 
