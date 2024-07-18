@@ -2,7 +2,6 @@ import { Kazagumo } from '../Kazagumo';
 import { KazagumoPlayer, KazagumoQueue } from '../Index';
 import { KazagumoTrack } from '../Managers/Supports/KazagumoTrack';
 import { Constructor } from './Utils';
-import { Snowflake } from 'discord.js';
 import { Track } from 'shoukaku';
 
 export interface KazagumoOptions {
@@ -23,7 +22,7 @@ export interface KazagumoOptions {
     player?: Constructor<KazagumoPlayer>;
   };
   /** Send to guild's shard */
-  send: (guildId: Snowflake, payload: Payload) => void;
+  send: (guildId: string, payload: Payload) => void;
 }
 
 export type SearchEngines = 'youtube' | 'soundcloud' | 'youtube_music' | string;
@@ -49,9 +48,9 @@ export const SourceIDs = {
 };
 
 export interface KazagumoPlayerOptions {
-  guildId: Snowflake;
-  voiceId: Snowflake;
-  textId?: Snowflake;
+  guildId: string;
+  voiceId: string;
+  textId?: string;
   deaf: boolean;
   volume: number;
   /** Whether the node for searching track should be the same as the node for playing track. Default: true */
@@ -69,11 +68,11 @@ export interface ResolveOptions {
 
 export interface CreatePlayerOptions {
   /** The player's guild ID */
-  guildId: Snowflake;
+  guildId: string;
   /** The player's voice ID */
-  voiceId: Snowflake;
+  voiceId: string;
   /** The player's text ID */
-  textId?: Snowflake;
+  textId?: string;
   /** Whether the bot should deafen */
   deaf?: boolean;
   /** Whether the bot should mute */

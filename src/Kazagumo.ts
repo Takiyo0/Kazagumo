@@ -32,168 +32,101 @@ import {
 
 import { KazagumoPlayer } from './Managers/KazagumoPlayer';
 import { KazagumoTrack } from './Managers/Supports/KazagumoTrack';
-import { Snowflake } from 'discord.js';
 import { KazagumoQueue } from './Managers/Supports/KazagumoQueue';
 
-export declare interface Kazagumo {
-  /* tslint:disable:unified-signatures */
+export interface KazagumoEvents {
   /**
    * Emitted when a track is going to play.
    * @event Kazagumo#playerStart
    */
-  on(event: 'playerStart', listener: (player: KazagumoPlayer, track: KazagumoTrack) => void): this;
+  'playerStart': [player: KazagumoPlayer, track: KazagumoTrack];
 
   /**
    * Emitted when an error occured while resolving track.
    * @event Kazagumo#playerResolveError
    */
-  on(
-    event: 'playerResolveError',
-    listener: (player: KazagumoPlayer, track: KazagumoTrack, message?: string) => void,
-  ): this;
+  'playerResolveError': [player: KazagumoPlayer, track: KazagumoTrack, message?: string];
 
   /**
    * Emitted when a player got destroyed.
    * @event Kazagumo#playerDestroy
    */
-  on(event: 'playerDestroy', listener: (player: KazagumoPlayer) => void): this;
+  'playerDestroy': [player: KazagumoPlayer];
 
   /**
    * Emitted when a player created.
    * @event Kazagumo#playerCreate
    */
-  on(event: 'playerCreate', listener: (player: KazagumoPlayer) => void): this;
+  'playerCreate': [player: KazagumoPlayer];
 
   /**
    * Emitted when a track ended.
    * @event Kazagumo#playerEnd
    */
-  on(event: 'playerEnd', listener: (player: KazagumoPlayer) => void): this;
+  'playerEnd': [player: KazagumoPlayer];
 
   /**
    * Emitted when a player got empty.
    * @event Kazagumo#playerEmpty
    */
-  on(event: 'playerEmpty', listener: (player: KazagumoPlayer) => void): this;
+  'playerEmpty': [player: KazagumoPlayer];
 
   /**
    * Emitted when a player got closed.
    * @event Kazagumo#playerClosed
    */
-  on(event: 'playerClosed', listener: (player: KazagumoPlayer, data: WebSocketClosedEvent) => void): this;
+  'playerClosed': [player: KazagumoPlayer, data: WebSocketClosedEvent];
 
   /**
    * Emitted when a player got stuck.
    * @event Kazagumo#playerStuck
    */
-  on(event: 'playerStuck', listener: (player: KazagumoPlayer, data: TrackStuckEvent) => void): this;
+  'playerStuck': [player: KazagumoPlayer, data: TrackStuckEvent];
 
   /**
    * Emitted when a player got resumed.
    * @event Kazagumo#playerResumed
    */
-  on(event: 'playerResumed', listener: (player: KazagumoPlayer) => void): this;
+  'playerResumed': [player: KazagumoPlayer];
 
   /**
    * Emitted only when you use playerMoved plugin and when the bot moved, joined, or left voice channel.
    * @event Kazagumo#playerMoved
    */
-  on(
-    event: 'playerMoved',
-    listener: (player: KazagumoPlayer, state: PlayerMovedState, channels: PlayerMovedChannels) => void,
-  ): this;
+  'playerMoved': [player: KazagumoPlayer, state: PlayerMovedState, channels: PlayerMovedChannels];
 
   /**
    * Emitted when an exception occured.
    * @event Kazagumo#playerException
    */
-  on(event: 'playerException', listener: (player: KazagumoPlayer, data: TrackExceptionEvent) => void): this;
+  'playerException': [player: KazagumoPlayer, data: TrackExceptionEvent];
 
   /**
    * Emitted when a player updated.
    * @event Kazagumo#playerUpdate
    */
-  on(event: 'playerUpdate', listener: (player: KazagumoPlayer, data: PlayerUpdate) => void): this;
+  'playerUpdate': [player: KazagumoPlayer, data: PlayerUpdate];
 
   /**
    * Emitted for science purpose.
    * @event Kazagumo#playerUpdate
    */
-  on(event: 'playerUpdate', listener: (data: unknown) => void): this;
+  // maybe this should be changed
+  // 'playerUpdate': [data: unknown];
 
   /**
    * Emitted when a queue updated (track added, changed, etc).
    * @event Kazagumo#queueUpdate
    */
-  on(event: 'queueUpdate', listener: (player: KazagumoPlayer, queue: KazagumoQueue) => void): this;
+  'queueUpdate': [player: KazagumoPlayer, queue: KazagumoQueue];
 
-  once(event: 'playerStart', listener: (player: KazagumoPlayer, track: KazagumoTrack) => void): this;
+}
 
-  once(
-    event: 'playerResolveError',
-    listener: (player: KazagumoPlayer, track: KazagumoTrack, message?: string) => void,
-  ): this;
-
-  once(event: 'playerDestroy', listener: (player: KazagumoPlayer) => void): this;
-
-  once(event: 'playerCreate', listener: (player: KazagumoPlayer) => void): this;
-
-  once(event: 'playerEnd', listener: (player: KazagumoPlayer) => void): this;
-
-  once(event: 'playerEmpty', listener: (player: KazagumoPlayer) => void): this;
-
-  once(event: 'playerClosed', listener: (player: KazagumoPlayer, data: WebSocketClosedEvent) => void): this;
-
-  once(event: 'playerStuck', listener: (player: KazagumoPlayer, data: TrackStuckEvent) => void): this;
-
-  once(event: 'playerResumed', listener: (player: KazagumoPlayer) => void): this;
-
-  once(
-    event: 'playerMoved',
-    listener: (player: KazagumoPlayer, state: PlayerMovedState, channels: PlayerMovedChannels) => void,
-  ): this;
-
-  once(event: 'playerException', listener: (player: KazagumoPlayer, data: TrackExceptionEvent) => void): this;
-
-  once(event: 'playerUpdate', listener: (player: KazagumoPlayer, data: PlayerUpdate) => void): this;
-
-  once(event: 'playerUpdate', listener: (data: unknown) => void): this;
-
-  once(event: 'queueUpdate', listener: (player: KazagumoPlayer, queue: KazagumoQueue) => void): this;
-
-  off(event: 'playerStart', listener: (player: KazagumoPlayer, track: KazagumoTrack) => void): this;
-
-  off(
-    event: 'playerResolveError',
-    listener: (player: KazagumoPlayer, track: KazagumoTrack, message?: string) => void,
-  ): this;
-
-  off(event: 'playerDestroy', listener: (player: KazagumoPlayer) => void): this;
-
-  off(event: 'playerCreate', listener: (player: KazagumoPlayer) => void): this;
-
-  off(event: 'playerEnd', listener: (player: KazagumoPlayer) => void): this;
-
-  off(event: 'playerEmpty', listener: (player: KazagumoPlayer) => void): this;
-
-  off(event: 'playerClosed', listener: (player: KazagumoPlayer, data: WebSocketClosedEvent) => void): this;
-
-  off(event: 'playerStuck', listener: (player: KazagumoPlayer, data: TrackStuckEvent) => void): this;
-
-  off(event: 'playerResumed', listener: (player: KazagumoPlayer) => void): this;
-
-  off(
-    event: 'playerMoved',
-    listener: (player: KazagumoPlayer, state: PlayerMovedState, channels: PlayerMovedChannels) => void,
-  ): this;
-
-  off(event: 'playerException', listener: (player: KazagumoPlayer, data: TrackExceptionEvent) => void): this;
-
-  off(event: 'playerUpdate', listener: (player: KazagumoPlayer, data: PlayerUpdate) => void): this;
-
-  off(event: 'playerUpdate', listener: (data: unknown) => void): this;
-
-  off(event: 'queueUpdate', listener: (player: KazagumoPlayer, queue: KazagumoQueue) => void): this;
+export declare interface Kazagumo {
+  on<K extends keyof KazagumoEvents>(event: K, listener: (...args: KazagumoEvents[K]) => void): this;
+  once<K extends keyof KazagumoEvents>(event: K, listener: (...args: KazagumoEvents[K]) => void): this;
+  off<K extends keyof KazagumoEvents>(event: K, listener: (...args: KazagumoEvents[K]) => void): this;
+  emit(event: string | symbol, ...args: any[]): boolean;
 }
 
 export class Kazagumo extends EventEmitter {
@@ -335,7 +268,7 @@ export class Kazagumo extends EventEmitter {
    * @param guildId Guild ID
    * @returns KazagumoPlayer | undefined
    */
-  public getPlayer<T extends KazagumoPlayer>(guildId: Snowflake): (T | KazagumoPlayer) | undefined {
+  public getPlayer<T extends KazagumoPlayer>(guildId: string): (T | KazagumoPlayer) | undefined {
     return this.players.get(guildId);
   }
 
@@ -344,7 +277,7 @@ export class Kazagumo extends EventEmitter {
    * @param guildId Guild ID
    * @returns void
    */
-  public destroyPlayer<T extends KazagumoPlayer>(guildId: Snowflake): void {
+  public destroyPlayer<T extends KazagumoPlayer>(guildId: string): void {
     const player = this.getPlayer<T>(guildId);
     if (!player) return;
     player.destroy();
@@ -390,11 +323,11 @@ export class Kazagumo extends EventEmitter {
       (options?.engine && ['youtube', 'youtube_music', 'soundcloud'].includes(options.engine)
         ? options.engine
         : null) ||
-        (!!this.KazagumoOptions.defaultSearchEngine &&
+      (!!this.KazagumoOptions.defaultSearchEngine &&
         ['youtube', 'youtube_music', 'soundcloud'].includes(this.KazagumoOptions.defaultSearchEngine!)
-          ? this.KazagumoOptions.defaultSearchEngine
-          : null) ||
-        'youtube'
+        ? this.KazagumoOptions.defaultSearchEngine
+        : null) ||
+      'youtube'
     ];
 
     const isUrl = /^https?:\/\/.*/.test(query);
