@@ -318,7 +318,7 @@ export class KazagumoPlayer {
       return this;
     }
 
-    const playOptions = { track: current.track, options: {} };
+    const playOptions = { track: { encoded: current.track }, options: {} };
     if (options) playOptions.options = { ...options, noReplace: false };
     else playOptions.options = { noReplace: false };
 
