@@ -322,11 +322,13 @@ export class KazagumoPlayer {
       return this;
     }
 
-    const playOptions = { track: current.track, options: {} };
-    if (options) playOptions.options = { ...options, noReplace: false };
-    else playOptions.options = { noReplace: false };
-
-    this.shoukaku.playTrack(playOptions);
+    await this.shoukaku.playTrack({
+      track: {
+        encoded: current.track,
+        userData: current.requester ?? {},
+      },
+      ...(options ? { ...options } : {}),
+    });
 
     return this;
   }
