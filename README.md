@@ -14,10 +14,13 @@
 ✓ Uses shoukaku v4 + capable of Lavalink v4   
 ✓ Stable _🙏_   
 
+## Note
+⚠️Please check [Environment](#environment) that Kazagumo 3.2.0 is verified working on. It's recommended to use the latest version of lavalink. If you encounter any problem, try using previous [version](https://www.npmjs.com/package/kazagumo/v/3.1.2). If issue still persist, please [open an issue](https://github.com/Takiyo0/Kazagumo/issues) or ask me in [Discord](https://discord.gg/nPPW2Gzqg2) (I will answer if I have time) ⚠️
+
 ## Documentation
-Pls read the docs before asking 🙏🙏🙏 There is a useful search feature there
+Please read the docs first before asking methods
+> Kazagumo; https://takiyo0.github.io/Kazagumo    
 > [Shoukaku](https://github.com/Deivu/Shoukaku) by [Deivu](https://github.com/Deivu);  https://deivu.github.io/Shoukaku   
-> Kazagumo; https://takiyo0.github.io/Kazagumo
 
 ## Installation
 
@@ -25,9 +28,35 @@ Pls read the docs before asking 🙏🙏🙏 There is a useful search feature th
 
 ## Metadata
 
-> version: 3.1.2  
+> version: 3.2.1  
 > pre-release: false  
-> Last build: 7-18-2024 23.36 PM
+> Last build: 9-2-2024 22.13 PM
+
+## Environment
+The new lavalink system that separate YouTube plugins made configuration a bit harder. I will list all working environment that's known working.
+
+| Environment                                  | Case 1                                                                                                                      | Case 2                                                                                                                                      | Case 3                                                                      |
+|----------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------|
+| Lavalink Version                             | v4.0.7                                                                                                                      | v4.0.7                                                                                                                                      | v4.0.7                                                                      |
+| Youtube Plugin Version                       | v1.7.2                                                                                                                      | v1.7.2                                                                                                                                      | none                                                                        |
+| [LavaSrc](https://google.com) Plugin Version | v4.1.1                                                                                                                      | v4.1.1                                                                                                                                      | v4.1.1                                                                      |
+| Kazagumo Version                             | v3.2.0                                                                                                                      | v3.2.0                                                                                                                                      | v3.2.0                                                                      |
+| Shoukaku Version                             | v4.1.0 (built-in v3.2.0)                                                                                                    | v4.1.0 (built-in v3.2.0)                                                                                                                    | v4.1.0 (built-in v3.2.0)                                                    |
+| Youtube Plugin Config                        | youtube.oauth.enabled = true<br>youtube.oauth.accessToken = "filled"<br>youtube.oauth.clients = MUSIC,ANDROID_TESTSUITE,WEB | youtube.oauth.enabled = true<br>youtube.oauth.accessToken = "filled"<br>youtube.oauth.clients = MUSIC,ANDROID_TESTSUITE,WEB,TVHTML5EMBEDDED | none                                                                        |
+| Lavalink Config                              | server.sources.youtube = false<br>server.sources.youtubeSearchEnabled = false                                               | server.sources.youtube = false<br>server.sources.youtubeSearchEnabled = false                                                               | server.sources.youtube = true<br>server.sources.youtubeSearchEnabled = true |
+| LavaSrc Config                               | lavasrc.sources.youtube = true                                                                                              | lavasrc.sources.youtube = true                                                                                                              | lavasrc.sources.youtube = true                                              |
+| **Result**                                   |                                                                                                                             |                                                                                                                                             |                                                                             |
+| YouTube Playlist Load*                       | ✅                                                                                                                           | ❌                                                                                                                                           | ✅                                                                           |
+| YouTube Track Load                           | ✅                                                                                                                           | ✅                                                                                                                                           | ❌                                                                           |
+| YouTube Search                               | ✅                                                                                                                           | ✅                                                                                                                                           | ✅                                                                           |
+| LavaSrc Spotify Playlist Load                | ✅                                                                                                                           | ✅                                                                                                                                           | ✅                                                                           |
+| LavaSrc Spotify Track Load                   | ✅                                                                                                                           | ✅                                                                                                                                           | ✅                                                                           |
+| LavaSrc Spotify Search (spsearch:query)**    | ✅                                                                                                                           | ✅                                                                                                                                           | ✅                                                                           |
+| **Summary**                                  | ✅ works just fine                                                                                                           | ➖ cannot load youtube playlist                                                                                                              | ❌ cannot play any track youtube related. including spotify                  |
+
+Note:
+- `*` = youtube playlist load with YouTube plugin requires oauth enabled and accessToken filled and `TVHTML5EMBEDDED` to be removed from oauth clients, since it's the default config
+- `**` = to do that, you need to add `source` option into `SearchOptions`. Example: `kazagumo.search(query, {source: "spsearch:"});` (⚠️you need to include `:` in the last of `spsearch` or anything to replace source)
 
 ## Plugins
 - Official [spotify plugin](https://npmjs.com/package/kazagumo-spotify)
@@ -44,11 +73,10 @@ Pls read the docs before asking 🙏🙏🙏 There is a useful search feature th
 > npm i stone-deezer
 
 ## Lavalink installation
+> Basically you can follow this [Official Step](https://lavalink.dev/getting-started/index.html)
 
-> Full tutorial step-by-step with image [here](https://github.com/Weeb-Devs/Laffey/blob/main/readme/LAVALINK_INSTALLATION.md) ©Weeb-Devs, the owner is me tbh   
-> System requirements [here](https://github.com/freyacodes/Lavalink#requirements)
 
-## Changes
+## Changes v2 -> v3
 ```javascript
 // You can get ShoukakuPlayer from here
 + <KazagumoPlayer>.shoukaku
@@ -88,17 +116,6 @@ Pls read the docs before asking 🙏🙏🙏 There is a useful search feature th
 // Skip the current song
 - this.player.players.get("69696969696969").stopTrack() // Stoptrack basically skip on shoukaku
 + this.player.players.get("69696969696969").skip() // skip on kazagumo. easier to find :v
-```
-
-## Migration from v2 to v3
-```diff
-- playerResumed event
-+ queueUpdate event
-- KazagumoPlayer#getPrevious function
-* previous object to an array
-* `uri` property on track is now optional
-* add NEARLY and RECONNECTING to State
-+ VoiceState enum
 ```
 
 ## Support
@@ -190,11 +207,19 @@ client.on("messageCreate", async msg => {
         let result = await kazagumo.search(query, {requester: msg.author});
         if (!result.tracks.length) return msg.reply("No results found!");
 
-        if (result.type === "PLAYLIST") for (let track of result.tracks) player.queue.add(track);
+        if (result.type === "PLAYLIST") player.queue.add(result.tracks); // do this instead of using for loop if you want queueUpdate not spammy
         else player.queue.add(result.tracks[0]);
 
         if (!player.playing && !player.paused) player.play();
         return msg.reply({content: result.type === "PLAYLIST" ? `Queued ${result.tracks.length} from ${result.playlistName}` : `Queued ${result.tracks[0].title}`});
+    }
+
+    if (msg.content.startsWith("!skip")) {
+        let player = kazagumo.players.get(msg.guild.id);
+        if (!player) return msg.reply("No player found!");
+        player.skip();
+        log(msg.guild.id);
+        return msg.reply({content: `Skipped to **${player.queue[0]?.title}** by **${player.queue[0]?.author}**`});
     }
 
     if (msg.content.startsWith("!forceplay")) {

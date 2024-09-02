@@ -165,12 +165,10 @@ export const SupportedSources = [
 ];
 
 export interface PlayOptions {
-  noReplace?: boolean;
-  pause?: boolean;
-  startTime?: number;
+  position?: number;
   endTime?: number;
-
-  replaceCurrent?: boolean;
+  volume?: number;
+  paused?: boolean;
 }
 
 export enum State {
