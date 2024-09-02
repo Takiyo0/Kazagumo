@@ -6,56 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="816b50fb-a693-4f75-a2db-53d14f492eab" name="Changes" comment="fix queueUpdate throwing typing error with shoukaku 4.1.0">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/assets/search.js" beforeDir="false" afterPath="$PROJECT_DIR$/docs/assets/search.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/classes/Kazagumo.Kazagumo.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/classes/Kazagumo.Kazagumo.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/classes/Managers_KazagumoPlayer.KazagumoPlayer.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/classes/Managers_KazagumoPlayer.KazagumoPlayer.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/classes/Managers_Supports_KazagumoQueue.KazagumoQueue.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/classes/Managers_Supports_KazagumoQueue.KazagumoQueue.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/classes/Managers_Supports_KazagumoTrack.KazagumoTrack.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/classes/Managers_Supports_KazagumoTrack.KazagumoTrack.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/classes/Modules_Interfaces.KazagumoError.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/classes/Modules_Interfaces.KazagumoError.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/classes/Modules_Interfaces.KazagumoPlugin.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/classes/Modules_Interfaces.KazagumoPlugin.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/classes/Modules_Utils.KazagumoUtils.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/classes/Modules_Utils.KazagumoUtils.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/classes/Plugins_PlayerMoved.KazagumoPlugin.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/classes/Plugins_PlayerMoved.KazagumoPlugin.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/enums/Modules_Interfaces.PlayerState.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/enums/Modules_Interfaces.PlayerState.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/enums/Modules_Interfaces.State.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/enums/Modules_Interfaces.State.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/enums/Modules_Interfaces.VoiceState.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/enums/Modules_Interfaces.VoiceState.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/functions/Modules_Interfaces.escapeRegExp.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/functions/Modules_Interfaces.escapeRegExp.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/interfaces/Kazagumo.KazagumoEvents.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/interfaces/Kazagumo.KazagumoEvents.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/interfaces/Modules_Interfaces.CreatePlayerOptions.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/interfaces/Modules_Interfaces.CreatePlayerOptions.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/interfaces/Modules_Interfaces.KazagumoOptions.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/interfaces/Modules_Interfaces.KazagumoOptions.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/interfaces/Modules_Interfaces.KazagumoPlayerOptions.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/interfaces/Modules_Interfaces.KazagumoPlayerOptions.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/interfaces/Modules_Interfaces.KazagumoSearchOptions.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/interfaces/Modules_Interfaces.KazagumoSearchOptions.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/interfaces/Modules_Interfaces.KazagumoSearchResult.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/interfaces/Modules_Interfaces.KazagumoSearchResult.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/interfaces/Modules_Interfaces.Payload.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/interfaces/Modules_Interfaces.Payload.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/interfaces/Modules_Interfaces.PlayOptions.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/interfaces/Modules_Interfaces.PlayOptions.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/interfaces/Modules_Interfaces.PlayerMovedChannels.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/interfaces/Modules_Interfaces.PlayerMovedChannels.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/interfaces/Modules_Interfaces.RawTrack.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/interfaces/Modules_Interfaces.RawTrack.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/interfaces/Modules_Interfaces.ResolveOptions.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/interfaces/Modules_Interfaces.ResolveOptions.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/modules/Index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/modules/Index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/modules/Kazagumo.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/modules/Kazagumo.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/modules/Managers_KazagumoPlayer.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/modules/Managers_KazagumoPlayer.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/modules/Managers_Supports_KazagumoQueue.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/modules/Managers_Supports_KazagumoQueue.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/modules/Managers_Supports_KazagumoTrack.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/modules/Managers_Supports_KazagumoTrack.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/modules/Modules_Interfaces.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/modules/Modules_Interfaces.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/modules/Modules_Plugins.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/modules/Modules_Plugins.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/modules/Modules_Utils.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/modules/Modules_Utils.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/modules/Plugins_PlayerMoved.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/modules/Plugins_PlayerMoved.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/types/Modules_Interfaces.PlayerMovedState.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/types/Modules_Interfaces.PlayerMovedState.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/types/Modules_Interfaces.SearchEngines.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/types/Modules_Interfaces.SearchEngines.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/types/Modules_Interfaces.SearchResultTypes.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/types/Modules_Interfaces.SearchResultTypes.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/types/Modules_Interfaces.YoutubeThumbnail.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/types/Modules_Interfaces.YoutubeThumbnail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/types/Modules_Utils.Constructor.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/types/Modules_Utils.Constructor.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/variables/Index.version.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/variables/Index.version.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/variables/Modules_Interfaces.Events.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/variables/Modules_Interfaces.Events.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/variables/Modules_Interfaces.SourceIDs.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/variables/Modules_Interfaces.SourceIDs.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/variables/Modules_Interfaces.SupportedSources.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/variables/Modules_Interfaces.SupportedSources.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/variables/Modules_Plugins.default.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/variables/Modules_Plugins.default.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Index.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Managers/KazagumoPlayer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Managers/KazagumoPlayer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Managers/Supports/KazagumoQueue.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Managers/Supports/KazagumoQueue.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -118,6 +69,9 @@
   <component name="PackageJsonUpdateNotifier">
     <dismissed value="$PROJECT_DIR$/package.json" />
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="QODANA_PROBLEMS_VIEW_TAB" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 2
 }</component>
@@ -136,7 +90,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
     "com.codeium.enabled": "true",
-    "git-widget-placeholder": "v3.2.0",
+    "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
     "last_opened_file_path": "C:/Users/takiy/OneDrive/Documents/project/Kazagumo",
     "node.js.detected.package.eslint": "true",
