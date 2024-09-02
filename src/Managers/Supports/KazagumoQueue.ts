@@ -84,6 +84,7 @@ export class KazagumoQueue extends Array<KazagumoTrack> {
   }
 
   private emitChanges(): void {
+    // @ts-ignore
     this.kazagumoPlayer.shoukaku.emit(Events.QueueUpdate, this.kazagumoPlayer, this);
   }
 }

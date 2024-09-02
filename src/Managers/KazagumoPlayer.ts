@@ -28,7 +28,7 @@ export class KazagumoPlayer {
   /**
    * Kazagumo Instance
    */
-  private readonly kazagumo: Kazagumo;
+  public readonly kazagumo: Kazagumo;
   /**
    * Shoukaku's Player instance
    */
@@ -167,6 +167,10 @@ export class KazagumoPlayer {
     this.shoukaku.on('update', (data: PlayerUpdate) => this.emit(Events.PlayerUpdate, this, data));
     this.shoukaku.on('stuck', (data: TrackStuckEvent) => this.emit(Events.PlayerStuck, this, data));
     this.shoukaku.on('resumed', () => this.emit(Events.PlayerResumed, this));
+    // @ts-ignore
+    this.shoukaku.on(Events.QueueUpdate, (player: KazagumoPlayer, queue: KazagumoQueue) =>
+      this.kazagumo.emit(Events.QueueUpdate, player, queue),
+    );
   }
 
   // /**
@@ -318,11 +322,13 @@ export class KazagumoPlayer {
       return this;
     }
 
-    const playOptions = { track: current.track, options: {} };
-    if (options) playOptions.options = { ...options, noReplace: false };
-    else playOptions.options = { noReplace: false };
-
-    this.shoukaku.playTrack(playOptions);
+    await this.shoukaku.playTrack({
+      track: {
+        encoded: current.track,
+        userData: current.requester ?? {},
+      },
+      ...(options ? { ...options } : {}),
+    });
 
     return this;
   }
