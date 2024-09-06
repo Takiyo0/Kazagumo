@@ -205,6 +205,7 @@ export class Kazagumo extends EventEmitter {
         player.sendServerUpdate(connection);
       };
       await player.sendServerUpdate(connection);
+      // @ts-ignore
       connection.on('connectionUpdate', onUpdate);
       this.shoukaku.players.set(player.guildId, player);
       return player;

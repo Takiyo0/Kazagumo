@@ -3,6 +3,7 @@ import { KazagumoPlayer, KazagumoQueue } from '../Index';
 import { KazagumoTrack } from '../Managers/Supports/KazagumoTrack';
 import { Constructor } from './Utils';
 import { Track } from 'shoukaku';
+import { User } from 'discord.js';
 
 export interface KazagumoOptions {
   /** Default search engine if no engine was provided. Default to youtube. If defaultSource is provided, this will be ignored */
@@ -135,7 +136,7 @@ export interface PlayerMovedChannels {
 export type PlayerMovedState = 'UNKNOWN' | 'JOINED' | 'LEFT' | 'MOVED';
 
 export interface KazagumoSearchOptions {
-  requester: unknown;
+  requester?: typeof User;
   source?: string;
   engine?: SearchEngines;
   nodeName?: string;
@@ -169,6 +170,7 @@ export interface PlayOptions {
   endTime?: number;
   volume?: number;
   paused?: boolean;
+  replaceCurrent?: boolean;
 }
 
 export enum State {

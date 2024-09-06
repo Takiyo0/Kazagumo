@@ -10,6 +10,7 @@ import {
 } from '../../Modules/Interfaces';
 import { Track } from 'shoukaku';
 import { KazagumoPlayer } from '../KazagumoPlayer';
+import { User } from 'discord.js';
 
 export class KazagumoTrack {
   /**
@@ -19,7 +20,7 @@ export class KazagumoTrack {
   /**
    * Track Requester
    */
-  public requester: unknown | undefined;
+  public requester?: typeof User | undefined;
 
   /** Track's Base64 */
   public track: string;
@@ -50,7 +51,7 @@ export class KazagumoTrack {
 
   constructor(
     private readonly raw: Track,
-    requester: unknown,
+    requester?: typeof User,
   ) {
     this.kazagumo = undefined;
 
@@ -182,8 +183,8 @@ export class KazagumoTrack {
     if (!node) throw new KazagumoError(1, 'No nodes available');
 
     const result = player
-      ? await player.search(query, { source, requester: this.requester })
-      : await this.kazagumo.search(query, { engine: defaultSearchEngine, requester: this.requester });
+      ? await player.search(query, { source, requester: this.requester as typeof User })
+      : await this.kazagumo.search(query, { engine: defaultSearchEngine, requester: this.requester as typeof User });
     if (!result || !result.tracks.length) throw new KazagumoError(2, 'No results found');
 
     const rawTracks = result.tracks.map((x) => x.getRaw()._raw);
