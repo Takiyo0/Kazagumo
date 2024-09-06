@@ -453,6 +453,7 @@ export class KazagumoPlayer {
     this.shoukaku.clean();
     await this.kazagumo.shoukaku.leaveVoiceChannel(this.guildId);
     await this.shoukaku.destroy();
+    // @ts-ignore
     this.shoukaku.removeAllListeners();
     this.kazagumo.players.delete(this.guildId);
     this.state = PlayerState.DESTROYED;
