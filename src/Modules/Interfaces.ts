@@ -169,6 +169,7 @@ export interface PlayOptions {
   endTime?: number;
   volume?: number;
   paused?: boolean;
+  replaceCurrent?: boolean;
 }
 
 export enum State {
