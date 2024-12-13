@@ -284,14 +284,18 @@ export class Kazagumo extends EventEmitter {
   }
 
   /**
-   * Get a least used node.
+   * Get the least used node.
+   * @param group The group where you want to get the least used nodes there. Case-sensitive, catch the error when there is no such group
    * @returns Node
    */
-  public async getLeastUsedNode(): Promise<Node> {
+  public async getLeastUsedNode(group?: string): Promise<Node> {
     const nodes: Node[] = [...this.shoukaku.nodes.values()];
 
-    const onlineNodes = nodes.filter((node) => node.state === State.CONNECTED);
-    if (!onlineNodes.length) throw new KazagumoError(2, 'No nodes are online');
+    const onlineNodes = nodes.filter((node) => node.state === State.CONNECTED && (!group || node.group === group));
+    if (!onlineNodes.length && group && !nodes.find((x) => x.group === group))
+      throw new KazagumoError(2, `There is no such group: ${group}`);
+    if (!onlineNodes.length)
+      throw new KazagumoError(2, !!group ? `No nodes are online in ${group}` : 'No nodes are online');
 
     const temp = await Promise.all(
       onlineNodes.map(async (node) => ({
