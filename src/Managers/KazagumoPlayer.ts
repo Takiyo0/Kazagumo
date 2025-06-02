@@ -76,7 +76,7 @@ export class KazagumoPlayer {
   /**
    * Player's custom data
    */
-  public readonly data: Map<string, any> = new Map();
+  public readonly data: Map<string, unknown> = new Map();
 
   /**
    * Initialize the player
