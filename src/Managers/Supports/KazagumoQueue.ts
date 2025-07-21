@@ -98,6 +98,29 @@ public addAt(track: KazagumoTrack, position: number): KazagumoQueue {
     return this;
   }
 
+  /**
+ * Move a track from one position to another in the queue
+ * @param from - The current position of the track (0-indexed)
+ * @param to - The target position for the track (0-indexed)
+ * @returns The current KazagumoQueue instance
+ * @throws {KazagumoError} If either position is invalid
+ * @example
+ * ```typescript
+ * // Move track from position 3 to position 1
+ * player.queue.move(3, 1);
+ * ```
+ */
+public move(from: number, to: number): KazagumoQueue {
+  if (from < 0 || from >= this.length || to < 0 || to >= this.length) {
+    throw new KazagumoError(1, `Invalid position: from=${from}, to=${to}, queue length=${this.length}`);
+  }
+  
+  const [track] = this.splice(from, 1);
+  this.splice(to, 0, track);
+  this.emitChanges();
+  return this;
+}
+
   /** Clear the queue */
   public clear(): KazagumoQueue {
     this.splice(0, this.length);
