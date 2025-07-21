@@ -332,16 +332,40 @@ export class KazagumoPlayer {
   }
 
   /**
-   * Skip the current track
-   * @returns KazagumoPlayer
-   */
-  public skip(): KazagumoPlayer {
-    if (this.state === PlayerState.DESTROYED) throw new KazagumoError(1, 'Player is already destroyed');
-
-    this.shoukaku.stopTrack();
-
-    return this;
+ * Skip the current track or multiple tracks
+ * @param amount - Number of tracks to skip (default: 1)
+ * @returns The current KazagumoPlayer instance
+ * @throws {KazagumoError} If player is destroyed
+ * @throws {KazagumoError} If amount is not a positive integer
+ * @throws {KazagumoError} If amount exceeds total available tracks
+ * @example
+ * ```typescript
+ * // Skip current track
+ * player.skip();
+ * 
+ * // Skip current track and next 2 tracks
+ * player.skip(3);
+ * ```
+ */
+public skip(amount: number = 1): KazagumoPlayer {
+  if (this.state === PlayerState.DESTROYED) 
+    throw new KazagumoError(1, 'Player is already destroyed');
+  
+  if (!Number.isInteger(amount) || amount < 1) 
+    throw new KazagumoError(1, 'Amount must be a positive integer');
+  
+  if (amount > this.queue.totalSize) {
+    throw new KazagumoError(1, `Cannot skip ${amount} tracks, only ${this.queue.totalSize} available`);
   }
+  
+  if (amount > 1) {
+    const toRemove = Math.min(amount - 1, this.queue.length);
+    this.queue.splice(0, toRemove);
+  }
+  
+  this.shoukaku.stopTrack();
+  return this;
+}
 
   /**
    * Seek to a position
