@@ -54,6 +54,28 @@ export class KazagumoQueue extends Array<KazagumoTrack> {
   }
 
   /**
+ * Add a track at a specific position in the queue
+ * @param track - The track to add
+ * @param position - The position to insert the track at (0-indexed)
+ * @returns The current KazagumoQueue instance
+ * @throws {KazagumoError} If position is invalid
+ * @example
+ * ```typescript
+ * // Add track at position 2
+ * player.queue.addAt(track, 2);
+ * ```
+ */
+public addAt(track: KazagumoTrack, position: number): KazagumoQueue {
+  if (position < 0 || position > this.length) {
+    throw new KazagumoError(1, `Invalid position ${position}. Must be between 0 and ${this.length}`);
+  }
+  
+  this.splice(position, 0, track);
+  this.emitChanges();
+  return this;
+}
+
+  /**
    * Remove track from the queue
    * @param position Position of the track
    * @returns KazagumoQueue
