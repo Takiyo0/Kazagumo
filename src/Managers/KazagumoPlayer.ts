@@ -169,8 +169,8 @@ export class KazagumoPlayer {
     this.shoukaku.on('stuck', (data: TrackStuckEvent) => this.emit(Events.PlayerStuck, this, data));
     this.shoukaku.on('resumed', () => this.emit(Events.PlayerResumed, this));
     // @ts-ignore
-    this.shoukaku.on(Events.QueueUpdate, (player: KazagumoPlayer, queue: KazagumoQueue) =>
-      this.kazagumo.emit(Events.QueueUpdate, player, queue),
+    this.shoukaku.on(Events.QueueUpdate, (referencePlayer: KazagumoPlayer, queue: KazagumoQueue) =>
+      this.kazagumo.emit(Events.QueueUpdate, referencePlayer, queue),
     );
   }
 
