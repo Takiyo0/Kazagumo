@@ -172,15 +172,6 @@ export interface PlayOptions {
   replaceCurrent?: boolean;
 }
 
-export enum State {
-  CONNECTING,
-  NEARLY,
-  CONNECTED,
-  RECONNECTING,
-  DISCONNECTING,
-  DISCONNECTED,
-}
-
 export enum PlayerState {
   CONNECTING,
   CONNECTED,
@@ -210,11 +201,4 @@ export class KazagumoError extends Error {
     this.code = code;
     this.message = message;
   }
-}
-
-export enum VoiceState {
-  SESSION_READY,
-  SESSION_ID_MISSING,
-  SESSION_ENDPOINT_MISSING,
-  SESSION_FAILED_UPDATE,
 }

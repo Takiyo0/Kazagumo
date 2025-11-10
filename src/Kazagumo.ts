@@ -10,8 +10,6 @@ import {
   PlayerMovedState,
   SearchResultTypes,
   SourceIDs,
-  State,
-  VoiceState,
 } from './Modules/Interfaces';
 import {
   Connection,
@@ -28,7 +26,10 @@ import {
   TrackStuckEvent,
   VoiceChannelOptions,
   WebSocketClosedEvent,
+  Constants,
 } from 'shoukaku';
+const { State, VoiceState } = Constants;
+type VoiceStateType = (typeof VoiceState)[keyof typeof VoiceState];
 
 import { KazagumoPlayer } from './Managers/KazagumoPlayer';
 import { KazagumoTrack } from './Managers/Supports/KazagumoTrack';
@@ -200,7 +201,7 @@ export class Kazagumo extends EventEmitter {
       const player = this.shoukaku.options.structures.player
         ? new this.shoukaku.options.structures.player(connection.guildId, node)
         : new Player(connection.guildId, node);
-      const onUpdate = (state: VoiceState) => {
+      const onUpdate = (state: VoiceStateType) => {
         if (state !== VoiceState.SESSION_READY) return;
         player.sendServerUpdate(connection);
       };
@@ -318,7 +319,7 @@ export class Kazagumo extends EventEmitter {
    */
   public async search(query: string, options?: KazagumoSearchOptions): Promise<KazagumoSearchResult> {
     const node = options?.nodeName
-      ? this.shoukaku.nodes.get(options.nodeName) ?? (await this.getLeastUsedNode())
+      ? (this.shoukaku.nodes.get(options.nodeName) ?? (await this.getLeastUsedNode()))
       : await this.getLeastUsedNode();
     if (!node) throw new KazagumoError(3, 'No node is available');
 
