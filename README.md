@@ -28,9 +28,9 @@ Please read the docs first before asking methods
 
 ## Metadata
 
-> version: 3.3.0  
+> version: 3.4.0  
 > pre-release: false  
-> Last build: 6-1-2025 22.13 PM
+> Last build: 11-10-2025 21.20 PM
 
 ## Environment
 The new lavalink system that separate YouTube plugins made configuration a bit harder. I will list all working environment that's known working.
