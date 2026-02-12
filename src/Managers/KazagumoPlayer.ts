@@ -120,11 +120,11 @@ export class KazagumoPlayer {
       if (['loadFailed', 'cleanup'].includes(data.reason)) {
         if (
           this.queue.current &&
-          !this.queue.previous.find(
+          !(this.queue.previous ?? []).find(
             (x) => x.identifier === this.queue.current?.identifier && x.title === this.queue.current?.title,
           )
         )
-          this.queue.previous = [this.queue.current].concat(this.queue.previous);
+          this.queue.previous = ([this.queue.current].concat(this.queue.previous) ?? []);
         this.emit(Events.PlayerEnd, this, this.queue.current);
         this.queue.current = null;
         this.playing = false;
@@ -141,7 +141,7 @@ export class KazagumoPlayer {
           (x) => x.identifier === this.queue.current?.identifier && x.title === this.queue.current?.title,
         )
       )
-        this.queue.previous = [this.queue.current].concat(this.queue.previous);
+        this.queue.previous = ([this.queue.current].concat(this.queue.previous) ?? []);
 
       const currentSong = this.queue.current;
       this.emit(Events.PlayerEnd, this, currentSong);
