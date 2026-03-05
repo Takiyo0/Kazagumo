@@ -10,6 +10,10 @@
     "url": "https://github.com/Takiyo0/Kazagumo",
     "email": "takiyotakahashi@gmail.com"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Takiyo0/Kazagumo.git"
+  },
   "engines": {
     "node": ">=16.5.0"
   },
