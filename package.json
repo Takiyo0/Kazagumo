@@ -51,6 +51,6 @@
     "typescript": "^5.9.3"
   },
   "dependencies": {
-    "shoukaku": "^4.2.0"
+    "shoukaku": "^4.3.0"
   }
 }
