@@ -1,7 +1,8 @@
 # Kazagumo
-#### A [Shoukaku](https://github.com/Deivu/Shoukaku) wrapper with built in queue system 
 
-![AppVeyor](https://img.shields.io/appveyor/build/Takiyo0/kazagumo) ![Downloads](https://img.shields.io/npm/dm/kazagumo) ![npm](https://img.shields.io/npm/v/kazagumo) ![GitHub contributors](https://img.shields.io/github/contributors/Takiyo0/Kazagumo) ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/Takiyo0/Kazagumo) ![GitHub last commit](https://img.shields.io/github/last-commit/Takiyo0/Kazagumo) ![NPM](https://img.shields.io/npm/l/kazagumo)  
+#### A [Shoukaku](https://github.com/Deivu/Shoukaku) wrapper with built in queue system
+
+![AppVeyor](https://img.shields.io/appveyor/build/Takiyo0/kazagumo) ![Downloads](https://img.shields.io/npm/dm/kazagumo) ![npm](https://img.shields.io/npm/v/kazagumo) ![GitHub contributors](https://img.shields.io/github/contributors/Takiyo0/Kazagumo) ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/Takiyo0/Kazagumo) ![GitHub last commit](https://img.shields.io/github/last-commit/Takiyo0/Kazagumo) ![NPM](https://img.shields.io/npm/l/kazagumo)
 
 ![Kazagumo](https://i.imgur.com/jfVSvHj.png)
 > Kazagumo © Azur Lane
@@ -12,15 +13,24 @@
 ✓ Easy to use  
 ✓ Plugin system  
 ✓ Uses shoukaku v4 + capable of Lavalink v4   
-✓ Stable _🙏_   
+✓ Supports dave*   
+✓ Stable _🙏_
 
 ## Note
-⚠️Please check [Environment](#environment) that Kazagumo 3.2.0 is verified working on. It's recommended to use the latest version of lavalink. If you encounter any problem, try using previous [version](https://www.npmjs.com/package/kazagumo/v/3.1.2). If issue still persist, please [open an issue](https://github.com/Takiyo0/Kazagumo/issues) or ask me in [Discord](https://discord.gg/nPPW2Gzqg2) (I will answer if I have time) ⚠️
+
+- `*`: requires at least lavalink v4.2.0 and above
+- ⚠️ Please check [Environment](#environment) that Kazagumo 3.2.0 is verified working on. It's recommended to use the
+  latest version of lavalink. If you encounter any problem, try using
+  previous [version](https://www.npmjs.com/package/kazagumo/v/3.1.2). If issue still persist,
+  please [open an issue](https://github.com/Takiyo0/Kazagumo/issues) or ask me
+  in [Discord](https://discord.gg/nPPW2Gzqg2) (I will answer if I have time) ⚠️
 
 ## Documentation
+
 Please read the docs first before asking methods
 > Kazagumo; https://takiyo0.github.io/Kazagumo    
-> [Shoukaku](https://github.com/Deivu/Shoukaku) by [Deivu](https://github.com/Deivu);  https://deivu.github.io/Shoukaku   
+> [Shoukaku](https://github.com/Deivu/Shoukaku)
+> by [Deivu](https://github.com/Deivu);  https://guide.shoukaku.shipgirl.moe
 
 ## Installation
 
@@ -28,12 +38,14 @@ Please read the docs first before asking methods
 
 ## Metadata
 
-> version: 3.4.1  
+> version: 3.4.2  
 > pre-release: false  
-> Last build: 12-02-2026 07.34 AM
+> Last build: 06-03-2026 02.27 AM
 
 ## Environment
-The new lavalink system that separate YouTube plugins made configuration a bit harder. I will list all working environment that's known working.
+
+The new lavalink system that separate YouTube plugins made configuration a bit harder. I will list all working
+environment that's known working.
 
 | Environment                                  | Case 1                                                                                                                      | Case 2                                                                                                                                      | Case 3                                                                      |
 |----------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------|
@@ -55,78 +67,99 @@ The new lavalink system that separate YouTube plugins made configuration a bit h
 | **Summary**                                  | ✅ works just fine                                                                                                           | ➖ cannot load youtube playlist                                                                                                              | ❌ cannot play any track youtube related. including spotify                  |
 
 Note:
-- `*` = youtube playlist load with YouTube plugin requires oauth enabled and accessToken filled and `TVHTML5EMBEDDED` to be removed from oauth clients, since it's the default config
-- `**` = to do that, you need to add `source` option into `SearchOptions`. Example: `kazagumo.search(query, {source: "spsearch:"});` (⚠️you need to include `:` in the last of `spsearch` or anything to replace source)
+
+- `*` = youtube playlist load with YouTube plugin requires oauth enabled and accessToken filled and `TVHTML5EMBEDDED` to
+  be removed from oauth clients, since it's the default config
+- `**` = to do that, you need to add `source` option into `SearchOptions`. Example:
+  `kazagumo.search(query, {source: "spsearch:"});` (⚠️you need to include `:` in the last of `spsearch` or anything to
+  replace source)
 
 ## Plugins
+
 - Official [spotify plugin](https://npmjs.com/package/kazagumo-spotify)
+
 > npm i kazagumo-spotify
-  - Additional [apple plugin](https://www.npmjs.com/package/kazagumo-apple)
+
+- Additional [apple plugin](https://www.npmjs.com/package/kazagumo-apple)
+
 > npm i kazagumo-apple
+
 - Additional [filter plugin](https://www.npmjs.com/package/kazagumo-filter)
+
 > npm i kazagumo-filter
+
 - Additional [nicovideo.jp plugin](https://www.npmjs.com/package/kazagumo-nico)
+
 > npm i kazagumo-nico
+
 - Additional [deezer plugin](https://www.npmjs.com/package/kazagumo-deezer)
+
 > npm i kazagumo-deezer
+
 - Stone-Deezer [deezer plugin](https://www.npmjs.com/package/stone-deezer)
+
 > npm i stone-deezer
 
 ## Lavalink installation
+
 > Basically you can follow this [Official Step](https://lavalink.dev/getting-started/index.html)
 
-
 ## Changes v2 -> v3
+
 ```javascript
 // You can get ShoukakuPlayer from here
-+ <KazagumoPlayer>.shoukaku
-+ this.player.players.get("69696969696969").shoukaku
++<KazagumoPlayer>.shoukaku
+    + this.player.players.get("69696969696969").shoukaku
 
-// Search tracks
-- this.player.getNode().rest.resolve("ytsearch:pretender Official髭男dism") // Shoukaku
-+ this.player.search("pretender Official髭男dism") // Kazagumo
-    
-// Create a player
-- this.player.getNode().joinChannel(...) // Shoukaku
-+ this.player.createPlayer(...) // Kazagumo
-    
-// Add a track to the queue. MUST BE A kazagumoTrack, you can get from <KazagumoPlayer>.search()
-+ this.player.players.get("69696969696969").queue.add(kazagumoTrack) // Kazagumo       
+    // Search tracks
+    - this.player.getNode().rest.resolve("ytsearch:pretender Official髭男dism") // Shoukaku
+    + this.player.search("pretender Official髭男dism") // Kazagumo
 
-// Play a track
-- this.player.players.get("69696969696969").playTrack(shoukakuTrack) // Shoukaku
-+ this.player.players.get("69696969696969").play() // Kazagumo, take the first song on queue
-+ this.player.players.get("69696969696969").play(kazagumoTrack) // Kazagumo, will unshift current song and forceplay this song
-        
-// Play previous song
-+ this.player.players.get("69696969696969").play(this.player.players.get("69696969696969").getPrevious()) // Kazagumo, make sure it's not undefined first        
+    // Create a player
+    - this.player.getNode().joinChannel(...) // Shoukaku
+    + this.player.createPlayer(...) // Kazagumo
 
-// Pauses or resumes the player. Control from kazagumoPlayer instead of shoukakuPlayer
-- this.player.players.get("69696969696969").setPaused(true) // Shoukaku
-+ this.player.players.get("69696969696969").pause(true) // Kazagumo
-    
-// Set filters. Access shoukakuPlayer from <KazagumoPlayer>.player
-- this.player.players.get("69696969696969").setFilters({lowPass: {smoothing: 2}}) // Shoukaku
-+ this.player.players.get("69696969696969").shoukaku.setFilters({lowPass: {smoothing: 2}}) // Kazagumo
+    // Add a track to the queue. MUST BE A kazagumoTrack, you can get from <KazagumoPlayer>.search()
+        + this.player.players.get("69696969696969").queue.add(kazagumoTrack) // Kazagumo
 
-// Set volume, use Kazagumo's for smoother volume
-- this.player.players.get("69696969696969").setVolume(1) // Shoukaku 100% volume
-+ this.player.players.get("69696969696969").setVolume(100) // Kazagumo 100% volume
+        // Play a track
+        - this.player.players.get("69696969696969").playTrack(shoukakuTrack) // Shoukaku
+        + this.player.players.get("69696969696969").play() // Kazagumo, take the first song on queue
+        + this.player.players.get("69696969696969").play(kazagumoTrack) // Kazagumo, will unshift current song and
+        forceplay this song
 
-// Skip the current song
-- this.player.players.get("69696969696969").stopTrack() // Stoptrack basically skip on shoukaku
-+ this.player.players.get("69696969696969").skip() // skip on kazagumo. easier to find :v
+        // Play previous song
+        + this.player.players.get("69696969696969").play(this.player.players.get("69696969696969").getPrevious()) //
+        Kazagumo, make sure it's not undefined first
+
+        // Pauses or resumes the player. Control from kazagumoPlayer instead of shoukakuPlayer
+        - this.player.players.get("69696969696969").setPaused(true) // Shoukaku
+        + this.player.players.get("69696969696969").pause(true) // Kazagumo
+
+        // Set filters. Access shoukakuPlayer from <KazagumoPlayer>.player
+            - this.player.players.get("69696969696969").setFilters({lowPass: {smoothing: 2}}) // Shoukaku
+            + this.player.players.get("69696969696969").shoukaku.setFilters({lowPass: {smoothing: 2}}) // Kazagumo
+
+            // Set volume, use Kazagumo's for smoother volume
+            - this.player.players.get("69696969696969").setVolume(1) // Shoukaku 100% volume
+            + this.player.players.get("69696969696969").setVolume(100) // Kazagumo 100% volume
+
+            // Skip the current song
+            - this.player.players.get("69696969696969").stopTrack() // Stoptrack basically skip on shoukaku
+            + this.player.players.get("69696969696969").skip() // skip on kazagumo. easier to find :v
 ```
 
 ## Support
-⚠️ Please read the docs first before asking question ⚠️ 
+
+⚠️ Please read the docs first before asking question ⚠️
 > Kazagumo support server: https://discord.gg/nPPW2Gzqg2 (anywhere lmao)   
 > Shoukaku support server: https://discord.gg/FVqbtGu (#development)   
 > Report if you found a bug here https://github.com/Takiyo0/Kazagumo/issues/new/choose
 
 ## Enable playerMoved event
+
 ```javascript
-import { Kazagumo, Payload, Plugins } from "kazagumo";
+import {Kazagumo, Payload, Plugins} from "kazagumo";
 
 const kazagumo = new Kazagumo({
     ...,
@@ -135,6 +168,7 @@ const kazagumo = new Kazagumo({
 ```
 
 ## Example bot
+
 ```javascript
 const {Client, GatewayIntentBits} = require('discord.js');
 const {Guilds, GuildVoiceStates, GuildMessages, MessageContent} = GatewayIntentBits;
@@ -248,20 +282,26 @@ client.login('');
 ```
 
 ## Known issue
-###### This part should be in kazagumo-spotify but whatever
-- Force playing song from spotify module (player.play(result.tracks[0]); `result.tracks[0]` is from spotify) is currently not working. **ONLY WHEN YOU DO player.play(thing), NOT player.play() OR player.queue.add(new KazagumoTrack(...))** Please use this workaround
-```js
-    const { KazagumoTrack } = require("kazagumo"); // CommonJS
-    import { KazagumoTrack } from "kazagumo"; // ES6; don't laugh if it's wrong
 
-    let track = result.tracks[0] // the spotify track
-    let convertedTrack = new KazagumoTrack(track.getRaw()._raw, track.author);
-    player.play(convertedTrack);
+###### This part should be in kazagumo-spotify but whatever
+
+- Force playing song from spotify module (player.play(result.tracks[0]); `result.tracks[0]` is from spotify) is
+  currently not working. **ONLY WHEN YOU DO player.play(thing), NOT player.play() OR player.queue.add(new
+  KazagumoTrack(...))** Please use this workaround
+
+```js
+    const {KazagumoTrack} = require("kazagumo"); // CommonJS
+import {KazagumoTrack} from "kazagumo"; // ES6; don't laugh if it's wrong
+
+let track = result.tracks[0] // the spotify track
+let convertedTrack = new KazagumoTrack(track.getRaw()._raw, track.author);
+player.play(convertedTrack);
 ```
 
 ## Contributors
+
 > - Deivu as the owner of Shoukaku   
->   &nbsp;&nbsp;&nbsp;&nbsp; Github: https://github.com/Deivu    
->   &nbsp;
+    > &nbsp;&nbsp;&nbsp;&nbsp; Github: https://github.com/Deivu    
+    > &nbsp;
 > - Takiyo as the owner of this project   
->   &nbsp;&nbsp;&nbsp;&nbsp; Github: https://github.com/Takiyo0
+    > &nbsp;&nbsp;&nbsp;&nbsp; Github: https://github.com/Takiyo0
