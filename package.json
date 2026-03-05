@@ -1,10 +1,10 @@
 {
   "name": "kazagumo",
-  "version": "3.4.1",
+  "version": "3.4.2",
   "description": "A shoukaku wrapper with built-in queue support.",
   "main": "dist/Index.js",
   "types": "dist/Index.d.ts",
-  "homepage": "https://github.com/Takiyo0/Kazagumo",
+  "homepage": "https://takiyo0.github.io/Kazagumo",
   "readme": "https://github.com/Takiyo0/Kazagumo#readme",
   "bugs": {
     "url": "https://github.com/Takiyo0/Kazagumo",
